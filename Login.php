@@ -2,7 +2,7 @@
 <head><title>PHP test</title></head>
 <body>
 <?php
-    echo 'Hej database';
+    echo 'Hej databasen';
 ?>
     </body>
 
