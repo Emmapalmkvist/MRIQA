@@ -23,7 +23,7 @@ echo "Connected successfully";
 
 
 $sql = "INSERT INTO qaspeciale.Logind (Brugernavn, Adgangskode)
-VALUES ('idarasmusen', 'kode1234')";
+VALUES ('sophia', 'kode4567')";
 
 
 $sql = "SELECT Brugernavn, Adgangskode FROM Logind";
