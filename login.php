@@ -1,6 +1,7 @@
 <?php
 
- session_start();
+
+session_start();
 
 
 // Inkluder fil med adgang til server/db
@@ -100,6 +101,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         $stmt->close();
     }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -122,8 +124,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
             <div class="form-group <?php echo (!empty($brugernavn_error)) ? 'has-error' : ''; ?>">
 
                 <label>Brugernavn: </label>
-                <input type="text" name="Brugernavn" class="form-control" value="<?php echo $brugernavn; ?>">
+                <input type="text" name="Brugernavn" class="form-control"value="<?php echo $brugernavn; ?>">
                 <span class="help-block"><?php echo $brugernavn_error; ?></span>
+
 
             </div>
             <div class="form-group <?php echo (!empty($adgangskode_error)) ? 'has-error' : ''; ?>">
@@ -141,3 +144,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     </div>
 </body>
 </html>
+
+
+
