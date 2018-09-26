@@ -10,8 +10,9 @@ $db = "qaspeciale";
 $mysqli = new mysqli($servername, $username, $password, $db, 8085);
 
 // Check connection
-if($mysqli === false){
+if($mysqli === false)
+{
     die("ERROR: Could not connect. " . $mysqli->connect_error);
 }
-else echo "Success!"
+
 ?>

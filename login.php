@@ -2,11 +2,6 @@
 // Initialize the session
 session_start();
 
-if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    header("location: welcome.php");
-    exit;
-}
-
 
 // Include config file
 require_once "config.php";
@@ -20,14 +15,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     // Check if username is empty
     if(empty(trim($_POST["Brugernavn"]))){
-        $username_err = "Please enter username.";
+        $username_err = "Indtast venligst brugernavn.";
     } else{
         $Brugernavn = trim($_POST["Brugernavn"]);
     }
 
     // Check if password is empty
     if(empty(trim($_POST["Adgangskode"]))){
-        $password_err = "Please enter your password.";
+        $password_err = "Indtast venligst adgangskode.";
     } else{
         $Adgangskode = trim($_POST["Adgangskode"]);
     }
@@ -71,15 +66,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             }
                         else{
                             // Display an error message if password is not valid
-                            $password_err = "The password you entered was not valid.";
+                            $password_err = "Adgangskoden eller brugernavn er ikke gyldig.";
                         }
                     }
                 } else{
                     // Display an error message if username doesn't exist
-                    $username_err = "No account found with that username.";
+                    $username_err = "Adgangskoden eller brugernavn er ikke gyldig.";
                 }
             } else{
-                echo "Oops! Something went wrong. Please try again later.";
+                echo "Fejl er opstået. Prøv igen.";
             }
         }
 
@@ -105,21 +100,21 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 </head>
 <body>
     <div class="wrapper">
-        <h2>Login til MRI-kvalitetssikringssystem</h2>
-        <p>Please fill in your credentials to login.</p>
+        <h2>Log ind til MRI-kvalitetssikringssystem</h2>
+        <p>Udfyld venligst dine log ind oplysninger nedenfor.</p>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-                <label>Brugernavn</label>
+                <label>Brugernavn: </label>
                 <input type="text" name="Brugernavn" class="form-control" value="<?php echo $Brugernavn; ?>">
                 <span class="help-block"><?php echo $username_err; ?></span>
             </div>
             <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-                <label>Adgangskode</label>
-                <input type="Adgangskode" name="Adgangskode" class="form-control">
+                <label>Adgangskode: </label>
+                <input type="password" name="Adgangskode" class="form-control">
                 <span class="help-block"><?php echo $password_err; ?></span>
             </div>
             <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Login">
+                <input type="submit" class="btn btn-primary" value="Log ind">
             </div>
 
         </form>
