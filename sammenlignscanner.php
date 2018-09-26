@@ -24,7 +24,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     </p>
     <div class="nav_bar">
         <ul>
-            <li><a href="nyhjemside.html">Hjem</a></li>
+            <li><a href="nyhjemside.php">Hjem</a></li>
             <li><a href="overblikscannere.php">Overblik over scannere</a></li>
             <li><a href="sammenlignscanner.php" id="onlink">Sammenlign scannere</a></li>
         </ul>

@@ -20,7 +20,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     </p>
     <div class="nav_bar">
         <ul>
-            <li><a href="nyhjemside.html">Hjem</a></li>
+            <li><a href="nyhjemside.php">Hjem</a></li>
             <li><a href="overblikscannere.php"  id="onlink">Overblik over scannere</a></li>
             <li><a href="sammenlignscanner.php">Sammenlign scannere</a></li>
         </ul>
