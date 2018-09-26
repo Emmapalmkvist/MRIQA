@@ -75,7 +75,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                             $_SESSION["Brugernavn"] = $brugernavn;
 
                             // Direct bruger til ny side
-                            header("location: hjemside.php");
+                            header("location: nyhjemside.php");
                         }
                         else
                         {

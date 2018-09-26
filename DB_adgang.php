@@ -12,7 +12,7 @@ $mysqli = new mysqli($servername, $username, $password, $db, $port);
 // Check forbindelsen
 if($mysqli === false)
 {
-    die("Kan ikke oprette forbindelse. " . $mysqli->connect_error);
+    die("Kan ikke oprette forbindelse." . $mysqli->connect_error);
 }
 
 // Test af succesfuld forbindelse
