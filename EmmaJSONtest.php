@@ -21,20 +21,17 @@ $data = array();
 while($row = mysqli_fetch_array($result))
 {
     $data[] = array(
-    'Lokation' => $row["Lokation"],
-    'Fabrikant' => $row["Fabrikant"],
-    'Dato' => $row["Dato"],
-    'SNR' =>$row["SNR"]
+    "y" => $row["Ghostingmean"],
+    "label" =>$row["Dato"]
     );
 }
-
-/*$array = ['items' => ['Milk', 'Eggs', 'Bread']]; */
 
 $object = json_decode(json_encode($data));
 
 echo '<pre>';
-print_r($object);
+print_r($data);
 echo '</pre>';
+
 
 ?>
 
@@ -50,6 +47,10 @@ $dataPoints = array(
 	array("y" => 20, "label" => "Saturday")
 );
 
+echo '<pre>';
+print_r($dataPoints);
+echo '</pre>';
+
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -59,14 +60,14 @@ window.onload = function () {
 
 var chart = new CanvasJS.Chart("chartContainer", {
 	title: {
-		text: "SNR over tid"
+		text: "Ghosting over tid"
 	},
 	axisY: {
-		title: "SNR"
+		title: "Ghosting"
 	},
 	data: [{
 		type: "line",
-		dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+		dataPoints: <?php echo json_encode($data, JSON_NUMERIC_CHECK); ?>
 	}]
 });
 chart.render();
