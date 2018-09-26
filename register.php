@@ -1,96 +1,126 @@
 <?php
-// Include config file
-require_once "config.php";
 
-// Define variables and initialize with empty values
-$Brugernavn = $Adgangskode = $confirm_password = "";
-$username_err = $password_err = $confirm_password_err = "";
+// Inkluder adgangsfil
+require_once "DB_adgang.php";
 
-// Processing form data when form is submitted
-if($_SERVER["REQUEST_METHOD"] == "POST"){
+// Definer variable
+$brugernavn = "";
+$adgangskode = "";
+$confirm_adgangskode = "";
+$brugernavn_error = "";
+$adgangskode_error = "";
+$confirm_adgangskode_error = "";
 
-    // Validate username
-    if(empty(trim($_POST["Brugernavn"]))){
-        $username_err = "Please enter a username.";
-    } else{
-        // Prepare a select statement
+// Behandling af data indtastet når "Opret" knappen trykkes på
+if($_SERVER["REQUEST_METHOD"] == "POST")
+{
+
+    // Valider brugernavn, trim fjerner whitespace før og efter streng
+    if(empty(trim($_POST["Brugernavn"])))
+    {
+        $brugernavn_error = "Indtast venligst brugernavn.";
+    }
+    else
+    {
+        // Select statement
         $sql = "SELECT id FROM Logind WHERE Brugernavn = ?";
 
         if($stmt = $mysqli->prepare($sql)){
 
-            // Bind variables to the prepared statement as parameters
-            $stmt->bind_param("s", $param_username);
+            // Binder variable til "prepared statement" som parametre
+            // "s" angiver type af den ene parameter (param_brugernavn), som er string
+            $stmt->bind_param("s", $param_brugernavn);
 
-            // Set parameters
-            $param_username = trim($_POST["Brugernavn"]);
+            // Sæt parameters
+            $param_brugernavn = trim($_POST["Brugernavn"]);
 
-            // Attempt to execute the prepared statement
+            // Execute prepared statement
             if($stmt->execute()){
-                // store result
+
                 $stmt->store_result();
 
-                if($stmt->num_rows == 1){
-                    $username_err = "This username is already taken.";
-                } else{
-                    $Brugernavn = trim($_POST["Brugernavn"]);
+                // Check om brugernavn eksisterer
+                if($stmt->num_rows == 1)
+                {
+                    $brugernavn_error = "Dette brugernavn eksisterer allerede. Vælg et andet.";
                 }
-            } else{
-                echo "Oops! Something went wrong. Please try again later.";
+                else
+                {
+                    $brugernavn = trim($_POST["Brugernavn"]);
+                }
+            }
+            else
+            {
+                echo "Noget gik galt. Prøv igen.";
             }
         }
 
-        // Close statement
+        // Luk statement
         $stmt->close();
     }
 
-    // Validate password
-    if(empty(trim($_POST["Adgangskode"]))){
-        $password_err = "Please enter a password.";
-    } elseif(strlen(trim($_POST["Adgangskode"])) < 6){
-        $password_err = "Password must have atleast 6 characters.";
-    } else{
-        $Adgangskode = trim($_POST["Adgangskode"]);
+    // Valider adgangsskode
+    if(empty(trim($_POST["Adgangskode"])))
+    {
+        $adgangskode_error = "Indtast venligst adgangskode.";
+    }
+    elseif(strlen(trim($_POST["Adgangskode"])) < 6)
+    {
+        $adgangskode_error = "Adgangskode skal bestå af mindst 6 tegn.";
+    }
+    else
+    {
+        $adgangskode = trim($_POST["Adgangskode"]);
     }
 
-    // Validate confirm password
-    if(empty(trim($_POST["confirm_password"]))){
-        $confirm_password_err = "Please confirm password.";
-    } else{
+    // Valider "gentag adgangskode"
+    if(empty(trim($_POST["confirm_adgangskode"])))
+    {
+        $confirm_password_err = "Bekræft adgangskode.";
+    }
+    else
+    {
         $confirm_password = trim($_POST["confirm_password"]);
-        if(empty($password_err) && ($Adgangskode != $confirm_password)){
-            $confirm_password_err = "Password did not match.";
+
+        if(empty($adgangskode_error) && ($adgangskode != $confirm_adgangskode))
+        {
+            $confirm_adgangskode_error = "Der er ikke match mellem adgangskoderne.";
         }
     }
 
-    // Check input errors before inserting in database
-    if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
+    // Check at alle error variabler er tomme før data indsættet i db.
+    if(empty($brugernavn_error) && empty($adgangskode_error) && empty($confirm_adgangskode_error))
+    {
 
-        // Prepare an insert statement
+        // Insert statement
         $sql = "INSERT INTO Logind (Brugernavn, Adgangskode) VALUES (?, ?)";
 
         if($stmt = $mysqli->prepare($sql)){
-            // Bind variables to the prepared statement as parameters
-            $stmt->bind_param("ss", $param_username, $param_password);
 
-            // Set parameters
-            $param_username = $Brugernavn;
-            $param_password = password_hash($Adgangskode, PASSWORD_DEFAULT); // Creates a password hash
+            // Bind variabler til prepared statement som parametre
+            // "ss" angiver to parametre af typen string
+            $stmt->bind_param("ss", $param_brugernavn, $param_adgangskode);
 
-            // Attempt to execute the prepared statement
-            if($stmt->execute()){
-                // Redirect to login page
+            // Sæt parameters
+            $param_brugernavn = $brugernavn;
+
+            // Opret password hash: password_hash er en indbygget funtion i php
+            $param_adgangskode = password_hash($adgangskode, PASSWORD_DEFAULT);
+
+            // Execute prepared statement
+            if($stmt->execute())
+            {
+                // Omdiriger til log ind side
                 header("location: login.php");
-            } else{
-                echo "Something went wrong. Please try again later.";
+            } else
+            {
+                echo "Noget gik galt. Prøv igen.";
             }
         }
 
         // Close statement
         $stmt->close();
     }
-
-    // Close connection
-    $mysqli->close();
 }
 ?>
 
@@ -98,7 +128,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Sign Up</title>
+    <title>Opret ny bruger</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
     <style type="text/css">
         body{ font: 14px sans-serif; }
@@ -110,20 +140,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <h2>Opret ny bruger</h2>
         <p>Udfyld formen nedenfor.</p>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-            <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+            <div class="form-group <?php echo (!empty($brugernavn_error)) ? 'has-error' : ''; ?>">
                 <label>Brugernavn:</label>
-                <input type="text" name="Brugernavn" class="form-control" value="<?php echo $Brugernavn; ?>">
-                <span class="help-block"><?php echo $username_err; ?></span>
+                <input type="text" name="Brugernavn" class="form-control" value="<?php echo $brugernavn; ?>">
+                <span class="help-block"><?php echo $brugernavn_error; ?></span>
             </div>
-            <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-                <label>Adgangskode</label>
-                <input type="password" name="Adgangskode" class="form-control" value="<?php echo $Adgangskode; ?>">
-                <span class="help-block"><?php echo $password_err; ?></span>
+            <div class="form-group <?php echo (!empty($adgangskode_error)) ? 'has-error' : ''; ?>">
+                <label>Adgangskode: </label>
+                <input type="password" name="Adgangskode" class="form-control" value="<?php echo $adgangskode; ?>">
+                <span class="help-block"><?php echo $adgangskode_error; ?></span>
             </div>
-            <div class="form-group <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
-                <label>Confirm Password</label>
-                <input type="password" name="confirm_password" class="form-control" value="<?php echo $confirm_password; ?>">
-                <span class="help-block"><?php echo $confirm_password_err; ?></span>
+            <div class="form-group <?php echo (!empty($confirm_adgangskode_error)) ? 'has-error' : ''; ?>">
+                <label>Gentag adgangskode: </label>
+                <input type="password" name="confirm_password" class="form-control" value="<?php echo $confirm_adgangskode; ?>">
+                <span class="help-block"><?php echo $confirm_adgangskode_error; ?></span>
             </div>
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Opret">
