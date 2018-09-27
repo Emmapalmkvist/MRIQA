@@ -1,5 +1,5 @@
 <?php
-
+// Koden i denne fil kommer fra hjemmesiden TutorialRepublic hentet den 24.09.2018 via følgende link: https://www.tutorialrepublic.com/php-tutorial/php-mysql-login-system.php. Følgende modificeringer er foretaget: mulighed for at oprette sig som bruger direkte fra log ind-siden er fjernet. Ved fejl i brugernavn eller password angives det ikke hvor fejlen er, men der angives blot: "Adgangskoden eller brugernavn er ikke gyldig." Login filen inkluderer egen server/database adgangsfil: DB_adgang.php. Desuden er variable omdøbt og beskeder til bruger ændret til dansk.
 
 session_start();
 
@@ -9,7 +9,7 @@ require_once "DB_adgang.php";
 
 // Definer variable
 $brugernavn = "";
-$bdgangskode = "";
+$adgangskode = "";
 $brugernavn_error = "";
 $adgangskode_error = "";
 
