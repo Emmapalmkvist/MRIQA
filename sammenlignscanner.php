@@ -1,25 +1,46 @@
+<?php
+
+session_start();
+
+// Check om bruger er logget ind
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: login.php");
+    exit;
+}
+?>
+
 <!doctype html>
 <html>
-<head><title>Sammenlign scannere</title></head>
+    <title>Sammenlign scannere</title>
+    <link rel="stylesheet" href="stylecss.css" />
+     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
+    <style type="text/css">
+        body{ font: 14px sans-serif; }
+        .wrapper{ width: 350px; padding: 20px; }
+    </style>
 <body>
     <!doctype html>
 <html>
 <head><title>Hjem</title></head>
 <body>
 <h1>MR-Scanning - Region Midt</h1>
-<div class="tabContainer">
-    <div class="buttonContainer">
-        <button onclick="window.location.href='hjemside.php'">Hjem</button>
-        <button onclick="window.location.href='sammenlignscanner.php'">Sammenlign Scannere</button>
-        <button onclick="window.location.href='overblikscannere.php'">Overblik over Scannere</button>
+    <p>
+        <a href="logout.php" class="btn btn-danger">Sign Out of Your Account</a>
+    </p>
+    <div class="nav_bar">
+        <ul>
+            <li><a href="nyhjemside.php">Hjem</a></li>
+            <li><a href="overblikscannere.php">Overblik over scannere</a></li>
+            <li><a href="sammenlignscanner.php" id="onlink">Sammenlign scannere</a></li>
+        </ul>
+    </div>
+    <div class="main_container">
+        <?php
+	echo'Sammenlign scannere';
+        ?>
     </div>
 
 
-</div>
-    <script src="myScripttest.js"></script>
-
-<?php
-	echo'Sammenlign scannere';
-?>
 </body>
 </html>
