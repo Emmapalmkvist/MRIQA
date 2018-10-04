@@ -48,7 +48,9 @@ while($row = mysqli_fetch_array($result))
     );
     $drift[] = array(
     "y" => $row["Drift"],
-    "label" =>$row["Dato"]
+    "label" =>$row["Dato"],
+    "driftbillede" =>$row["Driftbillede"],
+    "sti" => "billeder/" . $row["Driftbillede"]
     );
 }
 
@@ -174,8 +176,8 @@ var chart6 = new CanvasJS.Chart("chartContainer6", {
 	},
 	data: [{
 		type: "line",
-        toolTipContent:"Dato: {label}<br/> Drift: {y}<br/>{name}",
-        name: '<img src="../billede.jpg" height="120" width="150">',
+        toolTipContent:"Dato: {label}<br/> Drift: {y}<br/> Billede: {sti}",
+        name: '<img src= "{sti}" height="120" width="150">',
 		dataPoints: <?php echo json_encode($drift, JSON_NUMERIC_CHECK); ?>
 	}]
 });

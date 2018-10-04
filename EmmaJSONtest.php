@@ -22,7 +22,9 @@ while($row = mysqli_fetch_array($result))
 {
     $data[] = array(
     "label" => $row["Dato"],
-    "y" => $row["Ghostingmean"]
+    "y" => $row["Ghostingmean"],
+    "driftbillede" => $row["Driftbillede"],
+    "sti" => "billeder/" . $row["Driftbillede"]
     );
 }
 
