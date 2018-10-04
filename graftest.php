@@ -48,12 +48,16 @@ while($row = mysqli_fetch_array($result))
     );
     $drift[] = array(
     "y" => $row["Drift"],
-    "label" =>$row["Dato"]
+    "label" =>$row["Dato"],
+    "billede" =>$row["Driftbillede"]
     );
 }
 
-
-
+$driftobject = json_decode(json_encode($drift));
+/* Eksempel på datoformat
+$driftdato=date_create(array_column($drift, 'Dato'));
+date_format($driftdato, "Y/m/d");
+*/
 
 /*
 while($row = mysqli_fetch_array($result))
@@ -66,11 +70,12 @@ while($row = mysqli_fetch_array($result))
 
 $object = json_decode(json_encode($data2));
 */
-/*
+/* print specifikt column
 echo '<pre>';
-print_r($data);
+print_r(array_column($drift, 'billede'));
 echo '</pre>';
 */
+
 
 ?>
 
@@ -164,6 +169,7 @@ var chart5 = new CanvasJS.Chart("chartContainer5", {
 	}]
 });
 
+var driftArray = <?php echo json_encode($drift, JSON_PRETTY_PRINT); ?>;
 var chart6 = new CanvasJS.Chart("chartContainer6", {
 	title: {
 		text: "Drift over tid"
@@ -174,12 +180,13 @@ var chart6 = new CanvasJS.Chart("chartContainer6", {
 	},
 	data: [{
 		type: "line",
-        toolTipContent:"Dato: {label}<br/> Drift: {y}<br/>{name}",
-        name: '<img src="../billede.jpg" height="120" width="150">',
-		dataPoints: <?php echo json_encode($drift, JSON_NUMERIC_CHECK); ?>
+		dataPoints: driftArray,
+         toolTipContent:"Dato: {label}<br/> Drift: {y}<br/> {name}",
+         name:'<img src="../MRIQA/billeder/160402014040908drift.jpg" height="120" width="150">'
 	}]
 });
     /*
+    (array_column($drift, 'billede'))
         type: "column",
 toolTipContent: "{label}<br/>{name}, <strong>{y}</strong>mn Units",
         showInLegend: true,
@@ -202,6 +209,7 @@ chart6.render();
 </script>
 </head>
 <body>
+<img src="../MRIQA/billeder/160402014040908drift.jpg" height="120" width="150">
 <br/><div id="chartContainer1" style="width: 30%; height: 300px;display: inline-block;"></div>
 <div id="chartContainer2" style="width: 30%; height: 300px;display: inline-block;"></div>
 <div id="chartContainer3" style="width: 30%; height: 300px;display: inline-block;"></div>
