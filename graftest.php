@@ -13,7 +13,6 @@ if ($conn->connect_error) {
 }
 echo "Connected successfully";
 
-
 $sql = "SELECT * FROM Maaling";
 $result = mysqli_query($conn, $sql);
 
@@ -78,7 +77,8 @@ echo '</pre>';
 
 <?php
 
-$dataPoints = array(
+
+$dataPoinss = array(
 	array("y" => 25, "label" => "Sunday"),
 	array("y" => 15, "label" => "Monday"),
 	array("y" => 25, "label" => "Tuesday"),
@@ -166,6 +166,7 @@ var chart5 = new CanvasJS.Chart("chartContainer5", {
 	}]
 });
 
+var i;
 var chart6 = new CanvasJS.Chart("chartContainer6", {
 	title: {
 		text: "Drift over tid"
@@ -177,10 +178,13 @@ var chart6 = new CanvasJS.Chart("chartContainer6", {
 	data: [{
 		type: "line",
         toolTipContent:"Dato: {label}<br/> Drift: {y}<br/> Billede: {name}",
-        name: '<img src= "..{sti}" height="120" width="150">',
+        name: '<img src= <?php echo $drift[1]['sti']; ?> height="120" width=$150">',
 		dataPoints: <?php echo json_encode($drift, JSON_NUMERIC_CHECK); ?>
+
+
 	}]
 });
+
     /*
         type: "column",
 toolTipContent: "{label}<br/>{name}, <strong>{y}</strong>mn Units",
