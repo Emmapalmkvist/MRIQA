@@ -1,27 +1,4 @@
-<html>
-<head><title>PHP test</title></head>
-<body>
 <?php
-<<<<<<< HEAD
-    echo 'Hej databasen';
-?>
-    </body>
-
-<?php
-$servername = "5.104.105.222";
-$username = "iha";
-$password = "specialeprojekt";
-$db = "qaspeciale";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $db, 8085); // 8085 port
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-echo "Connected successfully";
-=======
 // Koden i denne fil kommer fra hjemmesiden TutorialRepublic hentet den 24.09.2018 via følgende link: https://www.tutorialrepublic.com/php-tutorial/php-mysql-login-system.php. Følgende modificeringer er foretaget: mulighed for at oprette sig som bruger direkte fra log ind-siden er fjernet. Ved fejl i brugernavn eller password angives det ikke hvor fejlen er, men der angives blot: "Adgangskoden eller brugernavn er ikke gyldig." Login filen inkluderer egen server/database adgangsfil: DB_adgang.php. Desuden er variable omdøbt og beskeder til bruger ændret til dansk.
 
 session_start();
@@ -79,7 +56,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
             if($stmt->execute())
             {
                 $stmt->store_result();
->>>>>>> origin/master
 
                 // Check om brugernavn eksisterer
                 if($stmt->num_rows == 1)
@@ -92,26 +68,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                         if(password_verify($adgangskode, $hashed_password))
                         {
 
-<<<<<<< HEAD
-$sql = "INSERT INTO qaspeciale.Logind (Brugernavn, Adgangskode)
-VALUES ('sophia', 'kode4567')";
-
-
-$sql = "SELECT Brugernavn, Adgangskode FROM Logind";
-$result = $conn->query($sql);
-
-    if ($result->num_rows > 0) {
-    // output data of each row
-    while($row = $result->fetch_assoc()) {
-        echo "Brugernavn: " . $row["Brugernavn"]. " - Adgangskode: " . $row["Adgangskode"];
-    }
-} else {
-    echo "0 results";
-}
-$conn->close();
-?>
-=======
-                            session_start();
+                        session_start();
 
                             // Gem data fre session
                             $_SESSION["loggedin"] = true;
@@ -189,5 +146,3 @@ $conn->close();
 </html>
 
 
-
->>>>>>> origin/master
