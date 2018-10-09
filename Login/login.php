@@ -5,7 +5,7 @@ session_start();
 
 
 // Inkluder fil med adgang til server/db
-require_once "DB_adgang.php";
+require_once "../Database/DB_adgang.php";
 
 // Definer variable
 $brugernavn = "";
@@ -76,7 +76,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                             $_SESSION["Brugernavn"] = $brugernavn;
 
                             // Direct bruger til ny side
-                            header("location: nyhjemside.php");
+                            header("location: ../Testfiler/nyhjemside.php");
                         }
                         else
                         {
