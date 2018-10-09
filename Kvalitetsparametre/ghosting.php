@@ -10,7 +10,7 @@ $sn = "21393";
 
 
 
-$sql = "SELECT Ghostingmean, Dato, Serienummer FROM Maaling WHERE Serienummer='$sn'";
+$sql = "SELECT Ghostingmean, Dato, Serienummer, Ghostingbillede FROM Maaling WHERE Serienummer='$sn'";
 $result = mysqli_query($mysqli, $sql);
 
 $ghosting= array();
@@ -20,7 +20,8 @@ while($row = mysqli_fetch_array($result))
 {
     $ghosting[] = array(
     "y" => $row["Ghostingmean"],
-    "label" =>$row["Dato"]
+    "label" =>$row["Dato"],
+    "sti" => "../billeder/" . $row["Ghostingbillede"]
     );
 
 }
@@ -43,6 +44,7 @@ var chart1 = new CanvasJS.Chart("chartContainer1", {
 	},
 	data: [{
 		type: "line",
+        toolTipContent:"Dato: {label}<br/> Drift: {y}<br/> Billede: <img src= {sti} height=120 width=$150>",
 		dataPoints: <?php echo json_encode($ghosting, JSON_NUMERIC_CHECK); ?>
 	}]
 });
