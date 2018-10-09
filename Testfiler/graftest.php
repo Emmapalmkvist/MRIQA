@@ -49,7 +49,7 @@ while($row = mysqli_fetch_array($result))
     "y" => $row["Drift"],
     "label" =>$row["Dato"],
     "driftbillede" =>$row["Driftbillede"],
-    "sti" => "billeder/" . $row["Driftbillede"]
+    "sti" => "../billeder/" . $row["Driftbillede"]
     );
 
     $driftbillede[] = array(
