@@ -2,8 +2,19 @@
 <html>
 <body>
 <form action="" method="post">
-<select name="select1">
 
+<script type="text/javascript" src="http://services.iperfect.net/js/IP_generalLib.js"></script>
+<input type="text" name="date1" id="date1" alt="date" class="IP_calendar" title="Y-m-d">
+<?php
+$startdato = $_POST['date1'];
+?>
+
+<input type="text" name="date2" id="date2" alt="date" class="IP_calendar" title="Y-m-d">
+<?php
+$slutdato = $_POST['date2'];
+?>
+
+<select name="select1">
 <?php
 require_once "../Database/DB_adgang.php";
 $sql1 = "SELECT Serienummer, Scannernavn FROM Scannere";
@@ -22,7 +33,7 @@ while ($row = mysqli_fetch_array($result1)) {
     //POST tager det, som ligger i dropdownmenyen og gemmer det i variablen //$sn, som puttes i SQL queryen.
 
     //$sn = $_POST['select1'];
-    $sql = "SELECT Ghostingmean, Dato, Serienummer, Ghostingbillede FROM Maaling WHERE Serienummer='$sn'";
+    $sql = "SELECT Ghostingmean, Dato, Serienummer, Ghostingbillede FROM Maaling WHERE Serienummer='$sn' AND Dato BETWEEN '$startdato' AND '$slutdato'";
 
 $result = mysqli_query($mysqli, $sql);
 
@@ -78,9 +89,7 @@ chart1.render();
 </head>
 <body>
 <br/><div id="chartContainer1" style="width: 30%; height: 300px;display: inline-block;"></div>
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js">
-
-    </script>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </body>
 </html>
 
