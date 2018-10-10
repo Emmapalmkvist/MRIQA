@@ -14,12 +14,14 @@ $result1 = mysqli_query($mysqli, $sql1);
 while ($row = mysqli_fetch_array($result1)) {
     echo "<option value='" . $row['Serienummer'] . "'>" . $row['Scannernavn'] . "</option>";
 }
+    $sn = $_POST['select1'];
 ?>
 </select>
 
 <?php
-    //POST tager det, som ligger i dropdownmenyen og gemmer det i variablen $sn, som puttes i SQL queryen.
-    $sn = $_POST['select1'];
+    //POST tager det, som ligger i dropdownmenyen og gemmer det i variablen //$sn, som puttes i SQL queryen.
+
+    //$sn = $_POST['select1'];
     $sql = "SELECT Ghostingmean, Dato, Serienummer, Ghostingbillede FROM Maaling WHERE Serienummer='$sn'";
 
 $result = mysqli_query($mysqli, $sql);
