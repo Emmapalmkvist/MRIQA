@@ -1,33 +1,12 @@
-<!DOCTYPE html>
-<html>
-<body>
-<form action="" method="post">
 
-<script type="text/javascript" src="http://services.iperfect.net/js/IP_generalLib.js"></script>
-<input type="date" name="date1" id="date1" alt="date" class="IP_calendar" title="Y-m-d">
-<input type="date" name="date2" id="date2" alt="date" class="IP_calendar" title="Y-m-d">
-
-<select name="select1">
-<?php
-require_once "../Database/DB_adgang.php";
-$sql1 = "SELECT Serienummer, Scannernavn FROM Scannere";
-$result1 = mysqli_query($mysqli, $sql1);
-
-?>
-<?php
-while ($row = mysqli_fetch_array($result1)) {
-    echo "<option value='" . $row['Serienummer'] . "'>" . $row['Scannernavn'] . "</option>";
-}
-    $startdato = $_POST['date1'];
-    $slutdato = $_POST['date2'];
-    $sn = $_POST['select1'];
-?>
-</select>
 
 <?php
-    //POST tager det, som ligger i dropdownmenyen og gemmer det i variablen //$sn, som puttes i SQL queryen.
-
-    //$sn = $_POST['select1'];
+function rftest($sn1, $start, $slut)
+{
+    include "../Database/DB_adgang.php";
+    $sn = $sn1;
+    $startdato = $start;
+    $slutdato = $slut;
     $sql = "SELECT Resonansfrekvens, Dato, Serienummer, Resonansfrekvensbillede FROM Maaling WHERE Serienummer='$sn' AND Dato BETWEEN '$startdato' AND '$slutdato'";
 
 $result = mysqli_query($mysqli, $sql);
@@ -42,22 +21,8 @@ while($row = mysqli_fetch_array($result))
     "sti" => "../billeder/" . $row["Resonansfrekvensbillede"]
     );
 
-}
-?>
-<button type ="submit" id="submit"> Vis scanner</button>
-
-</form>
-</body>
-</html>
-<?php
-// https://stackoverflow.com/questions/45157149/creating-dropdown-list-from-sql-database-in-php
-?>
-
-<!DOCTYPE HTML>
-<html>
-<head>
-
-<script>
+} ?>
+    <script>
 window.onload = function () {
 
 var chartRf = new CanvasJS.Chart("chartContainerRf", {
@@ -74,18 +39,17 @@ var chartRf = new CanvasJS.Chart("chartContainerRf", {
 	}]
 });
 
-
 chartRf.render();
-
 }
 
 </script>
-</head>
-<body>
-<br/><div id="chartContainerRf" style="width: 30%; height: 300px;display: inline-block;"></div>
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-</body>
-</html>
+<?php
+}
+?>
+
+
+
+
 
 
 
