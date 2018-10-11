@@ -1,3 +1,8 @@
+<?php
+require_once "../Database/DB_adgang.php";
+require_once "../Kvalitetsparametre/hentghostingdata.php";
+?>
+
 <!DOCTYPE html>
 <html>
 <body>
@@ -9,11 +14,14 @@
 
 <select name="select1">
 <?php
-require_once "../Database/DB_adgang.php";
+
+//require_once "../Database/DB_adgang.php";
+//require_once "../Kvalitetsparametre/hentghostingdata.php";
 $sql1 = "SELECT Serienummer, Scannernavn FROM Scannere";
 $result1 = mysqli_query($mysqli, $sql1);
 
 ?>
+
 <?php
 while ($row = mysqli_fetch_array($result1)) {
     echo "<option value='" . $row['Serienummer'] . "'>" . $row['Scannernavn'] . "</option>";
@@ -21,29 +29,17 @@ while ($row = mysqli_fetch_array($result1)) {
     $startdato = $_POST['date1'];
     $slutdato = $_POST['date2'];
     $sn = $_POST['select1'];
+
+
 ?>
 </select>
 
 <?php
-    //POST tager det, som ligger i dropdownmenyen og gemmer det i variablen //$sn, som puttes i SQL queryen.
-
-    //$sn = $_POST['select1'];
-    $sql = "SELECT Ghostingmean, Dato, Serienummer, Ghostingbillede FROM Maaling WHERE Serienummer='$sn' AND Dato BETWEEN '$startdato' AND '$slutdato'";
-
-$result = mysqli_query($mysqli, $sql);
-
-$ghosting= array();
-
-while($row = mysqli_fetch_array($result))
-{
-    $ghosting[] = array(
-    "y" => $row["Ghostingmean"],
-    "label" =>$row["Dato"],
-    "sti" => "../billeder/" . $row["Ghostingbillede"]
-    );
-
-}
+    echo testfunktion ($sn, $startdato, $slutdato)
 ?>
+
+
+
 
 <button type ="submit" id="submit"> Vis scanner</button>
 
@@ -57,7 +53,6 @@ while($row = mysqli_fetch_array($result))
 <!DOCTYPE HTML>
 <html>
 <head>
-
 <script>
 window.onload = function () {
 
@@ -80,8 +75,6 @@ chart1.render();
 
 }
 
-           chart1.render();
-
 </script>
 </head>
 <body>
@@ -89,14 +82,6 @@ chart1.render();
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
 
 
 
