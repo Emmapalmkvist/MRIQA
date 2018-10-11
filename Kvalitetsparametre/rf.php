@@ -23,7 +23,7 @@ while($row = mysqli_fetch_array($result))
 
 } ?>
     <script>
-window.onload = function () {
+function hej1 () {
 
 var chartRf = new CanvasJS.Chart("chartContainerRf", {
 	title: {
@@ -43,8 +43,7 @@ chartRf.render();
 }
 
 </script>
-<?php
-}
+<?php }
 ?>
 
 

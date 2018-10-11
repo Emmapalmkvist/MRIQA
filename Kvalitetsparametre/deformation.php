@@ -23,7 +23,8 @@ while($row = mysqli_fetch_array($result))
 
 } ?>
 <script>
-window.onload = function () {
+//window.onload =
+    function hej () {
 
 var chartDeformation = new CanvasJS.Chart("chartContainerDeformation", {
 	title: {

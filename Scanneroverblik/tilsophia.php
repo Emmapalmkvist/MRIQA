@@ -30,7 +30,6 @@ while ($row = mysqli_fetch_array($result1)) {
 <button type ="submit" id="submit"> Vis scanner</button>
 <?php
     rftest($sn, $startdato, $slutdato);
-
     deftest($sn, $startdato, $slutdato);
 
 ?>
