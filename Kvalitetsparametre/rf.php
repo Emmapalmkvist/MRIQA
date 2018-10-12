@@ -1,7 +1,7 @@
 
 
 <?php
-function rftest($sn1, $start, $slut)
+function rfdata($sn1, $start, $slut)
 {
     include "../Database/DB_adgang.php";
     $sn = $sn1;
@@ -23,7 +23,7 @@ while($row = mysqli_fetch_array($result))
 
 } ?>
     <script>
-function hej1 () {
+function displayRF () {
 
 var chartRf = new CanvasJS.Chart("chartContainerRf", {
 	title: {

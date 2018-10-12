@@ -1,6 +1,12 @@
 <?php
-include "../Kvalitetsparametre/rf.php";
 include "../Kvalitetsparametre/deformation.php";
+include "../Kvalitetsparametre/drift.php";
+include "../Kvalitetsparametre/ghosting.php";
+include "../Kvalitetsparametre/rf.php";
+include "../Kvalitetsparametre/snr.php";
+include "../Kvalitetsparametre/uniformitet.php";
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -29,8 +35,13 @@ while ($row = mysqli_fetch_array($result1)) {
 
 <button type ="submit" id="submit"> Vis scanner</button>
 <?php
-    rftest($sn, $startdato, $slutdato);
-    deftest($sn, $startdato, $slutdato);
+    deformationdata($sn, $startdato, $slutdato);
+    driftdata($sn, $startdato, $slutdato);
+    ghostingdata($sn, $startdato, $slutdato);
+    rfdata($sn, $startdato, $slutdato);
+    snrdata($sn, $startdato, $slutdato);
+    uniformitetdata($sn, $startdato, $slutdato);
+
 
 ?>
 </form>

@@ -1,12 +1,11 @@
 <?php
     //POST tager det, som ligger i dropdownmenyen og gemmer det i variablen //$sn, som puttes i SQL queryen.
-function deftest($sn1, $start, $slut)
+function deformationdata($sn1, $start, $slut)
 {
     include "../Database/DB_adgang.php";
     $sn = $sn1;
     $startdato = $start;
     $slutdato = $slut;
-    //$sn = $_POST['select1'];
     $sql = "SELECT Deformation, Dato, Serienummer, Deformationbillede FROM Maaling WHERE Serienummer='$sn' AND Dato BETWEEN '$startdato' AND '$slutdato'";
 
 $result = mysqli_query($mysqli, $sql);
@@ -24,7 +23,7 @@ while($row = mysqli_fetch_array($result))
 } ?>
 <script>
 //window.onload =
-    function hej () {
+    function displayDeformation () {
 
 var chartDeformation = new CanvasJS.Chart("chartContainerDeformation", {
 	title: {
@@ -44,7 +43,6 @@ var chartDeformation = new CanvasJS.Chart("chartContainerDeformation", {
 chartDeformation.render();
 
 }
-
 </script>
 <?php }
 ?>

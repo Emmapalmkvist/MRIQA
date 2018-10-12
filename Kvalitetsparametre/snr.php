@@ -1,3 +1,65 @@
+<?php
+    //POST tager det, som ligger i dropdownmenyen og gemmer det i variablen //$sn, som puttes i SQL queryen.
+function snrdata($sn1, $start, $slut)
+{
+    include "../Database/DB_adgang.php";
+    $sn = $sn1;
+    $startdato = $start;
+    $slutdato = $slut;
+    $sql = "SELECT SNR, Dato, Serienummer, SNRbillede FROM Maaling WHERE Serienummer='$sn' AND Dato BETWEEN '$startdato' AND '$slutdato'";
+
+$result = mysqli_query($mysqli, $sql);
+
+$snr= array();
+
+while($row = mysqli_fetch_array($result))
+{
+    $snr[] = array(
+    "y" => $row["SNR"],
+    "label" =>$row["Dato"],
+    "sti" => "../billeder/" . $row["SNRbillede"]
+    );
+
+} ?>
+<script>
+//window.onload =
+    function displaySNR () {
+
+var chartSNR = new CanvasJS.Chart("chartContainerSNR", {
+	title: {
+		text: "SNR over tid"
+	},
+	axisY: {
+		title: "SNR"
+	},
+    data: [{
+		type: "line",
+        toolTipContent:"Dato: {label}<br/> SNR: {y}<br/> Billede: <img src= {sti} height=120 width=$150>",
+		dataPoints: <?php echo json_encode($snr, JSON_NUMERIC_CHECK); ?>
+	}]
+});
+
+
+chartSNR.render();
+
+}
+</script>
+<?php }
+?>
+
+
+
+
+
+
+
+
+
+
+
+<?php
+/*
+
 <!DOCTYPE html>
 <html>
 <body>
@@ -87,6 +149,8 @@ chartSnr.render();
 </body>
 </html>
 
+*/
+?>
 
 
 
