@@ -14,10 +14,12 @@ include "../Kvalitetsparametre/uniformitet.php";
 <form action="" method="post">
 
 <script type="text/javascript" src="http://services.iperfect.net/js/IP_generalLib.js"></script>
-<input type="date" name="date1" id="date1" alt="date" class="IP_calendar" title="Y-m-d">
-<input type="date" name="date2" id="date2" alt="date" class="IP_calendar" title="Y-m-d">
+<input type="date" name="date1" id="date1" class="IP_calendar">
+<input type="date" name="date2" id="date2" class="IP_calendar" value="">
 
 <select name="select1">
+ <option value="">Vælg scanner..</option>
+
 <?php
 require_once "../Database/DB_adgang.php";
 $sql1 = "SELECT Serienummer, Scannernavn FROM Scannere";
@@ -41,8 +43,6 @@ while ($row = mysqli_fetch_array($result1)) {
     rfdata($sn, $startdato, $slutdato);
     snrdata($sn, $startdato, $slutdato);
     uniformitetdata($sn, $startdato, $slutdato);
-
-
 ?>
 </form>
 </body>
