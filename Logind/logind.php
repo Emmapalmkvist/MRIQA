@@ -90,8 +90,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                 else
                 {
                     // Angiv fejl, hvis password er forkert men indikerer ikke at det er password. Kan også være brugernavn
-                    $brugernavn_error = "Adgangskoden eller brugernavn er ikke gyldig.";
-                    $adgangskode_error = "Adgangskoden eller brugernavn er ikke gyldig.";
+                    $brugernavn_error = "Brugernavn eller adgangskode er ikke gyldig.";
+                    $adgangskode_error = "Brugernavn eller adgangskode er ikke gyldig.";
                 }
             }
             else echo "Fejl er opstået. Prøv igen.";

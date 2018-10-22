@@ -35,6 +35,7 @@ while ($row = mysqli_fetch_array($result1)) {
 </select>
 
 
+
 <button type ="submit" id="submit"> Vis scanner</button>
 <?php
     deformationdata($sn, $startdato, $slutdato);

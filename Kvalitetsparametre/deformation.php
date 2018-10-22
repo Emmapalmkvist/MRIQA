@@ -1,4 +1,5 @@
 <?php
+
     //POST tager det, som ligger i dropdownmenyen og gemmer det i variablen //$sn, som puttes i SQL queryen.
 function deformationdata($sn1, $start, $slut)
 {
@@ -44,21 +45,38 @@ chartDeformation.render();
 
 }
 </script>
-<?php }
+<?php
+
+}
+
+
+
+
+/*function averageDeformation ($model_, $start, $slut)
+{
+        include "../Database/DB_adgang.php";
+
+    $model = model_;
+    $startdato = $start;
+    $slutdato = $slut;
+    $sql = "SELECT Deformation, Model, Dato FROM Maaling WHERE Model='$model' AND Dato BETWEEN '$startdato' AND '$slutdato'";
+
+$result2 = mysqli_query($mysqli, $sql);
+
+$data = array();
+
+while($row = mysqli_fetch_array($result2))
+{
+    $data[] = array(
+    "y" => $row["Deformation"],
+    "label" =>$row["Dato"]
+    );
+
+}
+
+echo '<pre>';
+print_r($data);
+echo '</pre>';
+
+}*/
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
