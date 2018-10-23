@@ -22,7 +22,7 @@ include "../Kvalitetsparametre/uniformitet.php";
 
 <?php
 require_once "../Database/DB_adgang.php";
-$sql1 = "SELECT Serienummer, Scannernavn FROM Scannere";
+$sql1 = "SELECT Serienummer, Model, Scannernavn FROM Scannere";
 $result1 = mysqli_query($mysqli, $sql1);
 
 while ($row = mysqli_fetch_array($result1)) {
@@ -31,14 +31,16 @@ while ($row = mysqli_fetch_array($result1)) {
     $startdato = $_POST['date1'];
     $slutdato = $_POST['date2'];
     $sn = $_POST['select1'];
+    $model = $_POST['select1'];
 ?>
 </select>
 
 
 
+
 <button type ="submit" id="submit"> Vis scanner</button>
 <?php
-    deformationdata($sn, $startdato, $slutdato);
+    deformationdata($sn, $model, $startdato, $slutdato);
     driftdata($sn, $startdato, $slutdato);
     ghostingdata($sn, $startdato, $slutdato);
     rfdata($sn, $startdato, $slutdato);
