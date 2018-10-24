@@ -1,5 +1,4 @@
-<html>
-<head><title>PHP test</title></head>
+
 
 
 <?php
@@ -14,7 +13,7 @@ $mysqli = new mysqli($servername, $username, $password, $db, $port);
 
 /*$sql = "SELECT Dato, Lokation, Fabrikant, SNR, Uniformitet, Drift FROM Maaling";*/
 
-$sql = "SELECT Model, AVG(Deformation) as avgDef ,  Dato FROM Maaling WHERE Model='Achieva' AND Dato BETWEEN '2010-01-01' AND '2014-06-17' GROUP BY Dato";
+$sql = "SELECT Model, AVG(Deformation) as avgDef ,  Dato FROM Maaling WHERE Model='Achieva' AND Dato BETWEEN '2014-01-01' AND '2014-10-10' GROUP BY Dato";
 
 
 $result = mysqli_query($mysqli, $sql);
@@ -30,40 +29,69 @@ $result = mysqli_query($mysqli, $sql);
     echo "0 results";
 }*/
 
+
+
+
     //$conn->close();
 
-$averagedeformation= array();
+$avgDef= array();
 
 while($row = mysqli_fetch_array($result))
 {
-    $averagedeformation[] = array(
-    "y" => $row["avgDef"],
-    "label" =>$row["Dato"]
+    $avgDef[] = array(
+    //"y" => $row["avgDef"],
+    "label" =>$row["Dato"],
+    "y" => $row["avgDef"]
+
     );
 
     $model = $row["Model"];
+}
 
-    return $averagedeformation;
+echo json_encode($avgDef, JSON_PRETTY_PRINT);
+
+?>
+
+<!DOCTYPE HTML>
+<html>
+<head>
+
+<script>
+window.onload = function () {
+
+var chart1 = new CanvasJS.Chart("chartContainer1", {
+	title: {
+		text: "Ghosting over tid"
+	},
+	axisY: {
+		title: "Ghosting"
+	},
+	data: [{
+		type: "line",
+        toolTipContent:"Dato: {label}<br/> Drift: {y}<br/> Billede: <img src= {sti} height=120 width=$150>",
+		dataPoints: <?php echo json_encode($avgDef, JSON_PRETTY_PRINT); ?>
+	}]
+});
+
+
+chart1.render();
 
 }
 
+           //chart1.render();
 
-    print_r($averagedeformation);
-
-
-
-
-/*while($row = mysqli_fetch_array($result))
-{
-    //$data[] =$row['Data'];
-    //$data['Test'] = $result;
-    //return $data;
-
-    //foreach data.field_count
-
-}*/
+</script>
+</head>
+<body>
+<br/><div id="chartContainer1" style="width: 30%; height: 300px;display: inline-block;"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</body>
+</html>
 
 
+
+
+<?php
 
 /*while ($data = mysqli_fetch_array($result, MYSQLI_ASSOC))
 {
@@ -73,11 +101,7 @@ while($row = mysqli_fetch_array($result))
 				);
 }
 
-echo "<pre>\n";
-print_r($test);
-echo "</pre>\n";   */
 
-//foreach (item )
 
 
 
@@ -121,4 +145,3 @@ while ($row = mysqli_fetch_array($result))
 ?>
 
 
-</html>

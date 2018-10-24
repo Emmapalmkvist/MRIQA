@@ -17,8 +17,24 @@ include "../Kvalitetsparametre/uniformitet.php";
 <input type="date" name="date1" id="date1" class="IP_calendar">
 <input type="date" name="date2" id="date2" class="IP_calendar" value="">
 
-<select name="select1">
+<script>
+
+var x = ""
+
+function myFunction()
+    {
+        x = document.getElementById("scannerid").value;
+    }
+
+function onload()
+    {
+        document.getElementById("scannerid").value = x;
+    }
+</script>
+
+<select name="select1" id="scannerid" onchange="myFunction()">
  <option value="">Vælg scanner..</option>
+
 
 <?php
 require_once "../Database/DB_adgang.php";
@@ -28,6 +44,7 @@ $result1 = mysqli_query($mysqli, $sql1);
 while ($row = mysqli_fetch_array($result1)) {
     echo "<option value='" . $row['Serienummer'] . "'>" . $row['Scannernavn'] . "</option>";
 }
+
     $startdato = $_POST['date1'];
     $slutdato = $_POST['date2'];
     $sn = $_POST['select1'];
@@ -35,7 +52,9 @@ while ($row = mysqli_fetch_array($result1)) {
 ?>
 </select>
 
-
+<script>
+    onload();
+</script>
 
 
 <button type ="submit" id="submit"> Vis scanner</button>
