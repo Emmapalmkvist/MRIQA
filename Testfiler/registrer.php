@@ -1,7 +1,7 @@
 <?php
 
 // Inkluder adgangsfil
-require_once "DB_adgang.php";
+//require_once "../Database/DB_adgang.php";
 
 // Definer variable
 $brugernavn = "";

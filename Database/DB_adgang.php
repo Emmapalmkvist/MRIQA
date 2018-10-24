@@ -16,6 +16,6 @@ if($mysqli === false)
 }
 
 // Test af succesfuld forbindelse
-else echo "Forbindelse oprettet."
+//else echo "Forbindelse oprettet."
 
 ?>

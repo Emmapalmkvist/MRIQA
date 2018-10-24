@@ -21,10 +21,8 @@ $data = array();
 while($row = mysqli_fetch_array($result))
 {
     $data[] = array(
-    "label" => $row["Dato"],
     "y" => $row["Ghostingmean"],
-    "driftbillede" => $row["Driftbillede"],
-    "sti" => "billeder/" . $row["Driftbillede"]
+    "label" =>$row["Dato"]
     );
 }
 
@@ -34,17 +32,13 @@ echo '<pre>';
 print_r($data);
 echo '</pre>';
 
-  foreach ($data as $key => $part) {
-       $sort[$key] = "label";
-  }
-  array_multisort($sort, SORT_DESC, $data);
 
 ?>
 
 <?php
 
 $dataPoints = array(
-	array("y" => 25, "label" => new DateTime('01-01-2014')),
+	array("y" => 25, "label" => "Sunday"),
 	array("y" => 15, "label" => "Monday"),
 	array("y" => 25, "label" => "Tuesday"),
 	array("y" => 5, "label" => "Wednesday"),

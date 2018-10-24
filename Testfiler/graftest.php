@@ -48,21 +48,21 @@ while($row = mysqli_fetch_array($result))
     $drift[] = array(
     "y" => $row["Drift"],
     "label" =>$row["Dato"],
-    "driftbillede" =>$row["Driftbillede"],
-    "sti" => "billeder/" . $row["Driftbillede"]
+    "billede" =>$row["Driftbillede"],
+    "sti" => "../billeder/" . $row["Driftbillede"]
     );
 
-    $driftbillede[] = array(
-    "billeder/" . $row["Driftbillede"]
-    );
 
     $jsarray = json_encode($driftbillede);
 
     echo "var javascript_array = ". $jsarray . ";\n";
 }
 
-
-
+$driftobject = json_decode(json_encode($drift));
+/* Eksempel på datoformat
+$driftdato=date_create(array_column($drift, 'Dato'));
+date_format($driftdato, "Y/m/d");
+*/
 
 /*
 while($row = mysqli_fetch_array($result))
@@ -75,11 +75,12 @@ while($row = mysqli_fetch_array($result))
 
 $object = json_decode(json_encode($data2));
 */
-/*
+/* print specifikt column
 echo '<pre>';
-print_r($data);
+print_r(array_column($drift, 'billede'));
 echo '</pre>';
 */
+
 
 ?>
 
@@ -155,7 +156,6 @@ var chart5 = new CanvasJS.Chart("chartContainer5", {
 	}]
 });
 
-var i;
 var chart6 = new CanvasJS.Chart("chartContainer6", {
 	title: {
 		text: "Drift over tid"
@@ -169,11 +169,11 @@ var chart6 = new CanvasJS.Chart("chartContainer6", {
         toolTipContent:"Dato: {label}<br/> Drift: {y}<br/> Billede: <img src={sti} height=120 width=$150>",
 		dataPoints: <?php echo json_encode($drift, JSON_NUMERIC_CHECK); ?>
 
-
 	}]
 });
 
     /*
+    (array_column($drift, 'billede'))
         type: "column",
 
 toolTipContent: "{label}<br/>{name}, <strong>{y}</strong>mn Units",
@@ -197,6 +197,7 @@ chart6.render();
 </script>
 </head>
 <body>
+<img src="../MRIQA/billeder/160402014040908drift.jpg" height="120" width="150">
 <br/><div id="chartContainer1" style="width: 30%; height: 300px;display: inline-block;"></div>
 <div id="chartContainer2" style="width: 30%; height: 300px;display: inline-block;"></div>
 <div id="chartContainer3" style="width: 30%; height: 300px;display: inline-block;"></div>
