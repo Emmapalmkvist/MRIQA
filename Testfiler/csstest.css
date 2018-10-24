@@ -1,6 +1,6 @@
 .title{
     font-family: sans-serif;
-    color: #dc2d5e;
+    color: #7FFF00;
     text-align: center;
 }
 .tabContainer{
@@ -21,12 +21,13 @@
     font-family: sans-serif;
     font-size: 18px;
     background-color: #eee;
+    background-color: #7FFF00;
 }
 .tabContainer .buttonContainer button:hover{
     background-color: #d7d4d4;
 }
 .tabContainer .tabPanel{
-    height: 85%;
+    height: 50%;
     background-color: gray;
     color: white;
     text-align: center;

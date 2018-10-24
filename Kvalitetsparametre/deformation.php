@@ -15,29 +15,34 @@ $deformation= array();
 
 while($row = mysqli_fetch_array($result))
 {
-    /*$deformation[] = array(
-    "y"=> $row["Deformation"],
-    "label" =>$row["Dato"],
+    $deformation[] = array(
+        "label" =>$row["Dato"],
+
+    "y" => $row["Deformation"],
+    //"label" =>$row["Dato"],
     "sti" => "../billeder/" . $row["Deformationbillede"]
-    ); */
+    );
     $model = $row["Model"];
 }
 
-$sql1 = "SELECT Model, AVG(Deformation) as avgDef, Dato FROM Maaling WHERE Model='$model' AND Dato BETWEEN '$startdato' AND '$slutdato'";
+$sql1 = "SELECT Model, AVG(Deformation) as avgDef, Dato FROM Maaling WHERE Model='$model' AND Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY Dato";
 
 
 $result1 = mysqli_query($mysqli, $sql1);
 
 $avgDef= array();
 
+
     while($row = mysqli_fetch_array($result1))
     {
     $avgDef[] = array(
-    "y" => $row["avgDef"],
-    "label" => $row["Dato"]
+        "label" => $row["Dato"],
+    "y" => $row["avgDef"]
+
     );
 
     }
+
 ?>
 
 
@@ -55,12 +60,23 @@ var chartDeformation = new CanvasJS.Chart("chartContainerDeformation", {
 		title: "Deformation"
     },
     data: [
+
         {
 		type: "line",
+        //axisYType: "first",
         toolTipContent:"Dato: {label}<br/> Drift: {y}<br/> Billede: <img src= {sti} height=120 width=$150>",
 		dataPoints: <?php echo json_encode($deformation, JSON_NUMERIC_CHECK); ?>
 
-	    }
+
+
+	    },
+        {
+        type: "line",
+        //axisYType: "first",
+        toolTipContent:"Dato: {label}<br/> Drift: {y}<br/> Billede: <img src= {sti} height=120 width=$150>",
+		dataPoints: <?php echo json_encode($avgDef, JSON_NUMERIC_CHECK); ?>
+
+        }
 
         ]
 });
