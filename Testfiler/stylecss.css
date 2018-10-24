@@ -1,6 +1,6 @@
 body{
     margin: auto;
-    background: antiquewhite;
+    background: #A6B9C0;
     font-family: fantasy;
 }
 
@@ -30,7 +30,7 @@ body{
 .nav_bar ul li a{
     text-decoration: none;
     color: antiquewhite;
-    background: darkblue;
+    background: grey;
     border: 1px solid black;
     border-bottom: none;
     padding: 15px 15px 15px 15px;
@@ -41,7 +41,7 @@ body{
 .nav_bar ul li a:hover{
     text-decoration: none;
     color: burlywood;
-    background: blue;
+    background: green;
 }
 
 .nav_bar ul li a#onlink{
