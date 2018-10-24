@@ -12,35 +12,31 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 <!doctype html>
 <html>
     <title>Sammenlign scannere</title>
-    <link rel="stylesheet" href="stylecss.css" />
+    <link rel="stylesheet" href="newstyle.css" />
      <meta charset="UTF-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
     <style type="text/css">
-        body{ font: 14px sans-serif; }
-        .wrapper{ width: 350px; padding: 20px; }
+    body {
+  background-color: #A6B9C0;
+}
     </style>
 <body>
     <!doctype html>
 <html>
 <head><title>Hjem</title></head>
 <body>
-<h1>MR-Scanning - Region Midt</h1>
-    <p>
-        <a href="logout.php" class="btn btn-danger">Sign Out of Your Account</a>
-    </p>
-    <div class="nav_bar">
-        <ul>
-            <li><a href="nyhjemside.php">Hjem</a></li>
-            <li><a href="overblikscannere.php">Overblik over scannere</a></li>
-            <li><a href="sammenlignscanner.php" id="onlink">Sammenlign scannere</a></li>
-        </ul>
-    </div>
-    <div class="main_container">
-        <?php
-	echo'Sammenlign scannere';
-        ?>
+<header>
+      <h1>MRI-SCANNING - REGION MIDT</h1>
+    </header>
+
+    <div class="topnav">
+            <a class="active" href ="nyhjemside.php" id="onlink">HJEM</a>
+            <a href="overblikscannere.php">OVEBLIK OVER SCANNERE</a>
+            <a href="sammenlignscanner.php">SAMMENLIGN SCANNERE</a>
+        <li style="float:right"><a href="location: ../Logind/logud.php">LOG UD</a></li>
     </div>
 
+    <body>
 
 </body>
 </html>

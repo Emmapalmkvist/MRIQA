@@ -1,17 +1,23 @@
 body{
     margin: auto;
-    background: #A6B9C0;
-    font-family: fantasy;
+    background-color: white;
+    font-family: sans-serif;
+    font-weight: bold;
 }
 
 header{
     background-color: white;
     text-align: center;
+    padding: 15px;
+    font-family: sans-serif;
+    font-weight: bold;
+    color: #376472;
 }
 
 .topnav {
     background-color: #376472;
     overflow: hidden;
+    font-weight: bold;
 }
 
 /* Style the links inside the navigation bar */
@@ -20,71 +26,20 @@ header{
     color: #f2f2f2;
     font-family: sans-serif;
     text-align: center;
-    padding: 15px 35px;
+    padding: 15px 40px;
     text-decoration: none;
     font-size: 13px;
-}s
+}
 
 /* Change the color of links on hover */
 .topnav a:hover {
-    background-color: darkgrey;
-    color: white;
+    background-color: #517E8C;
 }
 
 /* Add a color to the active/current link */
 .topnav a.active {
-    background-color: #4E8FA3;
+    background-color: #517E8C;
     color: white;
-}
-
-.nav_bar {
-    margin: auto;
-    border-bottom: 1px solid #000000;
-    width: 1000px;
-    padding:0px 20px 0px 20px;
-    height: 50px;
-    margin-top:30px;
-
-}
-
-
-.nav_bar ul{
-    padding: 0;
-    list-style: none;
-}
-
-.nav_bar ul li{
-    float:left;
-    font-size: 16px;
-    font-weight: bold;
-    margin-right: 30px;
-}
-
-.nav_bar ul li a{
-    text-decoration: none;
-    color: antiquewhite;
-    background: grey;
-    border: 1px solid black;
-    border-bottom: none;
-    padding: 15px 15px 15px 15px;
-    width: 200px;
-    display: block;
-    text-align: center;
-}
-.nav_bar ul li a:hover{
-    text-decoration: none;
-    color: burlywood;
-    background: green;
-}
-
-.nav_bar ul li a#onlink{
-    background: green ;
-    color: antiquewhite;
-}
-
-.nav_bar ul li a#onlink:hover{
-    background: black;
-    color: aqua;
 }
 
 .main_container{
