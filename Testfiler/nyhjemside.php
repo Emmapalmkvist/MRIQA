@@ -13,7 +13,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 <html>
 <head>
     <title>Hjem</title>
-    <link rel="stylesheet" href="stylecss.css" />
+    <link rel="stylesheet" href="newstyle.css" />
      <meta charset="UTF-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
     <style type="text/css">
@@ -28,12 +28,10 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         </a>
 
     </p>
-    <div class="nav_bar">
-        <ul>
-            <li><a href="nyhjemside.php" id="onlink">Hjem</a></li>
-            <li><a href="overblikscannere.php">Overblik over scannere</a></li>
-            <li><a href="sammenlignscanner.php">Sammenlign scannere</a></li>
-        </ul>
+    <div class="topnav">
+            <a class="active" href ="nyhjemside.php" id="onlink">HJEM</a>
+            <a href="overblikscannere.php">OVEBLIK OVER SCANNERE</a>
+            <a href="sammenlignscanner.php">SAMMENLIGN SCANNERE</a>
     </div>
 
     <div class="main_container">
