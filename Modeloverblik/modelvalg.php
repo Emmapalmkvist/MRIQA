@@ -54,9 +54,17 @@ while($row = mysqli_fetch_array($result))
 <?php
 
 foreach($scannersn as $scan){
-echo '<br/><input type="checkbox" name=" .$scan . " value=" . $scan . " />';
+echo '<br/><input type="checkbox" name='scanner[]' value=" . $scan . " />';
 echo "<label for name=" . print_r($scan["label"])  . "</label>";
 
+}
+
+if (isset($_POST['scanner']))
+{
+//echo $_POST['scanner']; // Displays value of checked checkbox.
+foreach($_POST['scanner'] as $value){
+            echo "value : ".$value.'<br/>';
+        }
 }
 
 ?>
@@ -71,6 +79,18 @@ echo "<label for name=" . print_r($scan["label"])  . "</label>";
     uniformitetdata($sn, $startdato, $slutdato);*/
 ?>
 </form>
+<?php
+/*
+    if(!empty($_POST['scanner'])) {
+
+        foreach($_POST['scanner'] as $value){
+            echo "value : ".$value.'<br/>';
+        }
+
+    }
+*/
+
+?>
 </body>
 </html>
 
