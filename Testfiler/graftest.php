@@ -166,7 +166,7 @@ var chart6 = new CanvasJS.Chart("chartContainer6", {
 	},
 	data: [{
 		type: "line",
-        toolTipContent:"Dato: {label}<br/> Drift: {y}<br/> Billede: <img src= {sti} height=120 width=$150>",
+        toolTipContent:"Dato: {label}<br/> Drift: {y}<br/> Billede: <img src={sti} height=120 width=$150>",
 		dataPoints: <?php echo json_encode($drift, JSON_NUMERIC_CHECK); ?>
 
 
