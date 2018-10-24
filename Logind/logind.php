@@ -106,19 +106,27 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
     <title>Log ind</title>
+    <link rel="stylesheet" href="logind.css">
+    <meta charset="UTF-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
     <style type="text/css">
-        body{ font: 14px sans-serif; }
+        body{ font: 14px sans-serif; background-color: #A6B9C0;}
         .wrapper{ width: 350px; padding: 20px; }
+
     </style>
-</head>
+
+    <header>
+     <h1>MRI-SCANNING - REGION MIDT</h1>
+    </header>
+
+        <div class="topnav">
+            <a class="active" href ="logind.php" id="onlink">LOG IND</a>
+    </div>
+
 <body>
+
     <div class="wrapper">
-        <h2>Log ind til MRI-kvalitetssikringssystem</h2>
-        <p>Udfyld venligst dine log ind oplysninger nedenfor.</p>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 
             <div class="form-group <?php echo (!empty($brugernavn_error)) ? 'has-error' : ''; ?>">
