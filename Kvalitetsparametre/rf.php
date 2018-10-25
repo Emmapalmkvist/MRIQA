@@ -7,7 +7,7 @@ function rfdata($sn1, $start, $slut)
     $sn = $sn1;
     $startdato = $start;
     $slutdato = $slut;
-    $sql = "SELECT Resonansfrekvens, Dato, Serienummer, Resonansfrekvensbillede FROM Maaling WHERE Serienummer='$sn' AND Dato BETWEEN '$startdato' AND '$slutdato'";
+    $sql = "SELECT Resonansfrekvens, Dato, Serienummer, Resonansfrekvensbillede FROM Maaling WHERE Serienummer='$sn' AND Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY Dato";
 
 $result = mysqli_query($mysqli, $sql);
 

@@ -7,7 +7,7 @@ function driftdata($sn1, $start, $slut)
     $startdato = $start;
     $slutdato = $slut;
     //$sn = $_POST['select1'];
-    $sql = "SELECT Drift, Dato, Serienummer, Driftbillede FROM Maaling WHERE Serienummer='$sn' AND Dato BETWEEN '$startdato' AND '$slutdato'";
+    $sql = "SELECT Drift, Dato, Serienummer, Driftbillede FROM Maaling WHERE Serienummer='$sn' AND Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY Dato";
 
 $result = mysqli_query($mysqli, $sql);
 
