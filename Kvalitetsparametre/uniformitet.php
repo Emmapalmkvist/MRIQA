@@ -6,7 +6,7 @@ function uniformitetdata($sn1, $start, $slut)
     $sn = $sn1;
     $startdato = $start;
     $slutdato = $slut;
-    $sql = "SELECT Uniformitet, Dato, Serienummer, Uniformitetbillede FROM Maaling WHERE Serienummer='$sn' AND Dato BETWEEN '$startdato' AND '$slutdato'";
+    $sql = "SELECT Uniformitet, Dato, Serienummer, Uniformitetbillede FROM Maaling WHERE Serienummer='$sn' AND Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY Dato";
 
 $result = mysqli_query($mysqli, $sql);
 

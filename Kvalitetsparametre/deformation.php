@@ -7,13 +7,15 @@ function deformationdata($sn1, $model1, $start, $slut)
     $model = $model1;
     $startdato = $start;
     $slutdato = $slut;
-    $sql = "SELECT Deformation, Model, Dato, Serienummer, Deformationbillede FROM Maaling WHERE Serienummer='$sn' AND Dato BETWEEN '$startdato' AND '$slutdato'";
+    $sql = "SELECT Deformation, Model, Dato, Serienummer, Deformationbillede FROM Maaling WHERE Serienummer='$sn' AND Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY Dato";
+
+
+
 
 $result = mysqli_query($mysqli, $sql);
-
 $deformation= array();
 
-while($row = mysqli_fetch_array($result))
+    while($row = mysqli_fetch_array($result))
 {
     $deformation[] = array(
         "label" =>$row["Dato"],
@@ -24,6 +26,7 @@ while($row = mysqli_fetch_array($result))
     );
     $model = $row["Model"];
 }
+
 
 $sql1 = "SELECT Model, AVG(Deformation) as avgDef, Dato FROM Maaling WHERE Model='$model' AND Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY Dato";
 
@@ -36,9 +39,8 @@ $avgDef= array();
     while($row = mysqli_fetch_array($result1))
     {
     $avgDef[] = array(
-        "label" => $row["Dato"],
-    "y" => $row["avgDef"]
-
+    "y" => $row["avgDef"],
+    "label" => $row["Dato"]
     );
 
     }
@@ -86,6 +88,11 @@ chartDeformation.render();
 </script>
 <?php
 } // afslutning på dateDeformation() funktionen
+
+
+
+
+
 
 
 /*function averageDef($model, $start, $slut)
