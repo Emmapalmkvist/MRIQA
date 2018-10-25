@@ -58,14 +58,7 @@ while ($row = mysqli_fetch_array($result1)) {
 
 
 <button type ="submit" id="submit"> Vis scanner</button>
-<?php
-    deformationdata($sn, $model, $startdato, $slutdato);
-    driftdata($sn, $startdato, $slutdato);
-    ghostingdata($sn, $startdato, $slutdato);
-    rfdata($sn, $startdato, $slutdato);
-    snrdata($sn, $startdato, $slutdato);
-    uniformitetdata($sn, $startdato, $slutdato);
-?>
+
 </form>
 </body>
 </html>
