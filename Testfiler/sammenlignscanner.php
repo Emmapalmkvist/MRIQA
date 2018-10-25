@@ -30,9 +30,9 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     </header>
 
     <div class="topnav">
-            <a class="active" href ="nyhjemside.php" id="onlink">HJEM</a>
+            <a href ="nyhjemside.php" id="onlink">HJEM</a>
             <a href="overblikscannere.php">OVEBLIK OVER SCANNERE</a>
-            <a href="sammenlignscanner.php">SAMMENLIGN SCANNERE</a>
+            <a class="active" href="sammenlignscanner.php">SAMMENLIGN SCANNERE</a>
         <li style="float:right"><a href="location: ../Logind/logud.php">LOG UD</a></li>
     </div>
 
