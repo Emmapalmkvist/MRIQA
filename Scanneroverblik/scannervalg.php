@@ -59,8 +59,6 @@ while ($row = mysqli_fetch_array($result1)) {
     onload();
 </script>
 
-
-<button type ="submit" id="submit" style= "font-family: sans-serif; color: white; background-color: blue"> Vis scanner</button>
 <?php
     deformationdata($sn, $model, $startdato, $slutdato);
     driftdata($sn, $startdato, $slutdato);
@@ -69,6 +67,8 @@ while ($row = mysqli_fetch_array($result1)) {
     snrdata($sn, $startdato, $slutdato);
     uniformitetdata($sn, $startdato, $slutdato);
 ?>
+<button type ="submit" id="submit"> Vis scanner</button>
+
 </form>
 </body>
 </html>
