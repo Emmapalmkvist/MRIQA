@@ -10,12 +10,15 @@ include "../Kvalitetsparametre/uniformitet.php";
 ?>
 <!DOCTYPE html>
 <html>
+    <style type="text/css">
+    </style>
 <body>
 <form action="" method="post">
 
 <script type="text/javascript" src="http://services.iperfect.net/js/IP_generalLib.js"></script>
-<input type="date" name="date1" id="date1" class="IP_calendar">
-<input type="date" name="date2" id="date2" class="IP_calendar" value="">
+<br />
+<input type="date" name="date1" id="date1" style= "margin-left:27%; margin-right: 27% height: 25px margin-top: 5px"class="IP_calendar">
+<input type="date" name="date2" id="date2" style= "height: 25px" class="IP_calendar" value="">
 
 <script>
 
@@ -32,7 +35,7 @@ function onload()
     }
 </script>
 
-<select name="select1" id="scannerid" onchange="myFunction()">
+ <select name="select1" id="scannerid" style= "height: 25px" conchange="myFunction()">
  <option value="">Vælg scanner..</option>
 
 
@@ -57,7 +60,7 @@ while ($row = mysqli_fetch_array($result1)) {
 </script>
 
 
-<button type ="submit" id="submit"> Vis scanner</button>
+<button type ="submit" id="submit" style= "font-family: sans-serif; color: white; background-color: blue"> Vis scanner</button>
 <?php
     deformationdata($sn, $model, $startdato, $slutdato);
     driftdata($sn, $startdato, $slutdato);

@@ -26,7 +26,7 @@ header{
     color: #f2f2f2;
     font-family: sans-serif;
     text-align: center;
-    padding: 15px 40px;
+    padding: 12px 40px;
     text-decoration: none;
     font-size: 13px;
 }
@@ -40,6 +40,14 @@ header{
 .topnav a.active {
     background-color: #517E8C;
     color: white;
+}
+
+div#chartContainerDeformation {
+    margin-left:5%;
+}
+
+div#chartContainerRf {
+    margin-left:5%;
 }
 
 .main_container{
