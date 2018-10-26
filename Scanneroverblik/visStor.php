@@ -1,26 +1,34 @@
 <?php
-include "../Scanneroverblik/scannervalg.php";
+include "../Kvalitetsparametre/deformation.php";
+
 ?>
 
 <html>
 <head>
 </head>
 <?php
-  /*  switch($_GET[datatype]) {
+    $datatype = $_GET['datatype'];
+    $sn = $_GET['sn'];
+    $model = $_GET['model'];
+    $startdato = $_GET['startdato'];
+    $slutdato = $_GET['slutdato'];
+
+    switch($datatype) {
         case "Deformation":
-            //deformationdata($sn, $model, $startdato, $slutdato);
+
+            deformationdata($sn, $model, $startdato, $slutdato);
             ?>
             <body  onload="displayDefGns();">
             <br/>
             <div id="chartContainerDefGns" style="width: 100%; height: 600px;display: inline-block;"></div>
-            <?
-        case "Ghosting":
-    }*/
+            <?php
+        default:;}
+
+
+
 
 
 ?>
-<body>
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-
-</body>
+ <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    </body>
 </html>
