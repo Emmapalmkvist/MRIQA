@@ -26,7 +26,7 @@ header{
     color: #f2f2f2;
     font-family: sans-serif;
     text-align: center;
-    padding: 15px 40px;
+    padding: 12px 40px;
     text-decoration: none;
     font-size: 13px;
 }
@@ -42,10 +42,18 @@ header{
     color: white;
 }
 
-.main_container{
-    margin: auto;
-    width: 1000px;
+div#chartContainerDeformation {
+    margin-left:5%;
+}
+
+div#chartContainerRf {
+    margin-left:5%;
+}
+
+div#maincontainer{
+    width: 500px;
     padding: 20px;
-    border: 1px solid black;
+    border: 1px white;
     min-height: 400px;
+    min-height: 100px;
 }

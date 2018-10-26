@@ -125,8 +125,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     </div>
 
 <body>
-
-    <div class="wrapper">
+<br /> <br /> <br /> <br /> <br />
+    <div class="wrapper" style= "margin-left:39%;">
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 
             <div class="form-group <?php echo (!empty($brugernavn_error)) ? 'has-error' : ''; ?>">
@@ -144,7 +144,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                 <span class="help-block"><?php echo $adgangskode_error; ?></span>
 
             </div>
-            <div class="form-group">
+            <div class="form-group" style="margin-left: 36%;">
                 <input type="submit" class="btn btn-primary" value="Log ind">
             </div>
 
