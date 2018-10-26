@@ -50,10 +50,10 @@ div#chartContainerRf {
     margin-left:5%;
 }
 
-.main_container{
-    margin: auto;
-    width: 1000px;
+div#maincontainer{
+    width: 500px;
     padding: 20px;
-    border: 1px solid black;
+    border: 1px white;
     min-height: 400px;
+    min-height: 100px;
 }

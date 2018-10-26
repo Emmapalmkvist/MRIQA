@@ -32,6 +32,9 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         <li style="float:right"><a href="location: ../Logind/logud.php">LOG UD</a></li>
     </div>
 
+    <br /> <br />
+    <div class="maincontainer" style= "background-color: white;">
     <h2>hej</h2>
+    </div>
 
 </html>
