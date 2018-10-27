@@ -56,8 +56,9 @@ body{
 
 .main_container{
     margin: auto;
-    width: 1000px;
+    width: 100px;
     padding: 20px;
-    border: 1px solid black;
+    border: 1px solid white;
     min-height: 400px;
+    background-color: aqua;
 }
