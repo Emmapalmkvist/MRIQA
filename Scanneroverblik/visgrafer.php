@@ -9,16 +9,21 @@ include "../Scanneroverblik/hentdata.php";
 <body onload="displayDeformation();displayDrift();displayGhosting();displayRF();displaySNR();displayUniformitet();">
 
 <br/>
-<div id="chartContainerDeformation" style="width: 30%; height: 300px;display: inline-block;"></div>
+
+<div onclick="location.href='visStor.php?datatype=Deformation& <?php echo 'sn='.$sn.'&model='.$model.'&startdato='.$startdato.'&slutdato='.$slutdato ?>'" id="chartContainerDeformation" style="width: 30%; height: 300px;display: inline-block;">
+
+</div>
+
+
+
+
+
 <div id="chartContainerDrift" style="width: 30%; height: 300px;display: inline-block;"></div>
 <div id="chartContainerGhosting" style="width: 30%; height: 300px;display: inline-block;"></div>
 <div id="chartContainerRf" style="width: 30%; height: 300px;display: inline-block;"></div>
 <div id="chartContainerSNR" style="width: 30%; height: 300px;display: inline-block;"></div>
 <div id="chartContainerUniformitet" style="width: 30%; height: 300px;display: inline-block;"></div>
 
-    <a href="visStor.php?datatype=Deformation&serienr=$sn&model=$model&start=$startdata&slut=$slutdato" ></a>
-
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-
-</body>
+    </body>
 </html>
