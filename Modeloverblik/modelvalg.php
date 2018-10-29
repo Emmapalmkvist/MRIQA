@@ -8,7 +8,8 @@ include "../Kvalitetsparametre/uniformitet.php";
 ?>
 <!DOCTYPE html>
 <html>
-<body>
+<body >
+
 <form action="" method="post">
 
 <script type="text/javascript" src="http://services.iperfect.net/js/IP_generalLib.js"></script>
@@ -19,7 +20,7 @@ include "../Kvalitetsparametre/uniformitet.php";
  <option value="">Vælg modeltype..</option>
 
 <?php
-require_once "../Database/DB_adgang.php";
+include "../Database/DB_adgang.php";
 $sql1 = "SELECT distinct Model FROM Scannere";
 $result1 = mysqli_query($mysqli, $sql1);
 
@@ -37,6 +38,9 @@ while ($row = mysqli_fetch_array($result1)) {
 
 $sql = "SELECT Scannernavn, Serienummer, Model FROM Scannere WHERE Model='$model'";
 
+
+//$sql = "SELECT Deformation, Model, Dato, Serienummer, Deformationbillede FROM Maaling WHERE Model='$model' AND Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY Dato";
+
 $result = mysqli_query($mysqli, $sql);
 
 $scannersn = array();
@@ -44,53 +48,51 @@ $scannersn = array();
 while($row = mysqli_fetch_array($result))
 {
     $scannersn[] = array(
-    "y" => $row["Serienummer"],
-    "label" =>$row["Scannernavn"]
+    "sn" => $row["Serienummer"],
+        "model" => $row["Model"]
+    );
+}
+
+//måske en foreach serienummer et eller andet. Ellers skal der stå noget andet i while
+    while($row = mysqli_fetch_array($result))
+{
+    $sql = "SELECT Deformation, Model, Dato, Serienummer, Deformationbillede FROM Maaling WHERE Serienummer='".sn."' AND Dato BETWEEN '".$_POST['date1']."' AND '".$_POST['date2']."' GROUP BY Dato";
+    $scanner[] = array(
+    "y" => $row["Derformatio"],
+    "label" =>$row["Dato"],
+    displayGhosting(scanner)
     );
 }
 
 ?>
 <button type ="submit" id="submit"> Vis scannere af modeltype</button>
-<?php
+<script>
+//window.onload =
+    function displayGhosting($scanner1[]) {
+    $scanner1=$scannersn;
 
-foreach($scannersn as $scan){
-echo '<br/><input type="checkbox" name='scanner[]' value=" . $scan . " />';
-echo "<label for name=" . print_r($scan["label"])  . "</label>";
+var chartGhosting = new CanvasJS.Chart("chartContainerGhosting", {
+	title: {
+		text: "Ghosting over tid"
+	},
+	axisY: {
+		title: "Ghosting"
+	},
+    data: [{
+		type: "line",
+        toolTipContent:"Dato: {label}<br/> Ghosting: {y}<br/> Billede: <img src= {sti} height=120 width=$150>",
+		dataPoints: <?php echo json_encode($scannersn, JSON_NUMERIC_CHECK); ?>
+	}]
+});
+
+
+chartGhosting.render();
 
 }
+</script>
 
-if (isset($_POST['scanner']))
-{
-//echo $_POST['scanner']; // Displays value of checked checkbox.
-foreach($_POST['scanner'] as $value){
-            echo "value : ".$value.'<br/>';
-        }
-}
-
-?>
-
-<?php
-    /*
-    deformationdata($sn, $startdato, $slutdato);
-    driftdata($sn, $startdato, $slutdato);
-    ghostingdata($sn, $startdato, $slutdato);
-    rfdata($sn, $startdato, $slutdato);
-    snrdata($sn, $startdato, $slutdato);
-    uniformitetdata($sn, $startdato, $slutdato);*/
-?>
 </form>
-<?php
-/*
-    if(!empty($_POST['scanner'])) {
 
-        foreach($_POST['scanner'] as $value){
-            echo "value : ".$value.'<br/>';
-        }
-
-    }
-*/
-
-?>
 </body>
 </html>
 
