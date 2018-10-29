@@ -1,13 +1,13 @@
 <?php
     //POST tager det, som ligger i dropdownmenyen og gemmer det i variablen //$sn, som puttes i SQL queryen.
-function driftdata($sn1, $start, $slut)
+function driftdata($sn1, $model1, $start, $slut)
 {
     include "../Database/DB_adgang.php";
     $sn = $sn1;
+    $model = $model1;
     $startdato = $start;
     $slutdato = $slut;
-    //$sn = $_POST['select1'];
-    $sql = "SELECT Drift, Dato, Serienummer, Driftbillede FROM Maaling WHERE Serienummer='$sn' AND Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY Dato";
+    $sql = "SELECT Drift, Model, Dato, Serienummer, Driftbillede FROM Maaling WHERE Serienummer='$sn' AND Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY Dato";
 
 $result = mysqli_query($mysqli, $sql);
 
@@ -20,11 +20,80 @@ while($row = mysqli_fetch_array($result))
     "label" =>$row["Dato"],
     "sti" => "../billeder/" . $row["Driftbillede"]
     );
+    $model = $row["Model"];
 
-} ?>
+
+}
+
+
+$sql1 = "SELECT Model, AVG(Drift) as avgDrift, Dato FROM Maaling WHERE Model='$model' AND Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY Dato";
+
+
+$result1 = mysqli_query($mysqli, $sql1);
+
+$avgDrift= array();
+
+
+    while($row = mysqli_fetch_array($result1))
+    {
+    $avgDrift[] = array(
+    "y" => $row["avgDrift"],
+    "label" => $row["Dato"]
+    );
+    }
+
+?>
+
+
+
+
 <script>
-//window.onload =
-    function displayDrift () {
+
+
+function displayDriftAvg ()
+{
+
+var chartDriftAvg = new CanvasJS.Chart("chartContainerDriftAvg",
+{
+	title: {
+		text: "Drift over tid"
+	},
+	axisY: {
+		title: "Drift"
+    },
+    data: [
+
+        {
+        name: "Drift for valgt scanner",
+		type: "line",
+        showInLegend: true,
+        toolTipContent:"Dato: {label}<br/> Drift: {y}",
+		dataPoints: <?php echo json_encode($drift, JSON_NUMERIC_CHECK); ?>
+
+
+
+	    },
+        {
+        name: "Driftsgennemsnit for valgt scanners modeltype",
+        type: "line",
+        showInLegend: true,
+        toolTipContent:"Dato: {label}<br/> Drift: {y}",
+		dataPoints: <?php echo json_encode($avgDrift, JSON_NUMERIC_CHECK); ?>
+
+        }
+
+        ]
+}
+                                         );
+chartDriftAvg.render();
+
+}
+
+
+
+
+function displayDrift ()
+{
 
 var chartDrift = new CanvasJS.Chart("chartContainerDrift", {
 	title: {
@@ -44,6 +113,8 @@ var chartDrift = new CanvasJS.Chart("chartContainerDrift", {
 chartDrift.render();
 
 }
+
+
 </script>
 <?php }
 ?>

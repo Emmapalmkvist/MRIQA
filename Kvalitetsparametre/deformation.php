@@ -11,18 +11,15 @@ function deformationdata($sn1, $model1, $start, $slut)
     $sql = "SELECT Deformation, Model, Dato, Serienummer, Deformationbillede FROM Maaling WHERE Serienummer='$sn' AND Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY Dato";
 
 
-
-
 $result = mysqli_query($mysqli, $sql);
+
 $deformation= array();
 
     while($row = mysqli_fetch_array($result))
 {
     $deformation[] = array(
-        "label" =>$row["Dato"],
-
     "y" => $row["Deformation"],
-    //"label" =>$row["Dato"],
+    "label" =>$row["Dato"],
     "sti" => "../billeder/" . $row["Deformationbillede"]
     );
     $model = $row["Model"];
@@ -55,10 +52,10 @@ $avgDef= array();
 //window.onload =
 
 
-function displayDefGns ()
+function displayDefAvg ()
 {
 
-var chartDefGns = new CanvasJS.Chart("chartContainerDefGns",
+var chartDefAvg = new CanvasJS.Chart("chartContainerDefAvg",
 {
 	title: {
 		text: "Deformation over tid"
@@ -69,18 +66,20 @@ var chartDefGns = new CanvasJS.Chart("chartContainerDefGns",
     data: [
 
         {
+        name: "Deformation for valgt scanner",
 		type: "line",
-        //axisYType: "first",
-        toolTipContent:"Dato: {label}<br/> Drift: {y}<br/> Billede: <img src= {sti} height=120 width=$150>",
+        showInLegend: true,
+        toolTipContent:"Dato: {label}<br/> Deformation: {y}",
 		dataPoints: <?php echo json_encode($deformation, JSON_NUMERIC_CHECK); ?>
 
 
 
 	    },
         {
+        name: "Deformationsgennemsnit for valgt scanners modeltype",
         type: "line",
-        //axisYType: "first",
-        toolTipContent:"Dato: {label}<br/> Drift: {y}<br/> Billede: <img src= {sti} height=120 width=$150>",
+        showInLegend: true,
+        toolTipContent:"Dato: {label}<br/> Deformation: {y}",
 		dataPoints: <?php echo json_encode($avgDef, JSON_NUMERIC_CHECK); ?>
 
         }
@@ -88,7 +87,7 @@ var chartDefGns = new CanvasJS.Chart("chartContainerDefGns",
         ]
 }
                                          );
-chartDefGns.render();
+chartDefAvg.render();
 
 }
 
