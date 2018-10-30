@@ -53,14 +53,19 @@ while($row = mysqli_fetch_array($result))
     );
 }
 
+ $sql2 = "SELECT Deformation, Model, Dato, Serienummer, Deformationbillede FROM Maaling WHERE  AND Dato BETWEEN '".$_POST['date1']."' AND '".$_POST['date2']."' GROUP BY Serienummer AND Dato";
+
+$result2 = mysqli_query($mysqli, $sql2);
+
 //måske en foreach serienummer et eller andet. Ellers skal der stå noget andet i while
-    while($row = mysqli_fetch_array($result))
+    while($row = mysqli_fetch_array($result2))
 {
-    $sql = "SELECT Deformation, Model, Dato, Serienummer, Deformationbillede FROM Maaling WHERE Serienummer='".sn."' AND Dato BETWEEN '".$_POST['date1']."' AND '".$_POST['date2']."' GROUP BY Dato";
-    $scanner[] = array(
-    "y" => $row["Derformatio"],
+
+    $scanner = array(
+    "sn" => $row["Serienummer"],
+    "y" => $row["Derformation"],
     "label" =>$row["Dato"],
-    displayGhosting(scanner)
+
     );
 }
 
