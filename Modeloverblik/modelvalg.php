@@ -1,10 +1,6 @@
 <?php
-include "../Kvalitetsparametre/deformation.php";
-include "../Kvalitetsparametre/drift.php";
-include "../Kvalitetsparametre/ghosting.php";
-include "../Kvalitetsparametre/rf.php";
-include "../Kvalitetsparametre/snr.php";
-include "../Kvalitetsparametre/uniformitet.php";
+
+include "../Database/DB_adgang.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -20,7 +16,7 @@ include "../Kvalitetsparametre/uniformitet.php";
  <option value="">Vælg modeltype..</option>
 
 <?php
-include "../Database/DB_adgang.php";
+
 $sql1 = "SELECT distinct Model FROM Scannere";
 $result1 = mysqli_query($mysqli, $sql1);
 
@@ -31,11 +27,9 @@ while ($row = mysqli_fetch_array($result1)) {
     $slutdato = $_POST['date2'];
     $model = $_POST['select1'];
 ?>
-</select>
-
 <?php
     //POST tager det, som ligger i dropdownmenyen og gemmer det i variablen //$sn, som puttes i SQL queryen.
-
+/*
 $sql = "SELECT Scannernavn, Serienummer, Model FROM Scannere WHERE Model='$model'";
 
 
@@ -52,24 +46,31 @@ while($row = mysqli_fetch_array($result))
         "model" => $row["Model"]
     );
 }
+*/
+ //$sql2 = "SELECT s.Serienummer, s.Model, m.Deformation, m.Model, m.Dato, m.Serienummer, m.Deformationbillede FROM Scannere as s INNER JOIN Maalinger as m ON s.Serienummer = m.Serienummer WHERE s.Model='$model' AND m.Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY m.Serienummer AND m.Dato";
 
- $sql2 = "SELECT Deformation, Model, Dato, Serienummer, Deformationbillede FROM Maaling WHERE  AND Dato BETWEEN '".$_POST['date1']."' AND '".$_POST['date2']."' GROUP BY Serienummer AND Dato";
+    $sql2 = "SELECT Deformation, Model, Dato, Serienummer, Deformationbillede FROM Maaling WHERE Model='$model' AND Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY Dato";
 
 $result2 = mysqli_query($mysqli, $sql2);
-
+$scanner = array();
 //måske en foreach serienummer et eller andet. Ellers skal der stå noget andet i while
     while($row = mysqli_fetch_array($result2))
 {
 
     $scanner = array(
-    "sn" => $row["Serienummer"],
-    "y" => $row["Derformation"],
-    "label" =>$row["Dato"],
+    $snn => $row["Serienummer"],
+    $defdef => $row["Derformation"],
+    $datodato =>$row["Dato"]
 
     );
+
 }
+    print_r ($scanner);
 
 ?>
+</select>
+
+
 <button type ="submit" id="submit"> Vis scannere af modeltype</button>
 <script>
 //window.onload =
