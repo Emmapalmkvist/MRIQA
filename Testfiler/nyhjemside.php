@@ -132,8 +132,6 @@ while ($row = mysqli_fetch_array($result1)) {
     $sql = "INSERT INTO Servicetidspunkt (Servicetidspunkt, Serienummer)
     VALUES($dato,$sn)";
     mysqli_query($conn, $sql);
-    print($dato);
-    print("hej");
 ?>
 <form>
 <button type ="submit" id="submit">Gem dato</button>
