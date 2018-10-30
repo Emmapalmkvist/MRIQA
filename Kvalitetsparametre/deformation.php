@@ -60,9 +60,22 @@ var chartDefAvg = new CanvasJS.Chart("chartContainerDefAvg",
 	title: {
 		text: "Deformation over tid"
 	},
-	axisY: {
-		title: "Deformation"
-    },
+	axisY:{
+        stripLines:[
+        {
+        value:4,
+        label:"Maximum",
+        color:"red",
+        labelFontColor:"red"
+        },
+        {
+        value:0.5,
+        label:"Minumum",
+        color:"red",
+        labelFontColor:"red"
+        }
+        ],
+      },
     data: [
 
         {
