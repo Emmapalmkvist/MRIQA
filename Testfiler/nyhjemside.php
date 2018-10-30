@@ -32,15 +32,14 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         <li style="float:right"><a href="location: ../Logind/logud.php">LOG UD</a></li>
     </div>
 
-    <br /> <br />
-
-    <div class= head_container style= "font-family: sans-serif; font-size: 16px; padding: 5px; background-color: white; border: 1px solid darkgrey; width: 750px; margin-left: 2%;" >
+    <div class= head_container style= "font-family: sans-serif; font-size: 16px; padding: 7px; background-color: white; border: 1px solid darkgrey; width: 750px;  float: left; margin-left: 2%; margin-top: 2%" >
         <?php
         echo "Notifikationer"
         ?>
     </div>
 
-    <div class="main_container" style= "font-family: sans-serif; background-color: white; border: 1px solid darkgrey; width: 750px; margin-left: 2%;">
+
+    <div class="main_container" style= "font-family: sans-serif; background-color: white; border: 1px solid darkgrey; width: 750px; margin-left: 2%; margin-top:4%;">
         <?php
 
 $servername = "5.104.105.222";
@@ -55,7 +54,7 @@ $dtz = new DateTimeZone("Europe/Madrid"); //Your timezone
 $now = new DateTime(date("Y-m-d"), $dtz);
 $date1 = $now->format("Y-m-d");
 
-$date = (new \DateTime())->modify('-1897 days');
+$date = (new \DateTime())->modify('-1200 days');
 $date2 = $date->format("Y-m-d");
 
 
@@ -75,7 +74,8 @@ while($row = mysqli_fetch_array($result))
 }
 
 $maxRF = 64.1;
-$minRF = 63.7;
+$minRF = 63.83;
+
 
 
 for ($i = 0; $i < count($data); ++$i) {
@@ -86,8 +86,6 @@ if (($data[$i]['y']) > $maxRF)
     $dato = ($data[$i]['label']);
     $msg = "Resonansfrekvensen er over max-værdien d. $dato på MRI-scanneren med serienummer: $serienummer"."<br>";
     echo $msg;
-    wordwrap($msg, 70, "\r\n");
-    mail("palmkvistemma@hotmail.com","Notifikation",$msg);
 }
 
 if (($data[$i]['y']) < $minRF)
@@ -96,12 +94,52 @@ if (($data[$i]['y']) < $minRF)
     $dato = ($data[$i]['label']);
     $msg = "Resonansfrekvensen er under min-værdien d. $dato på MRI-scanneren med serienummer: $serienummer"."<br>";
     echo $msg;
-    wordwrap($msg, 70, "\r\n");
-    mail("palmkvistemma@hotmail.com","Notifikation",$msg);
 }
 
 }
 ?>
     </div>
+
+    <div class= head_container2 style= "font-family: sans-serif; font-size: 16px; padding: 7px; background-color: white; border: 1px solid darkgrey; width: 750px; margin-left: 2%; margin-top: 2%" >
+        <?php
+        echo "Indtast servicedato for scannere"
+        ?>
+    </div>
+
+<div class="main_container" style= "font-family: sans-serif; background-color: white; border: 1px solid darkgrey; width: 750px; margin-left: 2%;">
+
+    <input type="date" name="date3" id="date3" style= "margin-left:0.5%; height: 25px; margin-top: 5px"class="IP_calendar">
+
+     <select name="select1" id="scannerid" style= "height: 25px" conchange="myFunction()">
+     <option value="">Vælg scanner..</option>
+
+    <?php
+require_once "../Database/DB_adgang.php";
+$sql1 = "SELECT Serienummer, Model, Scannernavn FROM Scannere";
+$result1 = mysqli_query($mysqli, $sql1);
+
+while ($row = mysqli_fetch_array($result1)) {
+    echo "<option value='" . $row['Serienummer'] . "'>" . $row['Scannernavn'] . "</option>";
+}
+
+    $dato = $_POST['date3'];
+    $sn = $_POST['select1'];
+?>
+</select>
+
+<?php
+
+    $sql = "INSERT INTO Servicetidspunkt (Servicetidspunkt, Serienummer)
+    VALUES($dato,$sn)";
+    mysqli_query($conn, $sql);
+    print($dato);
+    print("hej");
+?>
+<form>
+<button type ="submit" id="submit">Gem dato</button>
+</form>
+
+    </div>
+
 
 </html>
