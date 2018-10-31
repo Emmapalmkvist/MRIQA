@@ -8,7 +8,8 @@ function deformationdata($sn1, $model1, $start, $slut)
     $model = $model1;
     $startdato = $start;
     $slutdato = $slut;
-    $sql = "SELECT Deformation, Model, Dato, Serienummer, Deformationbillede FROM Maaling WHERE Serienummer='$sn' AND Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY Dato";
+
+$sql = "SELECT Deformation, Model, Dato, Serienummer, Deformationbillede FROM Maaling WHERE Serienummer='$sn' AND Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY Dato";
 
 
 $result = mysqli_query($mysqli, $sql);
@@ -27,6 +28,8 @@ $deformation= array();
 
 
 $sql1 = "SELECT Model, AVG(Deformation) as avgDef, Dato FROM Maaling WHERE Model='$model' AND Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY Dato";
+
+print ($model);
 
 
 $result1 = mysqli_query($mysqli, $sql1);
@@ -61,21 +64,26 @@ var chartDefAvg = new CanvasJS.Chart("chartContainerDefAvg",
 		text: "Deformation over tid"
 	},
 	axisY:{
+
+        title: "Deformation",
+
+
         stripLines:[
         {
         value:4,
-        label:"Maximum",
+        label:"Max",
         color:"red",
         labelFontColor:"red"
         },
         {
         value:0.5,
-        label:"Minumum",
+        label:"Min",
         color:"red",
         labelFontColor:"red"
         }
         ],
       },
+
     data: [
 
         {

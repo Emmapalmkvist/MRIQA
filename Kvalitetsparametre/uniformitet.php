@@ -55,9 +55,26 @@ var chartUniformitetAvg = new CanvasJS.Chart("chartContainerUniformitetAvg",
 	title: {
 		text: "Uniformitet over tid"
 	},
-	axisY: {
-		title: "Uniformitet"
-    },
+	axisY:{
+
+        title: "Uniformitet",
+
+
+        stripLines:[
+        {
+        value:60,
+        label:"Max",
+        color:"red",
+        labelFontColor:"red"
+        },
+        {
+        value:35,
+        label:"Min",
+        color:"red",
+        labelFontColor:"red"
+        }
+        ],
+      },
     data: [
 
         {

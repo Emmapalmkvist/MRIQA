@@ -52,9 +52,26 @@ var chartSNRAvg = new CanvasJS.Chart("chartContainerSNRAvg",
 	title: {
 		text: "SNR over tid"
 	},
-	axisY: {
-		title: "SNR"
-    },
+	axisY:{
+
+        title: "SNR",
+
+
+        stripLines:[
+        {
+        value:295,
+        label:"Max",
+        color:"red",
+        labelFontColor:"red"
+        },
+        {
+        value:110,
+        label:"Min",
+        color:"red",
+        labelFontColor:"red"
+        }
+        ],
+      },
     data: [
 
         {
