@@ -110,7 +110,7 @@ if (($data[$i]['y']) < $minRF)
 
     <form action="" method="post">
 
-    <input type="date" name="date3" id="date3" style= "margin-left:0.5%; height: 25px; margin-top: 5px"class="IP_calendar">
+    <input type="date" name="datee" id="datee" style= "margin-left:0.5%; height: 25px; margin-top: 5px"class="IP_calendar">
 
 
      <select name="select1" id="scannerid" style= "height: 25px" conchange="myFunction()">
@@ -125,7 +125,7 @@ $result1 = mysqli_query($mysqli, $sql1);
 while ($row = mysqli_fetch_array($result1)) {
     echo "<option value='" . $row['Serienummer'] . "'>" . $row['Scannernavn'] . "</option>";
 }
-    if (isset($_POST["date3"])) {$dato = $_POST['date3'];} else {$dato = "";}
+    if (isset($_POST["datee"])) {$dato = $_POST['datee'];} else {$dato = "";}
     if (isset($_POST["select1"])) {$sn = $_POST['select1'];} else {$sn = "";}
     $model = "";
 ?>
