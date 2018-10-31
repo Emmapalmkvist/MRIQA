@@ -53,9 +53,28 @@ var chartRfAvg = new CanvasJS.Chart("chartContainerRfAvg", {
 	title: {
 		text: "Resonansfrekvens over tid"
 	},
-	axisY: {
-		title: "Resonansfrekvens"
-	},
+	axisY:{
+
+        title: "Resonansfrekvens",
+        minimum: 55,
+        maximum: 70,
+
+
+        stripLines:[
+        {
+        value:64,
+        label:"Max",
+        color:"red",
+        labelFontColor:"red"
+        },
+        {
+        value:63,
+        label:"Min",
+        color:"red",
+        labelFontColor:"red"
+        }
+        ],
+      },
     data: [
 
         {

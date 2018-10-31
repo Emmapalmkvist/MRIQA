@@ -53,9 +53,18 @@ var chartGhostingAvg = new CanvasJS.Chart("chartContainerGhostingAvg", {
 	title: {
 		text: "Ghosting over tid"
 	},
-	axisY: {
-		title: "Ghosting"
-	},
+	axisY:{
+
+        title: "Ghosting",
+        stripLines:[
+        {
+        value:2,
+        label:"Max",
+        color:"red",
+        labelFontColor:"red"
+        }
+        ],
+      },
     data: [
 
         {
