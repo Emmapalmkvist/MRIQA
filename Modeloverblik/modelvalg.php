@@ -57,15 +57,17 @@ $scanner = array();
     while($row = mysqli_fetch_array($result2))
 {
 
-    $scanner = array(
-    $snn => $row["Serienummer"],
-    $defdef => $row["Derformation"],
-    $datodato =>$row["Dato"]
+    $scanner[] = array(
+    "y" => $row["Serienummer"],
+    "label" => $row["Deformation"],
+    "date" =>$row["Dato"]
 
     );
 
 }
     print_r ($scanner);
+
+
 
 ?>
 </select>
