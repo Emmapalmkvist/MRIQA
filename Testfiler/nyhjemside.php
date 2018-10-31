@@ -125,10 +125,9 @@ $result1 = mysqli_query($mysqli, $sql1);
 while ($row = mysqli_fetch_array($result1)) {
     echo "<option value='" . $row['Serienummer'] . "'>" . $row['Scannernavn'] . "</option>";
 }
-
-    $dato = $_POST['date3'];
-    $date = date($dato);
-    $sn = $_POST['select1'];
+    if (isset($_POST["date3"])) {$dato = $_POST['date3'];} else {$dato = "";}
+    if (isset($_POST["select1"])) {$sn = $_POST['select1'];} else {$sn = "";}
+    $model = "";
 ?>
 
 </select>
@@ -147,8 +146,6 @@ if ($conn->query($sql) === TRUE) {
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }
-
-print($date);
 
 ?>
 
