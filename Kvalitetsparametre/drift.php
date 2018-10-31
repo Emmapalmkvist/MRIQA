@@ -58,9 +58,20 @@ var chartDriftAvg = new CanvasJS.Chart("chartContainerDriftAvg",
 	title: {
 		text: "Drift over tid"
 	},
-	axisY: {
-		title: "Drift"
-    },
+	axisY:{
+
+        title: "Drift",
+
+
+        stripLines:[
+        {
+        value:4,
+        label:"Max",
+        color:"red",
+        labelFontColor:"red"
+        }
+        ],
+      },
     data: [
 
         {
