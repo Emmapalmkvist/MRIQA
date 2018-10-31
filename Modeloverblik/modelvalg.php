@@ -4,7 +4,7 @@ include "../Database/DB_adgang.php";
 ?>
 <!DOCTYPE html>
 <html>
-<body >
+<body onload="displayDefdef();">
 
 <form action="" method="post">
 
@@ -47,9 +47,9 @@ while($row = mysqli_fetch_array($result))
     );
 }
 */
- //$sql2 = "SELECT s.Serienummer, s.Model, m.Deformation, m.Model, m.Dato, m.Serienummer, m.Deformationbillede FROM Scannere as s INNER JOIN Maalinger as m ON s.Serienummer = m.Serienummer WHERE s.Model='$model' AND m.Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY m.Serienummer AND m.Dato";
+  $sql2 = "SELECT s.Serienummer, s.Model, m.Deformation, m.Model, m.Dato, m.Serienummer, m.Deformationbillede FROM Scannere as s, Maaling as m WHERE s.Serienummer = m.Serienummer AND s.Model='$model' AND m.Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY m.Serienummer;";
 
-    $sql2 = "SELECT Deformation, Model, Dato, Serienummer, Deformationbillede FROM Maaling WHERE Model='$model' AND Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY Dato";
+//$sql2 = "SELECT Deformation, Model, Dato, Serienummer, Deformationbillede FROM Maaling WHERE Model='$model' AND Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY Dato";
 
 $result2 = mysqli_query($mysqli, $sql2);
 $scanner = array();
@@ -58,15 +58,38 @@ $scanner = array();
 {
 
     $scanner[] = array(
-    "y" => $row["Serienummer"],
-    "label" => $row["Deformation"],
-    "date" =>$row["Dato"]
+                $row["Serienummer"]
 
     );
 
 }
-    print_r ($scanner);
+    $line='';
 
+
+    foreach($scanner as $key => $value)
+    {
+
+        $sql3 = "SELECT Deformation, Model, Dato, Serienummer, Deformationbillede FROM Maaling WHERE Serienummer='$key' AND Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY Dato";
+        $scannerny = array();
+        $result3 = mysqli_query($mysqli, $sql3);
+            while($row = mysqli_fetch_array($result3))
+                {
+                    $scannerny[] = array(
+                    "y" => $row["Deformation"],
+                    "label" => $row["Dato"]
+                    );
+                }
+        $dataset = json_encode($scannerny, JSON_NUMERIC_CHECK);
+        if(strlen($line) > 0)
+        {
+            $line .= ',';
+        }
+        $line .= '{
+		type: "line",
+        toolTipContent:"Dato: {label}<br/> Ghosting: {y}<br/> Billede: <img src= {sti} height=120 width=$150>",
+		dataPoints: '.$dataset.'
+	}';
+    }
 
 
 ?>
@@ -76,29 +99,28 @@ $scanner = array();
 <button type ="submit" id="submit"> Vis scannere af modeltype</button>
 <script>
 //window.onload =
-    function displayGhosting($scanner1[]) {
-    $scanner1=$scannersn;
+    function displayDefdef() {
 
-var chartGhosting = new CanvasJS.Chart("chartContainerGhosting", {
+var chartDefdef = new CanvasJS.Chart("chartContainerDefdef", {
 	title: {
 		text: "Ghosting over tid"
 	},
 	axisY: {
 		title: "Ghosting"
 	},
-    data: [{
-		type: "line",
-        toolTipContent:"Dato: {label}<br/> Ghosting: {y}<br/> Billede: <img src= {sti} height=120 width=$150>",
-		dataPoints: <?php echo json_encode($scannersn, JSON_NUMERIC_CHECK); ?>
-	}]
+    data: [<?php echo $line; ?>]
 });
 
 
-chartGhosting.render();
+chartDefdef.render();
 
 }
-</script>
 
+
+</script>
+<div id="chartContainerDefdef" style="width: 30%; height: 300px;display: inline-block;">
+
+</div>
 </form>
 
 </body>
