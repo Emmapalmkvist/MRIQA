@@ -108,34 +108,49 @@ if (($data[$i]['y']) < $minRF)
 
 <div class="main_container" style= "font-family: sans-serif; background-color: white; border: 1px solid darkgrey; width: 750px; margin-left: 2%;">
 
+    <form action="" method="post">
+
     <input type="date" name="date3" id="date3" style= "margin-left:0.5%; height: 25px; margin-top: 5px"class="IP_calendar">
+
 
      <select name="select1" id="scannerid" style= "height: 25px" conchange="myFunction()">
      <option value="">Vælg scanner..</option>
+<?php
 
-    <?php
 require_once "../Database/DB_adgang.php";
 $sql1 = "SELECT Serienummer, Model, Scannernavn FROM Scannere";
 $result1 = mysqli_query($mysqli, $sql1);
+
 
 while ($row = mysqli_fetch_array($result1)) {
     echo "<option value='" . $row['Serienummer'] . "'>" . $row['Scannernavn'] . "</option>";
 }
 
     $dato = $_POST['date3'];
+    $date = date($dato);
     $sn = $_POST['select1'];
 ?>
+
 </select>
+
+<button type ="submit" id="submit">Gem dato</button>
+</form>
 
 <?php
 
-    $sql = "INSERT INTO Servicetidspunkt (Servicetidspunkt, Serienummer)
-    VALUES($dato,$sn)";
-    mysqli_query($conn, $sql);
+
+$sql = "INSERT INTO Servicetidspunkt (Servicetidspunkt, serienummer)
+VALUES('$dato', $sn)";
+
+if ($conn->query($sql) === TRUE) {
+    echo " Servicetidspunkt er gemt";
+} else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+}
+
+print($date);
+
 ?>
-<form>
-<button type ="submit" id="submit">Gem dato</button>
-</form>
 
     </div>
 
