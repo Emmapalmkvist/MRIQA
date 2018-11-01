@@ -11,7 +11,9 @@ $sql1 = "SELECT Serienummer, Model, Scannernavn FROM Scannere";
 $result1 = mysqli_query($mysqli, $sql1);
 $data = array();
 
-while ($row = mysqli_fetch_array($result1)) {
+while ($row = mysqli_fetch_array($result1))
+
+{
     // ligger serienummer ind i array som key og ligger scannernavn ind som value
     $data[$row['Serienummer']] = $row['Scannernavn'];
 

@@ -128,6 +128,55 @@ chartDrift.render();
 
 </script>
 <?php }
+
+function notificationsDrift()
+{
+    include "../Hjem/datointervalNot.php";
+    include "../Database/DB_adgang.php";
+
+
+    $sql_drift = "SELECT Drift, Dato, Serienummer FROM Maaling WHERE Dato BETWEEN '$date2' AND '$date1' GROUP BY Dato";
+
+    $result_drift = mysqli_query($mysqli, $sql_drift);
+
+    $data_drift = array();
+
+while($row = mysqli_fetch_array($result_drift))
+{
+    $data_drift[] = array(
+    "y" => $row["Drift"],
+    "label" =>$row["Dato"],
+    "serienummer" =>$row["Serienummer"]
+    );
+}
+
+// hardcode min og max
+$maxDrift = 5.0;
+//$minDrift = 0.5;
+
+for ($i = 0; $i < count($data_drift); ++$i) {
+
+if (($data_drift[$i]['y']) > $maxDrift)
+{
+    $serienummer = ($data_drift[$i]['serienummer']);
+    $dato = ($data_drift[$i]['label']);
+    $msg = "Drift over max d. $dato på scanneren med serienummer: $serienummer"."<br>";
+    echo $msg;
+}
+
+/*if (($data_def[$i]['y']) < $minDef)
+{
+    $serienummer = ($data_def[$i]['serienummer']);
+    $dato = ($data_def[$i]['label']);
+    $msg = "Deformation under min d. $dato på scanneren med serienummer: $serienummer"."<br>";
+    echo $msg;
+}*/
+}
+
+}
+
+
+
 ?>
 
 

@@ -127,6 +127,54 @@ chartRf.render();
 
 </script>
 <?php }
+
+function notificationsRf()
+{
+    include "../Hjem/datointervalNot.php";
+    include "../Database/DB_adgang.php";
+
+
+    $sql_rf = "SELECT Resonansfrekvens, Dato, Serienummer FROM Maaling WHERE Dato BETWEEN '$date2' AND '$date1' GROUP BY Dato";
+
+    $result_rf = mysqli_query($mysqli, $sql_rf);
+
+    $data_rf = array();
+
+while($row = mysqli_fetch_array($result_rf))
+{
+    $data_rf[] = array(
+    "y" => $row["Resonansfrekvens"],
+    "label" =>$row["Dato"],
+    "serienummer" =>$row["Serienummer"]
+    );
+}
+
+// hardcode min og max
+$maxRf= 64.0;
+$minRf = 63.0;
+
+for ($i = 0; $i < count($data_rf); ++$i) {
+
+if (($data_rf[$i]['y']) > $maxRf)
+{
+    $serienummer = ($data_rf[$i]['serienummer']);
+    $dato = ($data_rf[$i]['label']);
+    $msg = "Resonansfrekvens over max d. $dato på scanneren med serienummer: $serienummer"."<br>";
+    echo $msg;
+}
+
+if (($data_rf[$i]['y']) < $minRf)
+{
+    $serienummer = ($data_rf[$i]['serienummer']);
+    $dato = ($data_rf[$i]['label']);
+    $msg = "Resonansfrekvens under min d. $dato på scanneren med serienummer: $serienummer"."<br>";
+    echo $msg;
+}
+}
+
+}
+
+
 ?>
 
 

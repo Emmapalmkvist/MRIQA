@@ -1,4 +1,17 @@
 <?php
+
+session_start();
+
+
+// Check om bruger er logget ind
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: ../Logind/login.php");
+    exit;
+}
+?>
+
+
+<?php
 include "../Kvalitetsparametre/deformation.php";
 include "../Kvalitetsparametre/drift.php";
 include "../Kvalitetsparametre/ghosting.php";

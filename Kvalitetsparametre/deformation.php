@@ -29,9 +29,6 @@ $deformation= array();
 
 $sql1 = "SELECT Model, AVG(Deformation) as avgDef, Dato FROM Maaling WHERE Model='$model' AND Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY Dato";
 
-print ($model);
-
-
 $result1 = mysqli_query($mysqli, $sql1);
 
 $avgDef= array();
@@ -143,8 +140,64 @@ chartDeformation.render();
 
 }
 
+
+
 </script>
 <?php
-} // afslutning på deformationdata() funktionen
+}
+
+function notificationsDef()
+{
+    include "../Hjem/datointervalNot.php";
+    include "../Database/DB_adgang.php";
+
+/*$dtz = new DateTimeZone("Europe/Madrid"); //Your timezone
+$now = new DateTime(date("Y-m-d"), $dtz);
+$date1 = $now->format("Y-m-d");
+
+$date = (new \DateTime())->modify('-1200 days'); // hardcode 1200 dage - skal tilpasses
+$date2 = $date->format("Y-m-d");*/
+
+    $sql_def = "SELECT Deformation, Dato, Serienummer FROM Maaling WHERE Dato BETWEEN '$date2' AND '$date1' GROUP BY Dato";
+
+    $result_def = mysqli_query($mysqli, $sql_def);
+
+    $data_def = array();
+
+while($row = mysqli_fetch_array($result_def))
+{
+    $data_def[] = array(
+    "y" => $row["Deformation"],
+    "label" =>$row["Dato"],
+    "serienummer" =>$row["Serienummer"]
+    );
+}
+
+// hardcode min og max
+$maxDef = 4.0;
+$minDef = 0.5;
+
+for ($i = 0; $i < count($data_def); ++$i) {
+
+if (($data_def[$i]['y']) > $maxDef)
+{
+    $serienummer = ($data_def[$i]['serienummer']);
+    $dato = ($data_def[$i]['label']);
+    $msg = "Deformation over max d. $dato på scanneren med serienummer: $serienummer"."<br>";
+    echo $msg;
+}
+
+if (($data_def[$i]['y']) < $minDef)
+{
+    $serienummer = ($data_def[$i]['serienummer']);
+    $dato = ($data_def[$i]['label']);
+    $msg = "Deformation under min d. $dato på scanneren med serienummer: $serienummer"."<br>";
+    echo $msg;
+}
+}
+
+}
+
+// afslutning på deformationdata() funktionen
 ?>
 
