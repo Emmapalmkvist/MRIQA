@@ -91,30 +91,34 @@ while ($row = mysqli_fetch_array($result1))
     echo "<option value='" . $row['Serienummer'] . "'>" . $row['Scannernavn'] . "</option>";
 }
 
+$dato = $_POST['date'];
+$sn = $_POST['select1'];
 
+/*
 if (isset($_POST["date"])) {$dato = $_POST['date'];} else {$dato = "";}
 if (isset($_POST["select1"])) {$sn = $_POST['select1'];} else {$sn = "";}
+*/
 
 
-?>
-
-</select>
-
-<?php
 $sql = "INSERT INTO Servicetidspunkt (Servicetidspunkt, serienummer)
 VALUES('$dato', '$sn')";
 
+?>
+</select>
 
+<?php
 // check om servicedato bliver gemt
-/*if ($conn->query($sql) === TRUE) {
+if ($mysqli->query($sql) === TRUE) {
     echo " Servicetidspunkt er gemt";
 } else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
-}*/
+    echo "Error: " . $sql . "<br>" . $mysqli->error;
+}
 
 ?>
 
 <button type ="submit" id="submit">Gem dato</button>
+
+
 </form>
 </div>
 </html>
