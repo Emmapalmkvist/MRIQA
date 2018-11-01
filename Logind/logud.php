@@ -10,7 +10,7 @@ $_SESSION = array();
 session_destroy();
 
 // Omdiriger til log ind side
-header("location: ../Logind/logind.php");
+header("location: ../Logind/index.php");
 
 exit;
 ?>

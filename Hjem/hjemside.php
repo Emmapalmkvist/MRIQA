@@ -44,6 +44,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
 <?php
 
+include "../Database/DB_adgang.php";
+
 // kalder notifikationsfunktioner i der ligger i kvalitetsparametre
 include "../Kvalitetsparametre/deformation.php";
 include "../Kvalitetsparametre/drift.php";
@@ -62,8 +64,6 @@ notificationsUniformitet();
 
 ?>
 </div>
-
-
 
 
 <div class= head_container2 style= "font-family: sans-serif; font-size: 16px; padding: 7px; background-color: white; border: 1px solid darkgrey; width: 750px; margin-left: 2%; margin-top: 2%" >
