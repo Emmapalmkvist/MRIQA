@@ -7,7 +7,7 @@ function snrdata($sn1, $model1, $start, $slut)
     $model = $model1;
     $startdato = $start;
     $slutdato = $slut;
-    $sql = "SELECT SNR, Model, Dato, Serienummer, SNRbillede FROM Maaling WHERE Serienummer='$sn' AND Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY Dato";
+    $sql = "SELECT SNR, Model, Dato, Serienummer, SNRbillede, Starttidspunkt FROM Maaling WHERE Serienummer='$sn' AND Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY Dato";
 
 $result = mysqli_query($mysqli, $sql);
 
@@ -18,6 +18,7 @@ while($row = mysqli_fetch_array($result))
     $snr[] = array(
     "y" => $row["SNR"],
     "label" =>$row["Dato"],
+    "tidspunkt" =>$row["Starttidspunkt"],
     "sti" => "../billeder/" . $row["SNRbillede"]
     );
     $model = $row["Model"];
@@ -114,7 +115,7 @@ var chartSNR = new CanvasJS.Chart("chartContainerSNR", {
 	},
     data: [{
 		type: "line",
-        toolTipContent:"Dato: {label}<br/> SNR: {y}<br/> Billede: <img src= {sti} height=120 width=$150>",
+        toolTipContent:"Dato: {label}<br/> SNR: {y}<br/>Starttidspunkt: {tidspunkt}<br/> Billede: <img src= {sti} height=120 width=$150>",
 		dataPoints: <?php echo json_encode($snr, JSON_NUMERIC_CHECK); ?>
 	}]
 });

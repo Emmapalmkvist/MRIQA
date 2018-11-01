@@ -7,7 +7,7 @@ function driftdata($sn1, $model1, $start, $slut)
     $model = $model1;
     $startdato = $start;
     $slutdato = $slut;
-    $sql = "SELECT Drift, Model, Dato, Serienummer, Driftbillede FROM Maaling WHERE Serienummer='$sn' AND Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY Dato";
+    $sql = "SELECT Drift, Model, Dato, Serienummer, Driftbillede, Starttidspunkt FROM Maaling WHERE Serienummer='$sn' AND Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY Dato";
 
 $result = mysqli_query($mysqli, $sql);
 
@@ -18,6 +18,7 @@ while($row = mysqli_fetch_array($result))
     $drift[] = array(
     "y" => $row["Drift"],
     "label" =>$row["Dato"],
+    "tidspunkt" =>$row["Starttidspunkt"],
     "sti" => "../billeder/" . $row["Driftbillede"]
     );
     $model = $row["Model"];
@@ -115,7 +116,7 @@ var chartDrift = new CanvasJS.Chart("chartContainerDrift", {
 	},
     data: [{
 		type: "line",
-        toolTipContent:"Dato: {label}<br/> Drift: {y}<br/> Billede: <img src= {sti} height=120 width=$150>",
+        toolTipContent:"Dato: {label}<br/> Drift: {y}<br/>Starttidspunkt: {tidspunkt}<br/> Billede: <img src= {sti} height=120 width=$150>",
 		dataPoints: <?php echo json_encode($drift, JSON_NUMERIC_CHECK); ?>
 	}]
 });

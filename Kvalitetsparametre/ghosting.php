@@ -7,7 +7,7 @@ function ghostingdata($sn1, $model1, $start, $slut)
     $model = $model1;
     $startdato = $start;
     $slutdato = $slut;
-    $sql = "SELECT Ghostingmean, Model, Dato, Serienummer, Ghostingbillede FROM Maaling WHERE Serienummer='$sn' AND Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY Dato";
+    $sql = "SELECT Ghostingmean, Model, Dato, Serienummer, Ghostingbillede, Starttidspunkt FROM Maaling WHERE Serienummer='$sn' AND Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY Dato";
 
 $result = mysqli_query($mysqli, $sql);
 
@@ -18,6 +18,7 @@ while($row = mysqli_fetch_array($result))
     $ghosting[] = array(
     "y" => $row["Ghostingmean"],
     "label" =>$row["Dato"],
+    "tidspunkt" =>$row["Starttidspunkt"],
     "sti" => "../billeder/" . $row["Ghostingbillede"]
     );
     $model = $row["Model"];
@@ -106,7 +107,7 @@ var chartGhosting = new CanvasJS.Chart("chartContainerGhosting", {
 	},
     data: [{
 		type: "line",
-        toolTipContent:"Dato: {label}<br/> Ghosting: {y}<br/> Billede: <img src= {sti} height=120 width=$150>",
+        toolTipContent:"Dato: {label}<br/> Ghosting: {y}<br/>Starttidspunkt: {tidspunkt}<br/> Billede: <img src= {sti} height=120 width=$150>",
 		dataPoints: <?php echo json_encode($ghosting, JSON_NUMERIC_CHECK); ?>
 	}]
 });

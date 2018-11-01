@@ -26,7 +26,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 <head><title>Hjem</title></head>
 <body>
 <header>
-      <h1>MRI-SCANNING - REGION MIDT</h1>
+      <h1>MRI-KVALITETSSIKRING - REGION MIDT</h1>
     </header>
 
     <div class="topnav">

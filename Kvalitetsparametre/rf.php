@@ -6,7 +6,7 @@ function rfdata($sn1, $model1, $start, $slut)
     $model = $model1;
     $startdato = $start;
     $slutdato = $slut;
-    $sql = "SELECT Resonansfrekvens, Model, Dato, Serienummer, Resonansfrekvensbillede FROM Maaling WHERE Serienummer='$sn' AND Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY Dato";
+    $sql = "SELECT Resonansfrekvens, Model, Dato, Serienummer, Resonansfrekvensbillede, Starttidspunkt FROM Maaling WHERE Serienummer='$sn' AND Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY Dato";
 
 $result = mysqli_query($mysqli, $sql);
 
@@ -17,7 +17,9 @@ while($row = mysqli_fetch_array($result))
     $rf[] = array(
     "y" => $row["Resonansfrekvens"],
     "label" =>$row["Dato"],
+    "tidspunkt" =>$row["Starttidspunkt"],
     "sti" => "../billeder/" . $row["Resonansfrekvensbillede"]
+
     );
     $model = $row["Model"];
 
@@ -117,7 +119,7 @@ var chartRf = new CanvasJS.Chart("chartContainerRf", {
 	},
     data: [{
 		type: "line",
-        toolTipContent:"Dato: {label}<br/> Resonansfrekvens: {y}<br/> Billede: <img src= {sti} height=120 width=$150>",
+        toolTipContent:"Dato: {label}<br/> Resonansfrekvens: {y}<br/>Starttidspunkt: {tidspunkt}<br/> Billede: <img src= {sti} height=120 width=$150>",
 		dataPoints: <?php echo json_encode($rf, JSON_NUMERIC_CHECK); ?>
 	}]
 });
