@@ -103,8 +103,8 @@ $sn = $_POST['select1'];
  $sql = "INSERT INTO Servicetidspunkt (Servicetidspunkt, serienummer)
 VALUES('$dato', '$sn')";
 
- if ($mysqli->query($sql) === TRUE) {
-    echo " Servicetidspunkt er gemt";
+if ($mysqli->query($sql) === TRUE) {
+    echo "";
 } else {
     echo "Error: " . $sql . "<br>" . $mysqli->error;
 }
