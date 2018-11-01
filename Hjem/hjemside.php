@@ -110,24 +110,9 @@ if ($mysqli->query($sql) === TRUE) {
 }
 } else {$dato = ""; $sn="";}
 
-/*
-if (isset($_POST["select1"])) {$sn = $_POST['select1'];} else {$sn = "";}
-*/
-
-/*$sql = "INSERT INTO Servicetidspunkt (Servicetidspunkt, serienummer)
-VALUES('$dato', '$sn')"; */
-
-// check om servicedato bliver gemt
-/*if ($mysqli->query($sql) === TRUE) {
-    echo " Servicetidspunkt er gemt";
-} else {
-    echo "Error: " . $sql . "<br>" . $mysqli->error;
-} */
-
 ?>
 
 <button type ="submit" id="submit">Gem dato</button>
-
 
 </form>
 </div>
