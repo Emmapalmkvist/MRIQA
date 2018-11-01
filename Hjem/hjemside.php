@@ -91,28 +91,38 @@ while ($row = mysqli_fetch_array($result1))
     echo "<option value='" . $row['Serienummer'] . "'>" . $row['Scannernavn'] . "</option>";
 }
 
-$dato = $_POST['date'];
-$sn = $_POST['select1'];
-
-/*
-if (isset($_POST["date"])) {$dato = $_POST['date'];} else {$dato = "";}
-if (isset($_POST["select1"])) {$sn = $_POST['select1'];} else {$sn = "";}
-*/
-
-
-$sql = "INSERT INTO Servicetidspunkt (Servicetidspunkt, serienummer)
-VALUES('$dato', '$sn')";
-
 ?>
 </select>
 
 <?php
-// check om servicedato bliver gemt
-if ($mysqli->query($sql) === TRUE) {
+
+if (isset($_POST["date"]) && isset($_POST["select1"]))
+{$dato = $_POST['date'];
+$sn = $_POST['select1'];
+
+ $sql = "INSERT INTO Servicetidspunkt (Servicetidspunkt, serienummer)
+VALUES('$dato', '$sn')";
+
+ if ($mysqli->query($sql) === TRUE) {
     echo " Servicetidspunkt er gemt";
 } else {
     echo "Error: " . $sql . "<br>" . $mysqli->error;
 }
+} else {$dato = ""; $sn="";}
+
+/*
+if (isset($_POST["select1"])) {$sn = $_POST['select1'];} else {$sn = "";}
+*/
+
+/*$sql = "INSERT INTO Servicetidspunkt (Servicetidspunkt, serienummer)
+VALUES('$dato', '$sn')"; */
+
+// check om servicedato bliver gemt
+/*if ($mysqli->query($sql) === TRUE) {
+    echo " Servicetidspunkt er gemt";
+} else {
+    echo "Error: " . $sql . "<br>" . $mysqli->error;
+} */
 
 ?>
 
