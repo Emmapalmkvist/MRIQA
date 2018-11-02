@@ -109,7 +109,7 @@ if ($mysqli->query($sql) === TRUE) {
     echo "Error: " . $sql . "<br>" . $mysqli->error;
 }
 
-$message = "Servicedatoen, $dato er gemt";
+$message = "Servicedatoen, $dato, er gemt";
 echo "<script type='text/javascript'>alert('$message');</script>";
 
 } else {$dato = ""; $sn="";}
