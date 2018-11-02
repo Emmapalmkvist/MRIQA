@@ -43,7 +43,7 @@ $avgDef= array();
     );
     }
 
-$sql2 = "SELECT Servicetidspunkt FROM Servicetidspunkt WHERE Serienummer='$sn' AND Servicetidspunkt BETWEEN '$startdato' AND '$slutdato' GROUP BY Servicetidspunkt";
+/*$sql2 = "SELECT Servicetidspunkt FROM Servicetidspunkt WHERE Serienummer='$sn' AND Servicetidspunkt BETWEEN '$startdato' AND '$slutdato' GROUP BY Servicetidspunkt";
 
 $result2 = mysqli_query($mysqli, $sql2);
 
@@ -57,21 +57,18 @@ $service= array();
 
     );
 
-    }
+    }*/
     // test af arrayindhold
-    echo '<pre>';
+    /*echo '<pre>';
     print_r($service);
     echo  '</pre>';
 
     echo '<pre>';
     print_r($avgDef);
-    echo  '</pre>';
+    echo  '</pre>';*/
 
 
 ?>
-
-
-
 
 <script>
 //window.onload =
@@ -174,6 +171,7 @@ chartDeformation.render();
 
 </script>
 <?php
+
 }
 
 function notificationsDef()
@@ -181,12 +179,6 @@ function notificationsDef()
     include "../Hjem/datointervalNot.php";
     include "../Database/DB_adgang.php";
 
-/*$dtz = new DateTimeZone("Europe/Madrid"); //Your timezone
-$now = new DateTime(date("Y-m-d"), $dtz);
-$date1 = $now->format("Y-m-d");
-
-$date = (new \DateTime())->modify('-1200 days'); // hardcode 1200 dage - skal tilpasses
-$date2 = $date->format("Y-m-d");*/
 
     $sql_def = "SELECT Deformation, Dato, Serienummer FROM Maaling WHERE Dato BETWEEN '$date2' AND '$date1' GROUP BY Dato";
 
@@ -228,6 +220,42 @@ if (($data_def[$i]['y']) < $minDef)
 
 }
 
-// afslutning på deformationdata() funktionen
+
+/*function getServiceDeformation()
+{
+    include "../Database/DB_adgang.php";
+    $sn = $_GET['sn'];
+    $startdato = $_GET['startdato'];
+    $slutdato = $_GET['slutdato'];
+    $sql2 = "SELECT Servicetidspunkt FROM Servicetidspunkt WHERE Serienummer='$sn' AND Servicetidspunkt BETWEEN '$startdato' AND '$slutdato' GROUP BY Servicetidspunkt";
+
+    $result2 = mysqli_query($mysqli, $sql2);
+
+    $service= array();
+
+
+    while($row = mysqli_fetch_array($result2))
+    {
+    $service[] = array(
+    "label" => $row["Servicetidspunkt"]
+
+    );
+
+    }
+
+    for ($i = 0; $i < count($service); ++$i) {
+
+
+    if (($service[$i]['label']) > 0)
+{
+    $servicetidspunkt = ($service[$i]['label']);
+    $msg = "Der er foretaget serviceeftersyn d. $servicetidspunkt </br>";
+    echo $msg;
+}
+
+}
+}*/
+
+
 ?>
 
