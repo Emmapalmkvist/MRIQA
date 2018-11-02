@@ -69,6 +69,7 @@ var chartDriftAvg = new CanvasJS.Chart("chartContainerDriftAvg",
         value:4,
         label:"Max",
         color:"red",
+        thickness: 3,
         labelFontColor:"red"
         }
         ],

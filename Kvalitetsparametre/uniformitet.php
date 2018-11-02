@@ -66,12 +66,14 @@ var chartUniformitetAvg = new CanvasJS.Chart("chartContainerUniformitetAvg",
         value:60,
         label:"Max",
         color:"red",
+        thickness: 3,
         labelFontColor:"red"
         },
         {
         value:35,
         label:"Min",
         color:"red",
+        thickness: 3,
         labelFontColor:"red"
         }
         ],

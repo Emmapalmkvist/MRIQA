@@ -62,6 +62,7 @@ var chartGhostingAvg = new CanvasJS.Chart("chartContainerGhostingAvg", {
         value:2,
         label:"Max",
         color:"red",
+        thickness: 3,
         labelFontColor:"red"
         }
         ],

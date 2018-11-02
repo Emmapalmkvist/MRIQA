@@ -67,12 +67,14 @@ var chartRfAvg = new CanvasJS.Chart("chartContainerRfAvg", {
         value:64,
         label:"Max",
         color:"red",
+        thickness: 3,
         labelFontColor:"red"
         },
         {
         value:63,
         label:"Min",
         color:"red",
+        thickness: 3,
         labelFontColor:"red"
         }
         ],
