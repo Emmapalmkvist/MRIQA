@@ -121,7 +121,9 @@ chartDefdef.render();
 <div id="chartContainerDefdef" style="width: 30%; height: 300px;display: inline-block;">
 
 </div>
+
 </form>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
 </body>
 </html>
