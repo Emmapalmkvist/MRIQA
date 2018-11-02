@@ -7,7 +7,7 @@ function ghostingdata($sn1, $model1, $start, $slut)
     $model = $model1;
     $startdato = $start;
     $slutdato = $slut;
-    $sql = "SELECT Ghostingmean, Model, Dato, Serienummer, Ghostingbillede FROM Maaling WHERE Serienummer='$sn' AND Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY Dato";
+    $sql = "SELECT Ghostingmean, Model, Dato, Serienummer, Ghostingbillede, Starttidspunkt FROM Maaling WHERE Serienummer='$sn' AND Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY Dato";
 
 $result = mysqli_query($mysqli, $sql);
 
@@ -18,6 +18,7 @@ while($row = mysqli_fetch_array($result))
     $ghosting[] = array(
     "y" => $row["Ghostingmean"],
     "label" =>$row["Dato"],
+    "tidspunkt" =>$row["Starttidspunkt"],
     "sti" => "../billeder/" . $row["Ghostingbillede"]
     );
     $model = $row["Model"];
@@ -106,7 +107,7 @@ var chartGhosting = new CanvasJS.Chart("chartContainerGhosting", {
 	},
     data: [{
 		type: "line",
-        toolTipContent:"Dato: {label}<br/> Ghosting: {y}<br/> Billede: <img src= {sti} height=120 width=$150>",
+        toolTipContent:"Dato: {label}<br/> Ghosting: {y}<br/>Starttidspunkt: {tidspunkt}<br/> Billede: <img src= {sti} height=120 width=$150>",
 		dataPoints: <?php echo json_encode($ghosting, JSON_NUMERIC_CHECK); ?>
 	}]
 });
@@ -117,5 +118,50 @@ chartGhosting.render();
 }
 </script>
 <?php }
+
+function notificationsGhosting()
+{
+    include "../Hjem/datointervalNot.php";
+    include "../Database/DB_adgang.php";
+
+
+    $sql_ghosting = "SELECT Ghostingmean, Dato, Serienummer FROM Maaling WHERE Dato BETWEEN '$date2' AND '$date1' GROUP BY Dato";
+
+    $result_ghosting = mysqli_query($mysqli, $sql_ghosting);
+
+    $data_ghosting = array();
+
+while($row = mysqli_fetch_array($result_ghosting))
+{
+    $data_ghosting[] = array(
+    "y" => $row["Ghostingmean"],
+    "label" =>$row["Dato"],
+    "serienummer" =>$row["Serienummer"]
+    );
+}
+
+// hardcode min og max
+$maxGhosting = 2.0;
+
+for ($i = 0; $i < count($data_ghosting); ++$i) {
+
+if (($data_ghosting[$i]['y']) > $maxGhosting)
+{
+    $serienummer = ($data_ghosting[$i]['serienummer']);
+    $dato = ($data_ghosting[$i]['label']);
+    $msg = "Ghosting over max d. $dato på scanneren med serienummer: $serienummer"."<br>";
+    echo $msg;
+}
+
+/*if (($data_def[$i]['y']) < $minDef)
+{
+    $serienummer = ($data_def[$i]['serienummer']);
+    $dato = ($data_def[$i]['label']);
+    $msg = "Deformation under min d. $dato på scanneren med serienummer: $serienummer"."<br>";
+    echo $msg;
+}*/
+}
+
+}
 ?>
 

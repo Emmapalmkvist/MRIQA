@@ -7,7 +7,7 @@ function driftdata($sn1, $model1, $start, $slut)
     $model = $model1;
     $startdato = $start;
     $slutdato = $slut;
-    $sql = "SELECT Drift, Model, Dato, Serienummer, Driftbillede FROM Maaling WHERE Serienummer='$sn' AND Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY Dato";
+    $sql = "SELECT Drift, Model, Dato, Serienummer, Driftbillede, Starttidspunkt FROM Maaling WHERE Serienummer='$sn' AND Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY Dato";
 
 $result = mysqli_query($mysqli, $sql);
 
@@ -18,6 +18,7 @@ while($row = mysqli_fetch_array($result))
     $drift[] = array(
     "y" => $row["Drift"],
     "label" =>$row["Dato"],
+    "tidspunkt" =>$row["Starttidspunkt"],
     "sti" => "../billeder/" . $row["Driftbillede"]
     );
     $model = $row["Model"];
@@ -115,7 +116,7 @@ var chartDrift = new CanvasJS.Chart("chartContainerDrift", {
 	},
     data: [{
 		type: "line",
-        toolTipContent:"Dato: {label}<br/> Drift: {y}<br/> Billede: <img src= {sti} height=120 width=$150>",
+        toolTipContent:"Dato: {label}<br/> Drift: {y}<br/>Starttidspunkt: {tidspunkt}<br/> Billede: <img src= {sti} height=120 width=$150>",
 		dataPoints: <?php echo json_encode($drift, JSON_NUMERIC_CHECK); ?>
 	}]
 });
@@ -128,6 +129,55 @@ chartDrift.render();
 
 </script>
 <?php }
+
+function notificationsDrift()
+{
+    include "../Hjem/datointervalNot.php";
+    include "../Database/DB_adgang.php";
+
+
+    $sql_drift = "SELECT Drift, Dato, Serienummer FROM Maaling WHERE Dato BETWEEN '$date2' AND '$date1' GROUP BY Dato";
+
+    $result_drift = mysqli_query($mysqli, $sql_drift);
+
+    $data_drift = array();
+
+while($row = mysqli_fetch_array($result_drift))
+{
+    $data_drift[] = array(
+    "y" => $row["Drift"],
+    "label" =>$row["Dato"],
+    "serienummer" =>$row["Serienummer"]
+    );
+}
+
+// hardcode min og max
+$maxDrift = 5.0;
+//$minDrift = 0.5;
+
+for ($i = 0; $i < count($data_drift); ++$i) {
+
+if (($data_drift[$i]['y']) > $maxDrift)
+{
+    $serienummer = ($data_drift[$i]['serienummer']);
+    $dato = ($data_drift[$i]['label']);
+    $msg = "Drift over max d. $dato på scanneren med serienummer: $serienummer"."<br>";
+    echo $msg;
+}
+
+/*if (($data_def[$i]['y']) < $minDef)
+{
+    $serienummer = ($data_def[$i]['serienummer']);
+    $dato = ($data_def[$i]['label']);
+    $msg = "Deformation under min d. $dato på scanneren med serienummer: $serienummer"."<br>";
+    echo $msg;
+}*/
+}
+
+}
+
+
+
 ?>
 
 

@@ -12,7 +12,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 <!doctype html>
 <html>
     <title>Sammenlign scannere</title>
-    <link rel="stylesheet" href="newstyle.css" />
+    <link rel="stylesheet" href="../Hjem/newstyle.css" />
      <meta charset="UTF-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
     <style type="text/css">
@@ -26,14 +26,14 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 <head><title>Hjem</title></head>
 <body>
 <header>
-      <h1>MRI-SCANNING - REGION MIDT</h1>
+      <h1>MRI-KVALITETSSIKRING - REGION MIDT</h1>
     </header>
 
     <div class="topnav">
-            <a href ="nyhjemside.php" id="onlink">HJEM</a>
-            <a href="overblikscannere.php">OVEBLIK OVER SCANNERE</a>
-            <a class="active" href="sammenlignscanner.php">SAMMENLIGN SCANNERE</a>
-        <li style="float:right"><a href="location: ../Logind/logud.php">LOG UD</a></li>
+            <a href ="../Hjem/hjemside.php" id="onlink">HJEM</a>
+            <a href="../Scanneroverblik/visgrafer.php">OVEBLIK OVER SCANNERE</a>
+            <a class="active" href="../Modeloverblik/sammenlignscanner.php">SAMMENLIGN SCANNERE</a>
+        <li style="float:right"><a href="../Logind/logud.php">LOG UD</a></li>
     </div>
 
     <body>

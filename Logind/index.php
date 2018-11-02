@@ -76,7 +76,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                             $_SESSION["Brugernavn"] = $brugernavn;
 
                             // Direct bruger til ny side
-                            header("location: ../Testfiler/nyhjemside.php");
+                            header("location: ../Hjem/hjemside.php");
                         }
                         else
                         {
@@ -121,7 +121,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     </header>
 
         <div class="topnav">
-            <a class="active" href ="logind.php" id="onlink">LOG IND</a>
+            <a class="active" href ="/Logind/logind.php" id="onlink">LOG IND</a>
     </div>
 
 <body>

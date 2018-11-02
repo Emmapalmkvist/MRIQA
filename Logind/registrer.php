@@ -158,7 +158,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Opret">
             </div>
-            <p>Har du allerede en bruger? <a href="login.php">Log ind</a></p>
+            <p>Har du allerede en bruger? <a href="../Logind/index.php">Log ind</a></p>
         </form>
     </div>
 </body>

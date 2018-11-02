@@ -7,7 +7,7 @@ function snrdata($sn1, $model1, $start, $slut)
     $model = $model1;
     $startdato = $start;
     $slutdato = $slut;
-    $sql = "SELECT SNR, Model, Dato, Serienummer, SNRbillede FROM Maaling WHERE Serienummer='$sn' AND Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY Dato";
+    $sql = "SELECT SNR, Model, Dato, Serienummer, SNRbillede, Starttidspunkt FROM Maaling WHERE Serienummer='$sn' AND Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY Dato";
 
 $result = mysqli_query($mysqli, $sql);
 
@@ -18,6 +18,7 @@ while($row = mysqli_fetch_array($result))
     $snr[] = array(
     "y" => $row["SNR"],
     "label" =>$row["Dato"],
+    "tidspunkt" =>$row["Starttidspunkt"],
     "sti" => "../billeder/" . $row["SNRbillede"]
     );
     $model = $row["Model"];
@@ -114,7 +115,7 @@ var chartSNR = new CanvasJS.Chart("chartContainerSNR", {
 	},
     data: [{
 		type: "line",
-        toolTipContent:"Dato: {label}<br/> SNR: {y}<br/> Billede: <img src= {sti} height=120 width=$150>",
+        toolTipContent:"Dato: {label}<br/> SNR: {y}<br/>Starttidspunkt: {tidspunkt}<br/> Billede: <img src= {sti} height=120 width=$150>",
 		dataPoints: <?php echo json_encode($snr, JSON_NUMERIC_CHECK); ?>
 	}]
 });
@@ -125,125 +126,54 @@ chartSNR.render();
 }
 </script>
 <?php }
-?>
 
 
-
-
-
-
-
-
-
-
-
-<?php
-/*
-
-<!DOCTYPE html>
-<html>
-<body>
-<form action="" method="post">
-
-<script type="text/javascript" src="http://services.iperfect.net/js/IP_generalLib.js"></script>
-<input type="date" name="date1" id="date1" alt="date" class="IP_calendar" title="Y-m-d">
-<input type="date" name="date2" id="date2" alt="date" class="IP_calendar" title="Y-m-d">
-
-<select name="select1">
-<?php
-require_once "../Database/DB_adgang.php";
-$sql1 = "SELECT Serienummer, Scannernavn FROM Scannere";
-$result1 = mysqli_query($mysqli, $sql1);
-
-?>
-<?php
-while ($row = mysqli_fetch_array($result1)) {
-    echo "<option value='" . $row['Serienummer'] . "'>" . $row['Scannernavn'] . "</option>";
-}
-    $startdato = $_POST['date1'];
-    $slutdato = $_POST['date2'];
-    $sn = $_POST['select1'];
-?>
-</select>
-
-<?php
-    //POST tager det, som ligger i dropdownmenyen og gemmer det i variablen //$sn, som puttes i SQL queryen.
-
-    //$sn = $_POST['select1'];
-    $sql = "SELECT SNR, Dato, Serienummer, SNRbillede FROM Maaling WHERE Serienummer='$sn' AND Dato BETWEEN '$startdato' AND '$slutdato'";
-
-$result = mysqli_query($mysqli, $sql);
-
-$snr= array();
-
-while($row = mysqli_fetch_array($result))
+function notificationsSNR()
 {
-    $snr[] = array(
+    include "../Hjem/datointervalNot.php";
+    include "../Database/DB_adgang.php";
+
+
+    $sql_SNR = "SELECT SNR, Dato, Serienummer FROM Maaling WHERE Dato BETWEEN '$date2' AND '$date1' GROUP BY Dato";
+
+    $result_SNR = mysqli_query($mysqli, $sql_SNR);
+
+    $data_SNR = array();
+
+while($row = mysqli_fetch_array($result_SNR))
+{
+    $data_SNR[] = array(
     "y" => $row["SNR"],
     "label" =>$row["Dato"],
-    "sti" => "../billeder/" . $row["SNRbillede"]
+    "serienummer" =>$row["Serienummer"]
     );
-
 }
-?>
-<button type ="submit" id="submit"> Vis scanner</button>
 
-</form>
-</body>
-</html>
-<?php
-// https://stackoverflow.com/questions/45157149/creating-dropdown-list-from-sql-database-in-php
-?>
+// hardcode min og max
+$maxSNR= 295;
+$minSNR= 110;
 
-<!DOCTYPE HTML>
-<html>
-<head>
+for ($i = 0; $i < count($data_SNR); ++$i) {
 
-<script>
-window.onload = function () {
+if (($data_SNR[$i]['y']) > $maxSNR)
+{
+    $serienummer = ($data_SNR[$i]['serienummer']);
+    $dato = ($data_SNR[$i]['label']);
+    $msg = "SNR over max d. $dato på scanneren med serienummer: $serienummer"."<br>";
+    echo $msg;
+}
 
-var chartSnr = new CanvasJS.Chart("chartContainerSnr", {
-	title: {
-		text: "SNR over tid"
-	},
-	axisY: {
-		title: "SNR"
-	},
-    data: [{
-		type: "line",
-        toolTipContent:"Dato: {label}<br/> SNR: {y}<br/> Billede: <img src= {sti} height=120 width=$150>",
-		dataPoints: <?php echo json_encode($snr, JSON_NUMERIC_CHECK); ?>
-	}]
-});
-
-
-chartSnr.render();
+if (($data_SNR[$i]['y']) < $minSNR)
+{
+    $serienummer = ($data_SNR[$i]['serienummer']);
+    $dato = ($data_SNR[$i]['label']);
+    $msg = "SNR under min d. $dato på scanneren med serienummer: $serienummer"."<br>";
+    echo $msg;
+}
+}
 
 }
 
-</script>
-</head>
-<body>
-<br/><div id="chartContainerSnr" style="width: 30%; height: 300px;display: inline-block;"></div>
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-</body>
-</html>
 
-*/
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

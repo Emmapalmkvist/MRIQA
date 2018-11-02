@@ -1,4 +1,17 @@
 <?php
+
+session_start();
+
+
+// Check om bruger er logget ind
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: ../Logind/login.php");
+    exit;
+}
+?>
+
+
+<?php
 include "../Kvalitetsparametre/deformation.php";
 include "../Kvalitetsparametre/drift.php";
 include "../Kvalitetsparametre/ghosting.php";
@@ -8,9 +21,12 @@ include "../Kvalitetsparametre/uniformitet.php";
 
 ?>
 
+
+
 <html>
 <head>
 </head>
+    <a href="../Scanneroverblik/visgrafer.php">Tilbage til scanneroverblik</a>
 <?php
     $datatype = $_GET['datatype'];
     $sn = $_GET['sn'];
@@ -66,5 +82,6 @@ include "../Kvalitetsparametre/uniformitet.php";
 
 ?>
  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
     </body>
 </html>

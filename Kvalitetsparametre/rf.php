@@ -6,7 +6,7 @@ function rfdata($sn1, $model1, $start, $slut)
     $model = $model1;
     $startdato = $start;
     $slutdato = $slut;
-    $sql = "SELECT Resonansfrekvens, Model, Dato, Serienummer, Resonansfrekvensbillede FROM Maaling WHERE Serienummer='$sn' AND Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY Dato";
+    $sql = "SELECT Resonansfrekvens, Model, Dato, Serienummer, Resonansfrekvensbillede, Starttidspunkt FROM Maaling WHERE Serienummer='$sn' AND Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY Dato";
 
 $result = mysqli_query($mysqli, $sql);
 
@@ -17,7 +17,9 @@ while($row = mysqli_fetch_array($result))
     $rf[] = array(
     "y" => $row["Resonansfrekvens"],
     "label" =>$row["Dato"],
+    "tidspunkt" =>$row["Starttidspunkt"],
     "sti" => "../billeder/" . $row["Resonansfrekvensbillede"]
+
     );
     $model = $row["Model"];
 
@@ -117,7 +119,7 @@ var chartRf = new CanvasJS.Chart("chartContainerRf", {
 	},
     data: [{
 		type: "line",
-        toolTipContent:"Dato: {label}<br/> Resonansfrekvens: {y}<br/> Billede: <img src= {sti} height=120 width=$150>",
+        toolTipContent:"Dato: {label}<br/> Resonansfrekvens: {y}<br/>Starttidspunkt: {tidspunkt}<br/> Billede: <img src= {sti} height=120 width=$150>",
 		dataPoints: <?php echo json_encode($rf, JSON_NUMERIC_CHECK); ?>
 	}]
 });
@@ -127,6 +129,54 @@ chartRf.render();
 
 </script>
 <?php }
+
+function notificationsRf()
+{
+    include "../Hjem/datointervalNot.php";
+    include "../Database/DB_adgang.php";
+
+
+    $sql_rf = "SELECT Resonansfrekvens, Dato, Serienummer FROM Maaling WHERE Dato BETWEEN '$date2' AND '$date1' GROUP BY Dato";
+
+    $result_rf = mysqli_query($mysqli, $sql_rf);
+
+    $data_rf = array();
+
+while($row = mysqli_fetch_array($result_rf))
+{
+    $data_rf[] = array(
+    "y" => $row["Resonansfrekvens"],
+    "label" =>$row["Dato"],
+    "serienummer" =>$row["Serienummer"]
+    );
+}
+
+// hardcode min og max
+$maxRf= 64.0;
+$minRf = 63.0;
+
+for ($i = 0; $i < count($data_rf); ++$i) {
+
+if (($data_rf[$i]['y']) > $maxRf)
+{
+    $serienummer = ($data_rf[$i]['serienummer']);
+    $dato = ($data_rf[$i]['label']);
+    $msg = "Resonansfrekvens over max d. $dato på scanneren med serienummer: $serienummer"."<br>";
+    echo $msg;
+}
+
+if (($data_rf[$i]['y']) < $minRf)
+{
+    $serienummer = ($data_rf[$i]['serienummer']);
+    $dato = ($data_rf[$i]['label']);
+    $msg = "Resonansfrekvens under min d. $dato på scanneren med serienummer: $serienummer"."<br>";
+    echo $msg;
+}
+}
+
+}
+
+
 ?>
 
 
