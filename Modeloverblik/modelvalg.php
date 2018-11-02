@@ -1,10 +1,16 @@
 <?php
 
 include "../Database/DB_adgang.php";
+include "../Kvalitetsparametre/deformation_model.php";
+include "../Kvalitetsparametre/drift_model.php";
+include "../Kvalitetsparametre/ghosting_model.php";
+include "../Kvalitetsparametre/rf_model.php";
+include "../Kvalitetsparametre/snr_model.php";
+include "../Kvalitetsparametre/uniformitet_model.php";
 ?>
 <!DOCTYPE html>
 <html>
-<body onload="displayDefdef();">
+<body>
 
 <form action="" method="post">
 
@@ -28,12 +34,11 @@ while ($row = mysqli_fetch_array($result1)) {
     $model = $_POST['select1'];
 ?>
 <?php
+
     //POST tager det, som ligger i dropdownmenyen og gemmer det i variablen //$sn, som puttes i SQL queryen.
-/*
+
 $sql = "SELECT Scannernavn, Serienummer, Model FROM Scannere WHERE Model='$model'";
 
-
-//$sql = "SELECT Deformation, Model, Dato, Serienummer, Deformationbillede FROM Maaling WHERE Model='$model' AND Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY Dato";
 
 $result = mysqli_query($mysqli, $sql);
 
@@ -46,90 +51,15 @@ while($row = mysqli_fetch_array($result))
         "model" => $row["Model"]
     );
 }
-*/
-  $sql2 = "SELECT s.Serienummer, s.Model, m.Deformation, m.Model, m.Dato, m.Serienummer, m.Deformationbillede FROM Scannere as s, Maaling as m WHERE s.Serienummer = m.Serienummer AND s.Model='$model' AND m.Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY m.Serienummer;";
-
-//$sql2 = "SELECT Deformation, Model, Dato, Serienummer, Deformationbillede FROM Maaling WHERE Model='$model' AND Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY Dato";
-
-$result2 = mysqli_query($mysqli, $sql2);
-$scanner = array();
-//måske en foreach serienummer et eller andet. Ellers skal der stå noget andet i while
-    while($row = mysqli_fetch_array($result2))
-{
-
-    $scanner[] = array(
-                "sn" => $row["Serienummer"]
-
-    );
-
-}
-    $line='';
-
-
-    foreach($scanner as $value)
-    {
-        $scannerny[] = array();
-
-        extract($value);
-
-        $sql3 = "SELECT Deformation, Model, Dato, Serienummer, Deformationbillede FROM Maaling WHERE Serienummer='$sn' AND Dato BETWEEN '$startdato' AND '$slutdato' ORDER BY Dato";
-        $scannerny = array();
-        $result3 = mysqli_query($mysqli, $sql3);
-            while($row = mysqli_fetch_array($result3))
-                {
-                    $scannerny[] = array(
-                    "y" => $row["Deformation"],
-                    "label" => $row["Dato"]
-                    );
-                }
-        $dataset = json_encode($scannerny, JSON_NUMERIC_CHECK);
-        if(strlen($line) > 0)
-        {
-            $line .= ',';
-        }
-        $line .= '{
-		type: "line",
-        legend: "$sn",
-        toolTipContent:"Dato: {label}<br/> Ghosting: {y}<br/> Billede: <img src= {sti} height=120 width=$150>",
-		dataPoints: '.$dataset.'
-	}';
-    }
-
-
-?>
-</select>
-
-
-<button type ="submit" id="submit"> Vis scannere af modeltype</button>
-<script>
-window.onload =
-    function displayDefdef() {
-
-var chartDefdef = new CanvasJS.Chart("chartContainerDefdef", {
-	title: {
-		text: "Ghosting over tid"
-	},
-	axisY: {
-		title: "Ghosting"
-	},
-    data: [<?php echo $line; ?>]
-});
-
-
-chartDefdef.render();
-
-}
-
-
-</script>
-<div id="chartContainerDefdef" style="width: 30%; height: 300px;display: inline-block;">
-
-</div>
-
-</form>
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    ?>
+    </select>
+    <button type ="submit" id="submit"> Vis scannere af modeltype</button>
+ </form>
 
 </body>
 </html>
+
+
+
 
 

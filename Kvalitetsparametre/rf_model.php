@@ -1,12 +1,12 @@
 <?php
-function ghostingmodel($model1, $start, $slut)
+function rfmodel($model1, $start, $slut)
 {
     include "../Database/DB_adgang.php";
     $model = $model1;
     $startdato = $start;
     $slutdato = $slut;
 
-  $sql2 = "SELECT s.Serienummer, s.Model, m.Ghostingmean, m.Model, m.Dato, m.Serienummer, m.Ghostingbillede FROM Scannere as s, Maaling as m WHERE s.Serienummer = m.Serienummer AND s.Model='$model' AND m.Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY m.Serienummer;";
+  $sql2 = "SELECT s.Serienummer, s.Model, m.Resonansfrekvens, m.Model, m.Dato, m.Serienummer, m.Resonansfrekvensbillede FROM Scannere as s, Maaling as m WHERE s.Serienummer = m.Serienummer AND s.Model='$model' AND m.Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY m.Serienummer;";
 
 $result2 = mysqli_query($mysqli, $sql2);
 $scanner = array();
@@ -27,13 +27,13 @@ $scanner = array();
 
         extract($value);
 
-        $sql3 = "SELECT Ghostingmean, Model, Dato, Serienummer, Ghostingbillede FROM Maaling WHERE Serienummer='$sn1' AND Dato BETWEEN '$startdato' AND '$slutdato' ORDER BY Dato";
+        $sql3 = "SELECT Resonansfrekvens, Model, Dato, Serienummer, Resonansfrekvensbillede FROM Maaling WHERE Serienummer='$sn1' AND Dato BETWEEN '$startdato' AND '$slutdato' ORDER BY Dato";
         $scannerny = array();
         $result3 = mysqli_query($mysqli, $sql3);
             while($row = mysqli_fetch_array($result3))
                 {
                     $scannerny[] = array(
-                    "y" => $row["Ghostingmean"],
+                    "y" => $row["Resonansfrekvens"],
                     "label" => $row["Dato"]
                     );
                 }
@@ -53,20 +53,20 @@ $scanner = array();
 
 ?>
 <script>
-    function displayGhostingModel() {
+    function displayRfModel() {
 
-var chartGhostingModel = new CanvasJS.Chart("chartGhostingModel", {
+var chartRfModel = new CanvasJS.Chart("chartRfModel", {
 	title: {
-		text: "Ghosting over tid"
+		text: "Rf over tid"
 	},
 	axisY: {
-		title: "Ghosting"
+		title: "Rf"
 	},
     data: [<?php echo $line; ?>]
 });
 
 
-chartGhostingModel.render();
+chartRfModel.render();
 
 }
 </script>
