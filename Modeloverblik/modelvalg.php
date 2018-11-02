@@ -58,7 +58,7 @@ $scanner = array();
 {
 
     $scanner[] = array(
-                $row["Serienummer"]
+                "sn" => $row["Serienummer"]
 
     );
 
@@ -66,10 +66,13 @@ $scanner = array();
     $line='';
 
 
-    foreach($scanner as $key => $value)
+    foreach($scanner as $value)
     {
+        $scannerny[] = array();
 
-        $sql3 = "SELECT Deformation, Model, Dato, Serienummer, Deformationbillede FROM Maaling WHERE Serienummer='$key' AND Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY Dato";
+        extract($value);
+
+        $sql3 = "SELECT Deformation, Model, Dato, Serienummer, Deformationbillede FROM Maaling WHERE Serienummer='$sn' AND Dato BETWEEN '$startdato' AND '$slutdato' ORDER BY Dato";
         $scannerny = array();
         $result3 = mysqli_query($mysqli, $sql3);
             while($row = mysqli_fetch_array($result3))
@@ -86,6 +89,7 @@ $scanner = array();
         }
         $line .= '{
 		type: "line",
+        legend: "$sn",
         toolTipContent:"Dato: {label}<br/> Ghosting: {y}<br/> Billede: <img src= {sti} height=120 width=$150>",
 		dataPoints: '.$dataset.'
 	}';
@@ -98,7 +102,7 @@ $scanner = array();
 
 <button type ="submit" id="submit"> Vis scannere af modeltype</button>
 <script>
-//window.onload =
+window.onload =
     function displayDefdef() {
 
 var chartDefdef = new CanvasJS.Chart("chartContainerDefdef", {
