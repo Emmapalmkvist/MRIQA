@@ -1,12 +1,12 @@
 <?php
-function ghostingmodel($model1, $start, $slut)
+function snrmodel($model1, $start, $slut)
 {
     include "../Database/DB_adgang.php";
     $model = $model1;
     $startdato = $start;
     $slutdato = $slut;
 
-  $sql2 = "SELECT s.Serienummer, s.Model, m.Ghostingmean, m.Model, m.Dato, m.Serienummer, m.Ghostingbillede FROM Scannere as s, Maaling as m WHERE s.Serienummer = m.Serienummer AND s.Model='$model' AND m.Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY m.Serienummer;";
+  $sql2 = "SELECT s.Serienummer, s.Model, m.SNR, m.Model, m.Dato, m.Serienummer, m.SNRbillede FROM Scannere as s, Maaling as m WHERE s.Serienummer = m.Serienummer AND s.Model='$model' AND m.Dato BETWEEN '$startdato' AND '$slutdato' GROUP BY m.Serienummer;";
 
 $result2 = mysqli_query($mysqli, $sql2);
 $scanner = array();
@@ -27,13 +27,13 @@ $scanner = array();
 
         extract($value);
 
-        $sql3 = "SELECT Ghostingmean, Model, Dato, Serienummer, Ghostingbillede FROM Maaling WHERE Serienummer='$sn1' AND Dato BETWEEN '$startdato' AND '$slutdato' ORDER BY Dato";
+        $sql3 = "SELECT SNR, Model, Dato, Serienummer, SNRbillede FROM Maaling WHERE Serienummer='$sn1' AND Dato BETWEEN '$startdato' AND '$slutdato' ORDER BY Dato";
         $scannerny = array();
         $result3 = mysqli_query($mysqli, $sql3);
             while($row = mysqli_fetch_array($result3))
                 {
                     $scannerny[] = array(
-                    "y" => $row["Ghostingmean"],
+                    "y" => $row["SNR"],
                     "label" => $row["Dato"]
                     );
                 }
@@ -53,20 +53,20 @@ $scanner = array();
 
 ?>
 <script>
-    function displayGhostingModel() {
+    function displaySnrModel() {
 
-var chartGhostingModel = new CanvasJS.Chart("chartGhostingModel", {
+var chartSnrModel = new CanvasJS.Chart("chartSnrModel", {
 	title: {
-		text: "Ghosting over tid"
+		text: "SNR over tid"
 	},
 	axisY: {
-		title: "Ghosting"
+		title: "SNR"
 	},
     data: [<?php echo $line; ?>]
 });
 
 
-chartGhostingModel.render();
+chartSnrModel.render();
 
 }
 </script>
