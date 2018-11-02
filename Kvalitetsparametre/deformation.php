@@ -41,7 +41,6 @@ $avgDef= array();
     "y" => $row["avgDef"],
     "label" => $row["Dato"]
     );
-
     }
 
 $sql2 = "SELECT Servicetidspunkt FROM Servicetidspunkt WHERE Serienummer='$sn' AND Servicetidspunkt BETWEEN '$startdato' AND '$slutdato' GROUP BY Servicetidspunkt";
@@ -54,22 +53,19 @@ $service= array();
     while($row = mysqli_fetch_array($result2))
     {
     $service[] = array(
-
     "label" => $row["Servicetidspunkt"]
-
-    //"label" => $row["Servicetidspunkt"]
 
     );
 
     }
-    // test af array indhold
-    /*echo '<pre>';
+    // test af arrayindhold
+    echo '<pre>';
     print_r($service);
     echo  '</pre>';
 
     echo '<pre>';
     print_r($avgDef);
-    echo  '</pre>';*/
+    echo  '</pre>';
 
 
 ?>
@@ -90,14 +86,7 @@ var chartDefAvg = new CanvasJS.Chart("chartContainerDefAvg",
 		text: "Deformation over tid"
     },
 
-    axisX:{
-	   stripLines:[
-              {
-                  	value: [$service],
-                	label: "test"
-              }
-            ]
-    },
+
 	axisY:{
 
         title: "Deformation",
@@ -108,12 +97,14 @@ var chartDefAvg = new CanvasJS.Chart("chartContainerDefAvg",
         value:4,
         label:"Max",
         color:"red",
+        thickness: 3,
         labelFontColor:"red"
         },
         {
         value:0.5,
         label:"Min",
         color:"red",
+        thickness: 3,
         labelFontColor:"red"
         }
         ],

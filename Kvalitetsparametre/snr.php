@@ -63,12 +63,14 @@ var chartSNRAvg = new CanvasJS.Chart("chartContainerSNRAvg",
         value:295,
         label:"Max",
         color:"red",
+        thickness: 3,
         labelFontColor:"red"
         },
         {
         value:110,
         label:"Min",
         color:"red",
+        thickness: 3,
         labelFontColor:"red"
         }
         ],
