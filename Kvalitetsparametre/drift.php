@@ -117,7 +117,7 @@ var chartDrift = new CanvasJS.Chart("chartContainerDrift", {
 	},
     data: [{
 		type: "line",
-        toolTipContent:"Dato: {label}<br/> Drift: {y}<br/>Starttidspunkt: {tidspunkt}<br/> Billede: <img src= {sti} height=120 width=$150>",
+        toolTipContent:"Dato: {label}<br/> Drift: {y}<br/>Starttidspunkt: {tidspunkt[1]}<br/> Billede: <img src= {sti} height=120 width=$150>",
 		dataPoints: <?php echo json_encode($drift, JSON_NUMERIC_CHECK); ?>
 	}]
 });
