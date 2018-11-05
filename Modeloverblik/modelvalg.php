@@ -24,7 +24,7 @@ include "../Kvalitetsparametre/uniformitet_model.php";
 <input type="date" name="date1" id="date1" style= "margin-left:27%; margin-right: 27% height: 25px margin-top: 5px" class="IP_calendar">
 <input type="date" name="date2" id="date2" style= "height: 25px" class="IP_calendar" value="">
 
-<select name="select1">
+<select name="select1" style= "height: 25px">
  <option value="">Vælg modeltype..</option>
 
 <?php

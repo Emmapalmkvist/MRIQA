@@ -40,10 +40,10 @@ include "../Modeloverblik/hentdatamodel.php";
 <body onload="displayDefModel();displayDriftModel();displayGhostingModel();displayRfModel();displaySnrModel();displayUniModel();">
 
 <br/>
-<div id="chartDefModel" style="width: 30%; height: 300px;display: inline-block;"></div>
+<div id="chartDefModel" style="width: 30%; height: 300px;display: inline-block; margin-left: 5%"></div>
 <div id="chartDriftModel" style="width: 30%; height: 300px;display: inline-block;"></div>
 <div id="chartGhostingModel" style="width: 30%; height: 300px;display: inline-block;"></div>
-<div id="chartRfModel" style="width: 30%; height: 300px;display: inline-block;"></div>
+<div id="chartRfModel" style="width: 30%; height: 300px;display: inline-block; margin-left: 5%"></div>
 <div id="chartSnrModel" style="width: 30%; height: 300px;display: inline-block;"></div>
 <div id="chartUniModel" style="width: 30%; height: 300px;display: inline-block;"></div>
 
