@@ -108,6 +108,10 @@ if ($mysqli->query($sql) === TRUE) {
 } else {
     echo "Error: " . $sql . "<br>" . $mysqli->error;
 }
+
+$message = "Servicedatoen, $dato, er gemt";
+echo "<script type='text/javascript'>alert('$message');</script>";
+
 } else {$dato = ""; $sn="";}
 
 ?>
