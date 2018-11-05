@@ -2,7 +2,6 @@
 
 session_start();
 
-
 // Check om bruger er logget ind
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: ../Logind/login.php");
@@ -28,14 +27,11 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     <div class="topnav">
             <a href ="../Hjem/hjemside.php" id="onlink">HJEM</a>
             <a class="active" href="../Scanneroverblik/visgrafer.php">OVEBLIK OVER SCANNERE</a>
-            <a href="../Modeloverblik/sammenlignscanner.php">SAMMENLIGN SCANNERE</a>
-        <li style="float:right">
-            <a href="../Logind/logud.php">LOG UD</a></li>
+            <a href="../Modeloverblik/visgrafermodel.php">SAMMENLIGN SCANNERE</a>
+        <li style="float:right"><a href="../Logind/logud.php">LOG UD</a></li>
     </div>
-
 <?php
-    include "../Scanneroverblik/hentdata.php";
-
+include "../Scanneroverblik/hentdata.php";
 ?>
 
 <html>

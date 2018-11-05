@@ -36,7 +36,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         <li style="float:right"><a href="../Logind/logud.php">LOG UD</a></li>
     </div>
 
-    <body>
+<body>
 
 </body>
 </html>

@@ -34,7 +34,8 @@ $scanner = array();
                 {
                     $scannerny[] = array(
                     "y" => $row["Resonansfrekvens"],
-                    "label" => $row["Dato"]
+                    "label" => $row["Dato"],
+                    "sn" => $row["Serienummer"]
                     );
                 }
         $dataset = json_encode($scannerny, JSON_NUMERIC_CHECK);
@@ -45,7 +46,7 @@ $scanner = array();
         $line .= '{
 		type: "line",
         legend: "$sn",
-        toolTipContent:"Dato: {label}<br/> Ghosting: {y}<br/> Billede: <img src= {sti} height=120 width=$150>",
+        toolTipContent:"Dato: {label}<br/> Resonansfrekvens: {y}<br/>Serienummer: {sn}<br/> Billede: <img src= {sti} height=120 width=$150>",
 		dataPoints: '.$dataset.'
 	}';
     }
@@ -57,10 +58,10 @@ $scanner = array();
 
 var chartRfModel = new CanvasJS.Chart("chartRfModel", {
 	title: {
-		text: "Rf over tid"
+		text: "Resonansfrekvens over tid"
 	},
 	axisY: {
-		title: "Rf"
+		title: "Resonansfrekvens"
 	},
     data: [<?php echo $line; ?>]
 });

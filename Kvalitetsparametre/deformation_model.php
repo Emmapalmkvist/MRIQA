@@ -34,8 +34,10 @@ $scanner = array();
                 {
                     $scannerny[] = array(
                     "y" => $row["Deformation"],
-                    "label" => $row["Dato"]
+                    "label" => $row["Dato"],
+                    "sn" => $row["Serienummer"]
                     );
+
                 }
         $dataset = json_encode($scannerny, JSON_NUMERIC_CHECK);
         if(strlen($line) > 0)
@@ -44,8 +46,7 @@ $scanner = array();
         }
         $line .= '{
 		type: "line",
-        legend: "$sn",
-        toolTipContent:"Dato: {label}<br/> Ghosting: {y}<br/> Billede: <img src= {sti} height=120 width=$150>",
+        toolTipContent:"Dato: {label}<br/> Deformation: {y}<br/>Serienummer: {sn}<br/> Billede: <img src= {sti} height=120 width=$150>",
 		dataPoints: '.$dataset.'
 	}';
     }
@@ -53,22 +54,29 @@ $scanner = array();
 
 ?>
 <script>
-    function displayDefdef() {
+function displayDefModel()
+{
 
-var chartDefdef = new CanvasJS.Chart("chartDefdef", {
+var chartDefModel = new CanvasJS.Chart("chartDefModel", {
 	title: {
-		text: "Ghosting over tid"
+		text: "Deformation over tid"
 	},
 	axisY: {
 		title: "Ghosting"
 	},
-    data: [<?php echo $line; ?>]
+    data: [
+
+        <?php echo $line; ?>
+    ]
+
 });
 
 
-chartDefdef.render();
+chartDefModel.render();
 
 }
+
+
 </script>
 <?php
 }
