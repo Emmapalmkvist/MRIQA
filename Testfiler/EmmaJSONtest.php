@@ -21,7 +21,7 @@ $date = (new \DateTime())->modify('-1897 days');
 $date2 = $date->format("Y-m-d");
 
 
-$sql = "SELECT Resonansfrekvens, Dato, Serienummer FROM Maaling WHERE Dato BETWEEN '$date2' AND '$date1' GROUP BY Dato";
+$sql = "SELECT Resonansfrekvens, Dato, Serienummer, Starttidspunkt FROM Maaling WHERE Dato BETWEEN '$date2' AND '$date1' GROUP BY Dato";
 
 $result = mysqli_query($conn, $sql);
 
@@ -31,8 +31,7 @@ while($row = mysqli_fetch_array($result))
 {
     $data[] = array(
     "y" => $row["Resonansfrekvens"],
-    "label" =>$row["Dato"],
-    "serienummer" =>$row["Serienummer"]
+    "t" => $row["Starttidspunkt"],
     );
 }
 
@@ -61,7 +60,8 @@ if (($data[$i]['y']) < $minRF)
 $object = json_decode(json_encode($data));
 
 echo '<pre>';
-print_r($data);
+print_r($data[2]['t'][0]);
+print_r($data[2]['t'][1]);
 echo '</pre>';
 
 

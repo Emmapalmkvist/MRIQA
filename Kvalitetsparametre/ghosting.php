@@ -18,7 +18,10 @@ while($row = mysqli_fetch_array($result))
     $ghosting[] = array(
     "y" => $row["Ghostingmean"],
     "label" =>$row["Dato"],
-    "tidspunkt" =>$row["Starttidspunkt"],
+    "tidspunkt" =>$row["Starttidspunkt"][0],
+    "tidspunkt1" =>$row["Starttidspunkt"][1],
+    "tidspunkt2" =>$row["Starttidspunkt"][2],
+    "tidspunkt3" =>$row["Starttidspunkt"][3],
     "sti" => "../billeder/" . $row["Ghostingbillede"]
     );
     $model = $row["Model"];
@@ -108,7 +111,7 @@ var chartGhosting = new CanvasJS.Chart("chartContainerGhosting", {
 	},
     data: [{
 		type: "line",
-        toolTipContent:"Dato: {label}<br/> Ghosting: {y}<br/>Starttidspunkt: {tidspunkt}<br/> Billede: <img src= {sti} height=120 width=$150>",
+        toolTipContent:"Dato: {label}<br/> Ghosting: {y}<br/>Starttidspunkt: {tidspunkt}{tidspunkt1}:{tidspunkt2}{tidspunkt3}<br/> Billede: <img src= {sti} height=120 width=$150>",
 		dataPoints: <?php echo json_encode($ghosting, JSON_NUMERIC_CHECK); ?>
 	}]
 });
