@@ -37,7 +37,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
     <div class= head_container style= "font-family: sans-serif; font-size: 16px; padding: 7px; background-color: white; border: 1px solid darkgrey; width: 750px;  float: left; margin-left: 2%; margin-top: 2%" >
         <?php
-        echo "Servicetidspunkter for specific scanner: "
+        echo "Servicetidspunkter for specifik scanner: "
         ?>
     </div>
 

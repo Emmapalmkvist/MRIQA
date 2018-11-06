@@ -1,10 +1,10 @@
 <?php
-include "../Kvalitetsparametre/deformation.php";
+/*include "../Kvalitetsparametre/deformation.php";
 include "../Kvalitetsparametre/drift.php";
 include "../Kvalitetsparametre/ghosting.php";
 include "../Kvalitetsparametre/rf.php";
 include "../Kvalitetsparametre/snr.php";
-include "../Kvalitetsparametre/uniformitet.php";
+include "../Kvalitetsparametre/uniformitet.php";*/
 
 require_once "../Database/DB_adgang.php";
 $sql1 = "SELECT Serienummer, Model, Scannernavn FROM Scannere";
