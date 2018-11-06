@@ -1,5 +1,5 @@
 <?php
-include "../Scanneroverblik/scannervalg.php";
+include "../Scanneroverblik/scannervalg2.php";
 //include "../Kvalitetsparametre/deformation.php";
 
     deformationdata($sn, $model, $startdato, $slutdato);
