@@ -1,6 +1,5 @@
 <?php
-include "../Scanneroverblik/scannervalg2.php";
-//include "../Kvalitetsparametre/deformation.php";
+include "../Scanneroverblik/scannervalg.php";
 
     deformationdata($sn, $model, $startdato, $slutdato);
     driftdata($sn, $model, $startdato, $slutdato);

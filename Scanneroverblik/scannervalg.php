@@ -18,7 +18,6 @@ while ($row = mysqli_fetch_array($result1))
     $data[$row['Serienummer']] = $row['Scannernavn'];
 
 }
-    // sørg at instantier variablerne med tomme værdier
     if (isset($_POST["date1"])) {$startdato = $_POST['date1'];} else {$startdato = "";}
     if (isset($_POST["date2"])) {$slutdato = $_POST['date2'];} else {$slutdato = "";}
     if (isset($_POST["select1"])) {$sn = $_POST['select1'];} else {$sn = "";}
