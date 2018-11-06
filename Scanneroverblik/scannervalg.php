@@ -39,7 +39,7 @@ while ($row = mysqli_fetch_array($result1))
 
  <select name="select1" id="scannerid" style= "height: 25px">
      <option value="default">Vælg en scanner...</option>
-<?
+<?php
  foreach($data as $serienummer => $scannernavn) {
      echo "<option value=\"" . $serienummer . "\"";
      if ($serienummer == $sn) {
