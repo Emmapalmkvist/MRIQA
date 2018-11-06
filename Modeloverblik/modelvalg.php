@@ -1,12 +1,7 @@
 <?php
 
 include "../Database/DB_adgang.php";
-include "../Kvalitetsparametre/deformation_model.php";
-include "../Kvalitetsparametre/drift_model.php";
-include "../Kvalitetsparametre/ghosting_model.php";
-include "../Kvalitetsparametre/rf_model.php";
-include "../Kvalitetsparametre/snr_model.php";
-include "../Kvalitetsparametre/uniformitet_model.php";
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,7 +20,7 @@ include "../Kvalitetsparametre/uniformitet_model.php";
 <input type="date" name="date2" id="date2" style= "height: 25px" class="IP_calendar" value="">
 
 <select name="select1" style= "height: 25px">
- <option value="">Vælg modeltype..</option>
+ <option value="">Vælg modeltype</option>
 
 <?php
 
