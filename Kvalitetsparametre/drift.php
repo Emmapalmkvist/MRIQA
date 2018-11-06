@@ -18,7 +18,10 @@ while($row = mysqli_fetch_array($result))
     $drift[] = array(
     "y" => $row["Drift"],
     "label" =>$row["Dato"],
-    "tidspunkt" =>$row["Starttidspunkt"],
+    "tidspunkt" =>$row["Starttidspunkt"][0],
+    "tidspunkt1" =>$row["Starttidspunkt"][1],
+    "tidspunkt2" =>$row["Starttidspunkt"][2],
+    "tidspunkt3" =>$row["Starttidspunkt"][3],
     "sti" => "../billeder/" . $row["Driftbillede"]
     );
     $model = $row["Model"];
@@ -117,7 +120,7 @@ var chartDrift = new CanvasJS.Chart("chartContainerDrift", {
 	},
     data: [{
 		type: "line",
-        toolTipContent:"Dato: {label}<br/> Drift: {y}<br/>Starttidspunkt: {tidspunkt[1]}<br/> Billede: <img src= {sti} height=120 width=$150>",
+        toolTipContent:"Dato: {label}<br/> Drift: {y}<br/>Starttidspunkt: {tidspunkt}{tidspunkt1}:{tidspunkt2}{tidspunkt3}<br/> Billede: <img src= {sti} height=120 width=$150>",
 		dataPoints: <?php echo json_encode($drift, JSON_NUMERIC_CHECK); ?>
 	}]
 });

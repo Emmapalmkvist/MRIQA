@@ -18,7 +18,10 @@ while($row = mysqli_fetch_array($result))
     $uniformitet[] = array(
     "y" => $row["Uniformitet"],
     "label" =>$row["Dato"],
-    "tidspunkt" =>$row["Starttidspunkt"],
+    "tidspunkt" =>$row["Starttidspunkt"][0],
+    "tidspunkt1" =>$row["Starttidspunkt"][1],
+    "tidspunkt2" =>$row["Starttidspunkt"][2],
+    "tidspunkt3" =>$row["Starttidspunkt"][3],
     "sti" => "../billeder/" . $row["Uniformitetbillede"]
     );
     $model = $row["Model"];
@@ -120,7 +123,7 @@ var chartUniformitet = new CanvasJS.Chart("chartContainerUniformitet", {
 	},
     data: [{
 		type: "line",
-        toolTipContent:"Dato: {label}<br/> Uniformitet: {y}<br/>Starttidspunkt: {tidspunkt}<br/> Billede: <img src= {sti} height=120 width=$150>",
+        toolTipContent:"Dato: {label}<br/> Uniformitet: {y}<br/>Starttidspunkt: {tidspunkt}{tidspunkt1}:{tidspunkt2}{tidspunkt3}<br/> Billede: <img src= {sti} height=120 width=$150>",
 		dataPoints: <?php echo json_encode($uniformitet, JSON_NUMERIC_CHECK); ?>
 	}]
 });
