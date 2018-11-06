@@ -10,15 +10,6 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 }
 
 
-
-/*include "../Kvalitetsparametre/deformation.php";
-include "../Kvalitetsparametre/drift.php";
-include "../Kvalitetsparametre/ghosting.php";
-include "../Kvalitetsparametre/rf.php";
-include "../Kvalitetsparametre/snr.php";
-include "../Kvalitetsparametre/uniformitet.php";*/
-
-
 ?>
 
 <!doctype html>

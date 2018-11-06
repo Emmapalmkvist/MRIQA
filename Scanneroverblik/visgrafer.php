@@ -2,7 +2,6 @@
 
 session_start();
 
-// Check om bruger er logget ind
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: ../Logind/login.php");
     exit;
