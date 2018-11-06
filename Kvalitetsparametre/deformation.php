@@ -21,7 +21,10 @@ $deformation= array();
     $deformation[] = array(
     "y" => $row["Deformation"],
     "label" =>$row["Dato"],
-    "tidspunkt" =>$row["Starttidspunkt"],
+    "tidspunkt" =>$row["Starttidspunkt"][0],
+    "tidspunkt1" =>$row["Starttidspunkt"][1],
+    "tidspunkt2" =>$row["Starttidspunkt"][2],
+    "tidspunkt3" =>$row["Starttidspunkt"][3],
     "sti" => "../billeder/" . $row["Deformationbillede"]
     );
     $model = $row["Model"];
@@ -154,7 +157,7 @@ var chartDeformation = new CanvasJS.Chart("chartContainerDeformation",
         {
 		type: "line",
         //axisYType: "first",
-        toolTipContent:"Dato: {label}<br/> Drift: {y}<br/> Starttidspunkt: {tidspunkt}[1] <br/> Billede: <img src= {sti} height=120 width=$150>",
+        toolTipContent:"Dato: {label}<br/> Drift: {y}<br/> Starttidspunkt: {tidspunkt}{tidspunkt1}:{tidspunkt2}{tidspunkt3} <br/> Billede: <img src= {sti} height=120 width=$150>",
 		dataPoints: <?php echo json_encode($deformation, JSON_NUMERIC_CHECK); ?>
 
 	    }
