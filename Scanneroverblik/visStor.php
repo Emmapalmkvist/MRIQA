@@ -58,12 +58,12 @@ include "../Kvalitetsparametre/uniformitet.php";
 include "../Scanneroverblik/service.php";
 
 getService();
-notificationsDef();
+/*notificationsDef();
 notificationsDrift();
 notificationsGhosting();
 notificationsRf();
 notificationsSNR();
-notificationsUniformitet();
+notificationsUniformitet();*/
 
 ?>
 </div>
