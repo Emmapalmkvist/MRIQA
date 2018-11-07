@@ -44,8 +44,6 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
 <?php
 
-include "../Database/DB_adgang.php";
-
 // kalder notifikationsfunktioner i der ligger i kvalitetsparametre
 include "../Kvalitetsparametre/deformation.php";
 include "../Kvalitetsparametre/drift.php";
@@ -82,7 +80,7 @@ echo "Indtast servicedato for scannere"
     <option value="">Vælg scanner..</option>
 
 <?php
-require_once "../Database/DB_adgang.php";
+include "../Database/DB_adgang.php";
 $sql1 = "SELECT Serienummer, Model, Scannernavn FROM Scannere";
 $result1 = mysqli_query($mysqli, $sql1);
 
