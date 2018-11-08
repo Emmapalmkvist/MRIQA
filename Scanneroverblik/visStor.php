@@ -31,7 +31,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     <div class="topnav">
             <a class="active" href ="../Hjem/hjemside.php" id="onlink">HJEM</a>
             <a href="../Scanneroverblik/visgrafer.php">OVEBLIK OVER SCANNERE</a>
-            <a href="../Modeloverblik/visgrafermodel.php">SAMMENLIGN SCANNERE</a>
+            <a href="../Modeloverblik/visgrafermodel.php">OVERBLIK OVER MODELTYPER</a>
         <li style="float:right"><a href="../Logind/logud.php">LOG UD</a></li>
     </div>
 
