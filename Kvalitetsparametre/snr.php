@@ -135,7 +135,7 @@ chartSNR.render();
 
 function notificationsSNR()
 {
-    include "../Kvalitetsparametre/datointervalNot.php";
+    include "../Hjem/datointervalNot.php";
     include "../Database/DB_adgang.php";
 
 

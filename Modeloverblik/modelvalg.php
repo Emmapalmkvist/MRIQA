@@ -9,11 +9,6 @@ include "../Database/DB_adgang.php";
 
 <form action="" method="post">
 
-
-
-
-
-
 <script type="text/javascript" src="http://services.iperfect.net/js/IP_generalLib.js"></script>
     <br/>
 <input type="date" name="date1" id="date1" style= "margin-left:27%; margin-right: 27% height: 25px margin-top: 5px" class="IP_calendar">

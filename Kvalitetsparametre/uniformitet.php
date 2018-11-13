@@ -138,7 +138,7 @@ chartUniformitet.render();
 
 function notificationsUniformitet()
 {
-    include "../Kvalitetsparametre/datointervalNot.php";
+    include "../Hjem/datointervalNot.php";
     include "../Database/DB_adgang.php";
 
 

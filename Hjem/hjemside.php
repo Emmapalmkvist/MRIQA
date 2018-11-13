@@ -29,7 +29,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     <div class="topnav">
             <a class="active" href ="../Hjem/hjemside.php" id="onlink">HJEM</a>
             <a href="../Scanneroverblik/visgrafer.php">OVEBLIK OVER SCANNERE</a>
-            <a href="../Modeloverblik/visgrafermodel.php">OVERBLIK OVER MODELTYPER</a>
+            <a href="../Modeloverblik/visgrafermodel.php">SAMMENLIGN SCANNERE</a>
         <li style="float:right"><a href="../Logind/logud.php">LOG UD</a></li>
     </div>
 
@@ -43,6 +43,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     <div class="main_container" style= "font-family: sans-serif; background-color: white; border: 1px solid darkgrey; width: 750px; margin-left: 2%; margin-top:4%;">
 
 <?php
+
+include "../Database/DB_adgang.php";
 
 // kalder notifikationsfunktioner i der ligger i kvalitetsparametre
 include "../Kvalitetsparametre/deformation.php";
@@ -80,7 +82,7 @@ echo "Indtast servicedato for scannere"
     <option value="">Vælg scanner..</option>
 
 <?php
-include "../Database/DB_adgang.php";
+require_once "../Database/DB_adgang.php";
 $sql1 = "SELECT Serienummer, Model, Scannernavn FROM Scannere";
 $result1 = mysqli_query($mysqli, $sql1);
 

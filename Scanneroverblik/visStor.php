@@ -29,15 +29,15 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     </header>
 
     <div class="topnav">
-            <a  href ="../Hjem/hjemside.php" id="onlink">HJEM</a>
-            <a class="active" href="../Scanneroverblik/visgrafer.php">OVEBLIK OVER SCANNERE</a>
-            <a href="../Modeloverblik/visgrafermodel.php">OVERBLIK OVER MODELTYPER</a>
+            <a class="active" href ="../Hjem/hjemside.php" id="onlink">HJEM</a>
+            <a href="../Scanneroverblik/visgrafer.php">OVEBLIK OVER SCANNERE</a>
+            <a href="../Modeloverblik/visgrafermodel.php">SAMMENLIGN SCANNERE</a>
         <li style="float:right"><a href="../Logind/logud.php">LOG UD</a></li>
     </div>
 
     <div class= head_container style= "font-family: sans-serif; font-size: 16px; padding: 7px; background-color: white; border: 1px solid darkgrey; width: 750px;  float: left; margin-left: 2%; margin-top: 2%" >
         <?php
-        echo "Servicetidspunkter for specifik scanner: "
+        echo "Servicetidspunkter for specific scanner: "
         ?>
     </div>
 
@@ -58,12 +58,12 @@ include "../Kvalitetsparametre/uniformitet.php";
 include "../Scanneroverblik/service.php";
 
 getService();
-/*notificationsDef();
+notificationsDef();
 notificationsDrift();
 notificationsGhosting();
 notificationsRf();
 notificationsSNR();
-notificationsUniformitet();*/
+notificationsUniformitet();
 
 ?>
 </div>

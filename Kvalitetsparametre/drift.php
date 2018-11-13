@@ -136,7 +136,7 @@ chartDrift.render();
 
 function notificationsDrift()
 {
-    include "../Kvalitetsparametre/datointervalNot.php";
+    include "../Hjem/datointervalNot.php";
     include "../Database/DB_adgang.php";
 
 
