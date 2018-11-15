@@ -1,10 +1,10 @@
 <?php
-include "../Kvalitetsparametre/deformation.php";
+/*include "../Kvalitetsparametre/deformation.php";
 include "../Kvalitetsparametre/drift.php";
 include "../Kvalitetsparametre/ghosting.php";
 include "../Kvalitetsparametre/rf.php";
 include "../Kvalitetsparametre/snr.php";
-include "../Kvalitetsparametre/uniformitet.php";
+include "../Kvalitetsparametre/uniformitet.php";*/
 
 require_once "../Database/DB_adgang.php";
 $sql1 = "SELECT Serienummer, Model, Scannernavn FROM Scannere";
@@ -38,12 +38,15 @@ while ($row = mysqli_fetch_array($result1))
 
  <select name="select1" id="scannerid" style= "height: 25px">
      <option value="default">Vælg en scanner...</option>
-<?php
+
+     <?php
  foreach($data as $serienummer => $scannernavn) {
      echo "<option value=\"" . $serienummer . "\"";
+
      if ($serienummer == $sn) {
          echo " selected";
      }
+
      echo ">" . $scannernavn . "</option>\n";
  }
 

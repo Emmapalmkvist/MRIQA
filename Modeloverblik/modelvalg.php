@@ -25,6 +25,7 @@ $result1 = mysqli_query($mysqli, $sql1);
 while ($row = mysqli_fetch_array($result1)) {
     echo "<option value='" . $row['Model'] . "'>" . $row['Model'] . "</option>";
 }
+
     $startdato = $_POST['date1'];
     $slutdato = $_POST['date2'];
     $model = $_POST['select1'];

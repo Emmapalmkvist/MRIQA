@@ -1,5 +1,11 @@
 <?php
 include "../Scanneroverblik/scannervalg.php";
+include "../Kvalitetsparametre/deformation.php";
+include "../Kvalitetsparametre/drift.php";
+include "../Kvalitetsparametre/ghosting.php";
+include "../Kvalitetsparametre/rf.php";
+include "../Kvalitetsparametre/snr.php";
+include "../Kvalitetsparametre/uniformitet.php";
 
     deformationdata($sn, $model, $startdato, $slutdato);
     driftdata($sn, $model, $startdato, $slutdato);

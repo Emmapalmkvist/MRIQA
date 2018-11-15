@@ -1,4 +1,5 @@
 <?php
+
     //POST tager det, som ligger i dropdownmenyen og gemmer det i variablen //$sn, som puttes i SQL queryen.
 function uniformitetdata($sn1, $model1, $start, $slut)
 {
@@ -138,7 +139,7 @@ chartUniformitet.render();
 
 function notificationsUniformitet()
 {
-    include "../Hjem/datointervalNot.php";
+    include "../Kvalitetsparametre/datointervalNot.php";
     include "../Database/DB_adgang.php";
 
 

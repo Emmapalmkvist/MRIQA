@@ -137,7 +137,7 @@ chartRf.render();
 
 function notificationsRf()
 {
-    include "../Hjem/datointervalNot.php";
+    include "../Kvalitetsparametre/datointervalNot.php";
     include "../Database/DB_adgang.php";
 
 

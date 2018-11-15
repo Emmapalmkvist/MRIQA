@@ -55,6 +55,7 @@ include "../Kvalitetsparametre/ghosting.php";
 include "../Kvalitetsparametre/rf.php";
 include "../Kvalitetsparametre/snr.php";
 include "../Kvalitetsparametre/uniformitet.php";
+
 include "../Scanneroverblik/service.php";
 
 getService();
