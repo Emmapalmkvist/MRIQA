@@ -27,7 +27,7 @@ $scanner = array();
 
         extract($value);
 
-        $sql3 = "SELECT Deformation, Model, Dato, Serienummer, Deformationbillede FROM Maaling WHERE Serienummer='$sn1' AND Dato BETWEEN '$startdato' AND '$slutdato' ORDER BY Dato";
+        $sql3 = "SELECT Deformation, Model, Dato, Serienummer, Starttidspunkt, Deformationbillede FROM Maaling WHERE Serienummer='$sn1' AND Dato BETWEEN '$startdato' AND '$slutdato' ORDER BY Dato";
         $scannerny = array();
         $result3 = mysqli_query($mysqli, $sql3);
             while($row = mysqli_fetch_array($result3))
@@ -35,7 +35,11 @@ $scanner = array();
                     $scannerny[] = array(
                     "y" => $row["Deformation"],
                     "label" => $row["Dato"],
-                    "sn" => $row["Serienummer"]
+                    "sn" => $row["Serienummer"],
+                    "tidspunkt" =>$row["Starttidspunkt"][0],
+                    "tidspunkt1" =>$row["Starttidspunkt"][1],
+                    "tidspunkt2" =>$row["Starttidspunkt"][2],
+                    "tidspunkt3" =>$row["Starttidspunkt"][3],
                     );
 
                 }
@@ -46,7 +50,7 @@ $scanner = array();
         }
         $line .= '{
 		type: "line",
-        toolTipContent:"Dato: {label}<br/> Deformation: {y}<br/>Serienummer: {sn}<br/> Billede: <img src= {sti} height=120 width=$150>",
+        toolTipContent:"Dato: {label}<br/> Deformation: {y}<br/>Serienummer: {sn}<br/> Starttidspunkt: {tidspunkt}{tidspunkt1}:{tidspunkt2}{tidspunkt3}",
 		dataPoints: '.$dataset.'
 	}';
     }

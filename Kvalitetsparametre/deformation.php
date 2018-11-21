@@ -157,7 +157,7 @@ var chartDeformation = new CanvasJS.Chart("chartContainerDeformation",
         {
 		type: "line",
         //axisYType: "first",
-        toolTipContent:"Dato: {label}<br/> Drift: {y}<br/> Starttidspunkt: {tidspunkt}{tidspunkt1}:{tidspunkt2}{tidspunkt3} <br/> Billede: <img src= {sti} height=120 width=$150>",
+        toolTipContent:"Dato: {label}<br/> Deformation: {y}<br/> Starttidspunkt: {tidspunkt}{tidspunkt1}:{tidspunkt2}{tidspunkt3} <br/> Billede: <img src= {sti} height=120 width=$150>",
 		dataPoints: <?php echo json_encode($deformation, JSON_NUMERIC_CHECK); ?>
 
 	    }

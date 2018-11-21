@@ -78,7 +78,7 @@ echo "Indtast servicedato for scannere"
 
 <input type="date" name="date" id="date" style= "margin-left:0.5%; height: 25px; margin-top: 5px"class="IP_calendar">
 
-<select name="select1" id="scannerid" style= "height: 25px" conchange="myFunction()">
+<select name="scanner_" id="scannerid" style= "height: 25px" conchange="myFunction()">
     <option value="">Vælg scanner..</option>
 
 <?php
@@ -95,19 +95,24 @@ while ($row = mysqli_fetch_array($result1))
 </select>
 
 <?php
+// tilføjelse af servicetidspunkt
 
-if (isset($_POST["date"]) && isset($_POST["select1"]))
-{$dato = $_POST['date'];
-$sn = $_POST['select1'];
 
- $sql = "INSERT INTO Servicetidspunkt (Servicetidspunkt, serienummer)
-VALUES('$dato', '$sn')";
+if (isset($_POST["date"]) && isset($_POST["scanner_"]))
+{
+    $dato = $_POST['date'];
+    $sn = $_POST['scanner_'];
 
-if ($mysqli->query($sql) === TRUE) {
+    $sql = "INSERT INTO Servicetidspunkt (Servicetidspunkt, serienummer) VALUES('$dato', '$sn')";
+
+    if ($mysqli->query($sql) === TRUE)
+    {
     echo "";
-} else {
+    }
+    else
+    {
     echo "Error: " . $sql . "<br>" . $mysqli->error;
-}
+    }
 
 $message = "Servicedatoen, $dato, er gemt";
 echo "<script type='text/javascript'>alert('$message');</script>";

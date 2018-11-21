@@ -1,8 +1,20 @@
 <?php
 
 include "../Database/DB_adgang.php";
+$sql1 = "SELECT distinct Model FROM Scannere";
+$result1 = mysqli_query($mysqli, $sql1);
 
+
+
+    /*$startdato = $_POST['date1'];
+    $slutdato = $_POST['date2'];
+    $model = $_POST['select1'];*/
+    if (isset($_POST["date1"])) {$startdato = $_POST['date1'];} else {$startdato = "";}
+    if (isset($_POST["date2"])) {$slutdato = $_POST['date2'];} else {$slutdato = "";}
+    if (isset($_POST["select1"])) {$model = $_POST['select1'];} else {$model = "";}
 ?>
+
+
 <!DOCTYPE html>
 <html>
 <body>
@@ -11,24 +23,19 @@ include "../Database/DB_adgang.php";
 
 <script type="text/javascript" src="http://services.iperfect.net/js/IP_generalLib.js"></script>
     <br/>
-<input type="date" name="date1" id="date1" style= "margin-left:27%; margin-right: 27% height: 25px margin-top: 5px" class="IP_calendar">
-<input type="date" name="date2" id="date2" style= "height: 25px" class="IP_calendar" value="">
+<input type="date" name="date1" id="date1" style= "margin-left:27%; margin-right: 27% height: 25px margin-top: 5px"class="IP_calendar" value="<? print $startdato;?>">
+<input type="date" name="date2" id="date2" style= "height: 25px" class="IP_calendar" value="<? print $slutdato;?>">
 
 <select name="select1" style= "height: 25px">
  <option value="">Vælg modeltype</option>
 
 <?php
 
-$sql1 = "SELECT distinct Model FROM Scannere";
-$result1 = mysqli_query($mysqli, $sql1);
-
-while ($row = mysqli_fetch_array($result1)) {
+    while ($row = mysqli_fetch_array($result1)) {
     echo "<option value='" . $row['Model'] . "'>" . $row['Model'] . "</option>";
 }
 
-    $startdato = $_POST['date1'];
-    $slutdato = $_POST['date2'];
-    $model = $_POST['select1'];
+
 ?>
 <?php
 
@@ -55,8 +62,3 @@ while($row = mysqli_fetch_array($result))
 
 </body>
 </html>
-
-
-
-
-

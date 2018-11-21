@@ -117,11 +117,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     </style>
 
     <header>
-     <h1>MRI-SCANNING - REGION MIDT</h1>
+     <h1>MRI-KVALITETSSIKRING - REGION MIDT</h1>
     </header>
 
         <div class="topnav">
-            <a class="active" href ="/Logind/logind.php" id="onlink">LOG IND</a>
+            <a>  </a>
     </div>
 
 <body>
