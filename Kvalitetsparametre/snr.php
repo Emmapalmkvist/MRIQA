@@ -1,5 +1,4 @@
 <?php
-    //POST tager det, som ligger i dropdownmenyen og gemmer det i variablen //$sn, som puttes i SQL queryen.
 function snrdata($sn1, $model1, $start, $slut)
 {
     include "../Database/DB_adgang.php";
@@ -154,7 +153,7 @@ while($row = mysqli_fetch_array($result_SNR))
     );
 }
 
-// hardcode min og max
+
 $maxSNR= 295;
 $minSNR= 110;
 

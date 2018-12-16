@@ -156,7 +156,6 @@ while($row = mysqli_fetch_array($result_rf))
     );
 }
 
-// hardcode min og max
 $maxRf= 64.0;
 $minRf = 63.0;
 

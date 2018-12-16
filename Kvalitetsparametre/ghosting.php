@@ -144,7 +144,6 @@ while($row = mysqli_fetch_array($result_ghosting))
     );
 }
 
-// hardcode min og max
 $maxGhosting = 2.0;
 
 for ($i = 0; $i < count($data_ghosting); ++$i) {
@@ -157,13 +156,6 @@ if (($data_ghosting[$i]['y']) > $maxGhosting)
     echo $msg;
 }
 
-/*if (($data_def[$i]['y']) < $minDef)
-{
-    $serienummer = ($data_def[$i]['serienummer']);
-    $dato = ($data_def[$i]['label']);
-    $msg = "Deformation under min d. $dato på scanneren med serienummer: $serienummer"."<br>";
-    echo $msg;
-}*/
 }
 
 }

@@ -155,9 +155,9 @@ while($row = mysqli_fetch_array($result_drift))
     );
 }
 
-// hardcode min og max
+
 $maxDrift = 5.0;
-//$minDrift = 0.5;
+
 
 for ($i = 0; $i < count($data_drift); ++$i) {
 
@@ -169,13 +169,7 @@ if (($data_drift[$i]['y']) > $maxDrift)
     echo $msg;
 }
 
-/*if (($data_def[$i]['y']) < $minDef)
-{
-    $serienummer = ($data_def[$i]['serienummer']);
-    $dato = ($data_def[$i]['label']);
-    $msg = "Deformation under min d. $dato på scanneren med serienummer: $serienummer"."<br>";
-    echo $msg;
-}*/
+
 }
 
 }

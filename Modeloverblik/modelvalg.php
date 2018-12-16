@@ -5,10 +5,6 @@ $sql1 = "SELECT distinct Model FROM Scannere";
 $result1 = mysqli_query($mysqli, $sql1);
 
 
-
-    /*$startdato = $_POST['date1'];
-    $slutdato = $_POST['date2'];
-    $model = $_POST['select1'];*/
     if (isset($_POST["date1"])) {$startdato = $_POST['date1'];} else {$startdato = "";}
     if (isset($_POST["date2"])) {$slutdato = $_POST['date2'];} else {$slutdato = "";}
     if (isset($_POST["select1"])) {$model = $_POST['select1'];} else {$model = "";}

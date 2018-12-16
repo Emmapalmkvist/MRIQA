@@ -1,5 +1,5 @@
 <?php
-// sæt datointerval der ønskes notificationer for
+// sæt datointerval der ønskes notifications for
 
 $dtz = new DateTimeZone("Europe/Madrid"); //Your timezone
 $now = new DateTime(date("Y-m-d"), $dtz);

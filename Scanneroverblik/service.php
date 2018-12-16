@@ -2,7 +2,6 @@
 
 function getService()
 {
-    //require_once "../Scanneroverblik/service.php";
     include "../Database/DB_adgang.php";
     $sn = $_GET['sn'];
     $startdato = $_GET['startdato'];

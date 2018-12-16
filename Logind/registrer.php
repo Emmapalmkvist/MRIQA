@@ -1,7 +1,9 @@
 <?php
+// Koden i denne fil kommer fra hjemmesiden TutorialRepublic hentet den 24.09.2018 via følgende link: https://www.tutorialrepublic.com/php-tutorial/php-mysql-login-system.php. Der er foretaget modificeringer ift. design og muligheder. Sprog er ændret til dansk.
+
 
 // Inkluder adgangsfil
-//require_once "../Database/DB_adgang.php";
+include "../Database/DB_adgang.php";
 
 // Definer variable
 $brugernavn = "";
@@ -111,7 +113,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
             if($stmt->execute())
             {
                 // Omdiriger til log ind side
-                header("location: login.php");
+                header("location: ..\Logind\index.php");
             } else
             {
                 echo "Noget gik galt. Prøv igen.";
