@@ -66,7 +66,7 @@ var chartDefModel = new CanvasJS.Chart("chartDefModel", {
 		text: "Deformation over tid"
 	},
 	axisY: {
-		title: "Ghosting"
+		title: "Deformation"
 	},
     data: [
 
