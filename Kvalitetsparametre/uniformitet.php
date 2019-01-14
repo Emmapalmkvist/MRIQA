@@ -158,7 +158,7 @@ while($row = mysqli_fetch_array($result_uni))
 }
 
 
-$maxUni= 60.0;
+$maxUni= 70.0;
 $minUni = 35.0;
 
 for ($i = 0; $i < count($data_uni); ++$i) {
